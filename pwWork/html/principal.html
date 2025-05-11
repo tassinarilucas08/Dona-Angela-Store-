@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/principal.css">
+  <script src="../JavaScript/principal.js" async></script>
+  <title>Loja de Beleza</title>
+</head>
+<body>
+
+  <!-- Modal -->
+  <div id="modal" class="modal-overlay" onmouseenter="cancelHideModal()" onmouseleave="hideModal()">
+    <div class="modal-content">
+      <img src="../images/perfums/zaad.jpeg" alt="Foto da Mãe" class="bg">
+      <div class="modal-text">
+        <h2>A História da Angela</h2>
+        <p>
+          Uma mulher de força extraordinária, que com amor e dedicação construiu mais do que uma família — construiu valores.
+          Desde jovem, enfrentou desafios com coragem, ensinando pelo exemplo e inspirando todos à sua volta. Esta loja é um
+          reflexo da sua beleza interior, da sua sensibilidade e da sua visão de futuro. Angela iniciou sua jornada como revendedora
+          a mais de 10 anos. Nesse tempo conheceu muitos amigos e clientes que estão com ela a vários anos.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="logo">
+    <h1>Angela Revendedora</h1>
+  </div>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="tooltip-container">
+      <img src="../images/mother/image_mother.png" alt="Foto da Mãe" onmouseenter="showModal()" onmouseleave="startHideModal()">
+      <div class="mother-informations">
+      <div class="name">Angela</div> 
+      <p class="mother-informations-colorP">saiba mais sobre mim aqui!</p></div><!-- Nome ao lado da imagem -->
+    </div>
+    
+    <div class="search-box">
+      <input type="text" placeholder="Pesquisar produtos...">
+      <img src="../images/layout/lupa.png" alt="Buscar">
+    </div>
+
+    <a href="../html/login.html" class="login-link">Login</a>
+
+    <div class="cart-icon">
+      <a href="../html/compras.html"><img src="../images/layout/sacola.png" alt="Sacola de Compras"></a>
+      <span class="cart-badge">3</span>
+    </div>
+  </header>
+  
+
+  <!-- Promoções do Dia -->
+  <main>
+    <section class="promo-section-card">
+      <div class="promo-card">
+        <h2>Promoções do Dia</h2>
+        <p>Ofertas incríveis por tempo limitado!</p>
+        <button onclick="scrollToProdutos()">Confira Agora</button>
+      </div>
+    </section>      
+
+    <!-- Grade de produtos -->
+    <section class="products-container" id="products">
+
+
+      <!-- Produto Natura - Essencial -->
+<div class="product-card">
+  <span class="tag tag-natura">Natura</span>
+  <img src="../images/perfums/essencial.jpg" alt="Produto Natura Essencial">
+  <div class="product-info">
+    <h2>Essencial</h2>
+    <p>Perfume floral com toque cítrico</p>
+    <div class="price">
+      <span class="old">R$ 89,90</span>
+      <span class="new">R$ 59,90</span>
+    </div>
+  </div>
+</div>
+
+<!-- Produto Natura - Ekos -->
+<div class="product-card">
+  <span class="tag tag-natura">Natura</span>
+  <img src="../images/perfums/ekos_hidra.jpg" alt="Produto Natura Ekos">
+  <div class="product-info">
+    <h2>Ekos</h2>
+    <p>Creme hidratante para o corpo</p>
+    <div class="price">
+      <span class="old">R$ 49,90</span>
+      <span class="new">R$ 39,90</span>
+    </div>
+  </div>
+</div>
+
+<!-- Produto O Boticário - Lily -->
+<div class="product-card">
+  <span class="tag tag-boticario">O Boticário</span>
+  <img src="../images/perfums/lily.jpg" alt="Produto O Boticário Lily">
+  <div class="product-info">
+    <h2>Lily</h2>
+    <p>Aroma floral sofisticado</p>
+    <div class="price">
+      <span class="old">R$ 119,90</span>
+      <span class="new">R$ 89,90</span>
+    </div>
+  </div>
+</div>
+    </section>
+  </main>
+
+  <footer class="site-footer-compact">
+    <div class="footer-container">
+      
+      <!-- Contatos -->
+      <section class="footer-contact">
+        <h2>📞 Fale Conosco</h2>
+        <ul>
+          <li>
+            <img src="https://img.icons8.com/color/24/000000/whatsapp--v1.png" alt="WhatsApp" />
+            <a href="https://wa.me/5551997532447">WhatsApp</a>
+          </li>
+          <li>
+            <img src="https://img.icons8.com/color/24/000000/instagram-new--v1.png" alt="Instagram" />
+            <a href="https://instagram.com/angela.revendedora">@angela.revendedora</a>
+          </li>
+          <li>
+            <img src="https://img.icons8.com/color/24/000000/email.png" alt="E-mail" />
+            <a href="mailto:angela.revendedora@email.com">angela.revendedora@email.com</a>
+          </li>
+          <li class="horario">🕐 Segunda a sábado, das 8h às 20h</li>
+        </ul>
+      </section>
+  
+      <!-- FAQ -->
+<section class="footer-faq">
+  <h2>❓ Dúvidas Frequentes</h2>
+  <ul>
+    <li>
+      <p class="pergunta">🛒 Como faço um pedido?</p>
+      <p class="resposta">Escolha seus produtos, adicione ao carrinho e finalize pelo WhatsApp. A Angela vai confirmar tudo com você!</p>
+    </li>
+    <li>
+      <p class="pergunta">📦 Onde vocês entregam?</p>
+      <p class="resposta">Entregamos na região de [sua cidade/bairro], com taxa acessível. Consulte no WhatsApp para mais detalhes.</p>
+    </li>
+    <li>
+      <p class="pergunta">📍 Posso retirar em mãos?</p>
+      <p class="resposta">Sim! Após o pedido, combinamos um horário certinho para retirada.</p>
+    </li>
+    <li>
+      <p class="pergunta">✔️ Os produtos são originais?</p>
+      <p class="resposta">Sim, todos os produtos são 100% originais da Natura e O Boticário, com garantia de procedência.</p>
+    </li>
+    <li>
+      <p class="pergunta">🔎 Posso encomendar algo que não está no site?</p>
+      <p class="resposta">Claro! É só chamar no WhatsApp que a gente verifica a disponibilidade para você.</p>
+    </li>
+  </ul>
+</section>
+
+
+  
+    </div>
+  </footer>  
+
+  <script>
+    let hideTimeout;
+
+    function showModal() {
+      clearTimeout(hideTimeout);
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function startHideModal() {
+      hideTimeout = setTimeout(() => {
+        document.getElementById('modal').classList.remove('active');
+      }, 150);
+    }
+
+    function hideModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    function cancelHideModal() {
+      clearTimeout(hideTimeout);
+    }
+  </script>
+</body>
+</html>

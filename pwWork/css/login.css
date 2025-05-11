@@ -1,0 +1,128 @@
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      display: flex;
+      width: 80%;
+      max-width: 1000px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #f2f2f2;
+    }
+
+    .login-container {
+      flex: 1;
+      padding: 40px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .login-container h2 {
+      color: #d04c92;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #444;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 5px;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      font-size: 16px;
+      background: transparent;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border-bottom-color: #d04c92;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #d04c92;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color:  #b3387c;
+    }
+
+    .link-register {
+      margin-top: 15px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .link-register a {
+      color: #d63384;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .link-register a:hover {
+      text-decoration: underline;
+    }
+
+    .image-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .image-container {
+        padding: 10px;
+      }
+
+      .image-container img {
+        max-height: 200px;
+      }
+    }
