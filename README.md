@@ -1,2 +1,3 @@
 # Dona-Angela-Store-
 Loja da dona Angela
+breve mais informações...
