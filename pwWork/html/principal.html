@@ -31,7 +31,7 @@
   </div>
   <!-- Cabeçalho -->
   <header>
-    <div class="tooltip-container">
+    <div class="tooltip-container" id="mother-informations">
       <img src="../images/mother/image_mother.png" alt="Foto da Mãe" onmouseenter="showModal()" onmouseleave="startHideModal()">
       <div class="mother-informations">
       <div class="name">Angela</div> 
@@ -186,6 +186,11 @@
     function cancelHideModal() {
       clearTimeout(hideTimeout);
     }
+
+    let motherInformationsClick = document.querySelector("#mother-informations");
+    motherInformationsClick.addEventListener('click', ()=>{
+        showModal();
+    });
   </script>
 </body>
 </html>
