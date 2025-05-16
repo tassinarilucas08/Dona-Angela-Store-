@@ -51,6 +51,15 @@
     </div>
   </header>
   
+<!-- Filtro por Categoria -->
+<section class="product-categories">
+  <div class="category-buttons">
+    <button onclick="filterProducts('all')">Todos</button>
+    <button onclick="filterProducts('perfumes')">Perfumes</button>
+    <button onclick="filterProducts('maquiagens')">Maquiagens</button>
+    <button onclick="filterProducts('hidratantes')">Hidratantes</button>
+  </div>
+</section>
 
   <!-- Promoções do Dia -->
   <main>
@@ -58,7 +67,7 @@
       <div class="promo-card">
         <h2>Promoções do Dia</h2>
         <p>Ofertas incríveis por tempo limitado!</p>
-        <button onclick="scrollToProdutos()">Confira Agora</button>
+        <button onclick="filterProducts('all')">Confira Agora</button>
       </div>
     </section>      
 
@@ -67,7 +76,7 @@
 
 
       <!-- Produto Natura - Essencial -->
-<div class="product-card">
+<div class="product-card perfumes">
   <span class="tag tag-natura">Natura</span>
   <img src="../images/perfums/essencial.jpg" alt="Produto Natura Essencial">
   <div class="product-info">
@@ -81,7 +90,7 @@
 </div>
 
 <!-- Produto Natura - Ekos -->
-<div class="product-card">
+<div class="product-card hidratantes">
   <span class="tag tag-natura">Natura</span>
   <img src="../images/perfums/ekos_hidra.jpg" alt="Produto Natura Ekos">
   <div class="product-info">
@@ -95,7 +104,7 @@
 </div>
 
 <!-- Produto O Boticário - Lily -->
-<div class="product-card">
+<div class="product-card perfumes">
   <span class="tag tag-boticario">O Boticário</span>
   <img src="../images/perfums/lily.jpg" alt="Produto O Boticário Lily">
   <div class="product-info">
@@ -160,37 +169,7 @@
   </ul>
 </section>
 
-
-  
     </div>
   </footer>  
-
-  <script>
-    let hideTimeout;
-
-    function showModal() {
-      clearTimeout(hideTimeout);
-      document.getElementById('modal').classList.add('active');
-    }
-
-    function startHideModal() {
-      hideTimeout = setTimeout(() => {
-        document.getElementById('modal').classList.remove('active');
-      }, 150);
-    }
-
-    function hideModal() {
-      document.getElementById('modal').classList.remove('active');
-    }
-
-    function cancelHideModal() {
-      clearTimeout(hideTimeout);
-    }
-
-    let motherInformationsClick = document.querySelector("#mother-informations");
-    motherInformationsClick.addEventListener('click', ()=>{
-        showModal();
-    });
-  </script>
 </body>
 </html>

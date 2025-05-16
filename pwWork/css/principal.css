@@ -399,3 +399,21 @@ header {
   line-height: 1.4;
 }
 
+.product-categories {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.category-buttons button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.category-buttons button:hover {
+  background-color: #d4d4d4;
+}
