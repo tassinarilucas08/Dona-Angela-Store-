@@ -40,3 +40,15 @@ function scrollToProdutos() {
   });
   scrollToProdutos();
 }
+function handleClick(button, category) {
+    // Adiciona classe de animação
+    button.classList.add('clicked');
+
+    // Remove a classe após a animação
+    setTimeout(() => {
+      button.classList.remove('clicked');
+    }, 100);
+
+    // Chama a função de filtro
+    filterProducts(category);
+  }

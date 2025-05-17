@@ -10,6 +10,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f9fafb;
   color: #333;
+  background-color: #f2f2f2;
 }
 
 /* Cabeçalho */
@@ -416,4 +417,27 @@ header {
 
 .category-buttons button:hover {
   background-color: #d4d4d4;
+}
+.price .normal {
+  color: rgba(13, 13, 13, 0.87);
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 8px;
+  margin-left: 0px;
+}
+.movButton#male{
+background-color: lightblue;
+}
+.movButton#female{
+background-color: lightpink;
+}
+.movButton {
+  transition: transform 0.1s ease;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+.movButton.clicked {
+  transform: scale(0.9);
 }
