@@ -3,6 +3,7 @@
 require __DIR__ . "/../source/autoload.php";
 
 use Source\Models\Store\Product;
+use Source\Models\User;
 
 echo "Olá, products";
 

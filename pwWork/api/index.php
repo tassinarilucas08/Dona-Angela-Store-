@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 use CoffeeCode\Router\Router;
 
-$route = new Router("http://localhost:8080/pwWork/api",":");
+$route = new Router("localhost/lucas/api",":");
 
 $route->namespace("Source\WebService");
 
@@ -25,10 +25,16 @@ $route->namespace("Source\WebService");
 
 $route->group("/users");
 
+$route->post("/login", "Users:login");
+
 $route->get("/", "Users:listUsers");
 $route->get("/id/{id}", "Users:listUserById");
+$route->get("/id/", "Users:listUserById");
 
-$route->post("/", "Users:createUser");
+// http://localhost:8080/inf-3am-2025/api/users/add
+$route->post("/add", "Users:createUser");
+// http://localhost:8080/inf-3am-2025/api/users/update
+$route->put("/update", "Users:updateUser");
 
 $route->group("null");
 
@@ -40,11 +46,11 @@ if ($route->error()) {
     http_response_code(404);
 
     echo json_encode([
-        "errors" => [
-            "type " => "endpoint_not_found",
-            "message" => "Não foi possível processar a requisição"
-        ]
+        "code" => 404,
+        "status" => "not_found",
+        "message" => "URL não encontrada"
     ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
 }
 
 ob_end_flush();

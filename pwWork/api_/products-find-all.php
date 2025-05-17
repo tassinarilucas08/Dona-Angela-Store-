@@ -4,4 +4,5 @@ require __DIR__ . "/../source/autoload.php";
 
 use Source\Models\Store\Product;
 
-echo json_encode(findAll());
+$products = new Product();
+echo json_encode($products -> findAll());
