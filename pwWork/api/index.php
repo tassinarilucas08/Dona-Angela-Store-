@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 use CoffeeCode\Router\Router;
 
-$route = new Router("localhost/lucas/api",":");
+$route = new Router("localhost/Dona-Angela-Store-/pwWork/api",":");
 
 $route->namespace("Source\WebService");
 
