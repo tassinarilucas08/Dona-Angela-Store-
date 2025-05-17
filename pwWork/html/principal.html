@@ -54,10 +54,10 @@
 <!-- Filtro por Categoria -->
 <section class="product-categories">
   <div class="category-buttons">
-    <button onclick="filterProducts('all')">Todos</button>
-    <button onclick="filterProducts('perfumes')">Perfumes</button>
-    <button onclick="filterProducts('maquiagens')">Maquiagens</button>
-    <button onclick="filterProducts('hidratantes')">Hidratantes</button>
+    <button class="movButton" onclick="handleClick(this, 'todos')" style="background-color: gainsboro;"><b>Todos</b></button>
+    <button class="movButton" onclick="handleClick(this, 'masculino')" style="background-color: lightblue;"><b>Masculino</b></button>
+    <button class="movButton" onclick="handleClick(this, 'feminino')" style="background-color: lightpink;"><b>Feminino</b></button>
+    <button class="movButton" onclick="handleClick(this, 'infaltil')" style="background-color: lightgreen;"><b>Infantil</b></button>   
   </div>
 </section>
 
@@ -65,32 +65,38 @@
   <main>
     <section class="promo-section-card">
       <div class="promo-card">
-        <h2>Promoções do Dia</h2>
+        <h2>Promoções Ativas</h2>
         <p>Ofertas incríveis por tempo limitado!</p>
-        <button onclick="filterProducts('all')">Confira Agora</button>
+        <button onclick="filterProducts('promocao')">Confira Agora</button>
       </div>
     </section>      
+
+<section class="product-categories">
+  <div class="category-buttons">
+<!-- Botão de exemplo -->
+    <button class="movButton" id="female" onclick="filterProducts('feminino hidratantes')"><b>Maquiagem</b></button>
+    <button class="movButton" id="male" onclick="filterProducts('feminino hidratantes')"><b>Barba</b></button>
+  </div>
+</section>
 
     <!-- Grade de produtos -->
     <section class="products-container" id="products">
 
-
       <!-- Produto Natura - Essencial -->
-<div class="product-card perfumes">
+<div class="product-card todos masculino perfumes">
   <span class="tag tag-natura">Natura</span>
   <img src="../images/perfums/essencial.jpg" alt="Produto Natura Essencial">
   <div class="product-info">
     <h2>Essencial</h2>
     <p>Perfume floral com toque cítrico</p>
     <div class="price">
-      <span class="old">R$ 89,90</span>
-      <span class="new">R$ 59,90</span>
+      <span class="normal">R$ 89,90</span>
     </div>
   </div>
 </div>
 
 <!-- Produto Natura - Ekos -->
-<div class="product-card hidratantes">
+<div class="product-card promocao todos feminino hidratantes">
   <span class="tag tag-natura">Natura</span>
   <img src="../images/perfums/ekos_hidra.jpg" alt="Produto Natura Ekos">
   <div class="product-info">
@@ -104,15 +110,14 @@
 </div>
 
 <!-- Produto O Boticário - Lily -->
-<div class="product-card perfumes">
+<div class="product-card todos feminino perfumes">
   <span class="tag tag-boticario">O Boticário</span>
   <img src="../images/perfums/lily.jpg" alt="Produto O Boticário Lily">
   <div class="product-info">
     <h2>Lily</h2>
     <p>Aroma floral sofisticado</p>
     <div class="price">
-      <span class="old">R$ 119,90</span>
-      <span class="new">R$ 89,90</span>
+      <span class="normal">R$ 119,90</span>
     </div>
   </div>
 </div>
