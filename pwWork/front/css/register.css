@@ -11,16 +11,42 @@ body {
   }
 
   .container {
+    position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
     max-width: 1300px;
     background-color: #f2f2f2; /* leve transparência */
-    padding: 0px;
-    border-radius: 0px;
+    padding: 40px 30px 30px 30px;
+    border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   }
+
+  .voltar-wrapper {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+  }
+
+  .btn-voltar {
+    margin-top: 40px;
+    margin-left: 120px;
+    padding: 8px 14px;
+    background-color: #d04c92;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-voltar:hover {
+    background-color: #b3387c;
+  }
+
 
   .image-container {
     flex: 1;
@@ -30,6 +56,7 @@ body {
   .image-container img {
     width: 100%;
     border-radius: 10px;
+    margin-top: 90px;
   }
 
   .form-container {
@@ -68,7 +95,7 @@ body {
     border-bottom: 2px solid #d04c92;
   }
 
-  button {
+  #register {
     background-color: #d04c92;
     color: white;
     border: none;
@@ -80,7 +107,7 @@ body {
     width: 100%;
   }
 
-  button:hover {
+  #register:hover {
     background-color: #b3387c;
   }
 
