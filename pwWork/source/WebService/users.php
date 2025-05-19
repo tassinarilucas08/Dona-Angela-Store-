@@ -6,6 +6,7 @@ use Source\Models\User;
 
 class Users extends Api
 {
+    // Controller -> Usa as coisas que tu define no model para criar a funçao da rota em si.
     public function listUsers (): void
     {
         $users = new User();

@@ -1,10 +1,11 @@
 <?php
 
+require  __DIR__ . "/../vendor/autoload.php";
+
 namespace Source\Models;
 
-//use Source\Core\Connect;
 use Source\Core\Model;
-//use Source\Models\Records\Address;
+use Source\Models\Address;
 
 class User extends Model
 {
@@ -13,8 +14,7 @@ class User extends Model
     protected $name;
     protected $email;
     protected $password;
-    protected $photo;
-    //protected $address;
+    protected $address;
 
     public function __construct(
         int $id = null,
@@ -22,8 +22,7 @@ class User extends Model
         string $name = null,
         string $email = null,
         string $password = null,
-        string $photo = null
-        //Address $address = null
+        Address $address = null
     )
     {
         $this->table = "users";
@@ -32,8 +31,7 @@ class User extends Model
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        $this->photo = $photo;
-        //$this->address = $address;
+        $this->address = $address;
     }
 
     public function getId(): ?int
@@ -86,21 +84,14 @@ class User extends Model
         $this->password = $password;
     }
 
-    public function getPhoto(): ?string
-    {
-        return $this->photo;
-    }
-
-    public function setPhoto(?string $photo): void
-    {
-        $this->photo = $photo;
-    }
-
-    public function login () {
-        echo "Olá, {$this->name}! Você está logado!";
-    }
     public function insert():bool{
         //verificar a existência do email
         //se não existir
+    }
+
+    // Model cuida das regras
+    public function createUser(nome, email, senha) {
+        // logica de banco
+        // return DADOS_DO_INSERT
     }
 }

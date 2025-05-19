@@ -17,15 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 use CoffeeCode\Router\Router;
 
-$route = new Router("localhost/Dona-Angela-Store-/pwWork/api",":");
+$route = new Router("localhost/Dona-Angela-Store-/pwWork/api_",":");
 
 $route->namespace("Source\WebService");
 
 /* USERS */
 
 $route->group("/users");
-
-$route->post("/login", "Users:login");
 
 $route->get("/", "Users:listUsers");
 $route->get("/id/{id}", "Users:listUserById");
@@ -36,6 +34,14 @@ $route->post("/add", "Users:createUser");
 // http://localhost:8080/inf-3am-2025/api/users/update
 $route->put("/update", "Users:updateUser");
 
+
+// $route->group("/users");
+
+// $route->post("/login", "Users:login");
+
+// $route->get("/", "Users:listUsers");
+// $route->get("/id/{id}", "Users:listUserById");
+// $route->get("/id/", "Users:listUserById");
 $route->group("null");
 
 $route->dispatch();
