@@ -4,9 +4,8 @@ require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models;
 
-//use Source\Core\Connect;
 use Source\Core\Model;
-//use Source\Models\Records\Address;
+use Source\Models\Address;
 
 class User extends Model
 {

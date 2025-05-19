@@ -1,6 +1,10 @@
 <?php
 
+require  __DIR__ . "/../vendor/autoload.php";
+
 namespace Source\Models\Records;
+
+use Source\Core\Model;
 
 Class Address extends Model{
     protected $id;  

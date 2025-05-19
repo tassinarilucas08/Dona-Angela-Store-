@@ -3,6 +3,8 @@ require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models\Faq;
 
+use Source\Core\Model;
+
 class Type 
 {
     private $id;
