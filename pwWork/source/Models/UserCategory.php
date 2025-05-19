@@ -1,9 +1,9 @@
 <?php
 require  __DIR__ . "/../vendor/autoload.php";
 
-namespace Source\Models\Faq;
+namespace Source\Models;
 
-class Type 
+class UserCategory extends Model
 {
     private $id;
     private $description;
@@ -31,5 +31,4 @@ class Type
     public function setDescription (?string $description): void
     {
         $this->description = $description;
-    }
-}
+    }}

@@ -1,4 +1,6 @@
 <?php
+require  __DIR__ . "/../vendor/autoload.php";
+
 namespace Source\Models\Store;
 
 use Source\Core\Model;
