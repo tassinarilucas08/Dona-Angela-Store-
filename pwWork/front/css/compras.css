@@ -26,7 +26,7 @@ body {
     font-size: 24px;
   }
   
-  #btn-voltar {
+  .btn-voltar {
     position: absolute;
     left: 20px;
     top: 50%;
@@ -36,12 +36,14 @@ body {
     color: white;
     text-decoration: none;
     font-size: 14px;
-    border-radius: 6px;
     font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  #btn-voltar:hover {
+  .btn-voltar:hover {
     background-color: #b3387c;
   }
   
