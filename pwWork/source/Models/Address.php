@@ -28,6 +28,8 @@ Class Address extends Model{
         $this->street = $street;
         $this->number = $number;
         $this->complement = $complement;
+        $this -> table = "adress";
+
     }
     
     public function getId()
