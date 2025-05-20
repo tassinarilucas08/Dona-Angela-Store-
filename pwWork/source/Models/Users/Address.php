@@ -2,7 +2,7 @@
 
 require  __DIR__ . "/../vendor/autoload.php";
 
-namespace Source\Models\Records;
+namespace Source\Models\Users;
 
 use Source\Core\Model;
 
@@ -32,11 +32,11 @@ Class Address extends Model{
 
     }
     
-    public function getId()
+    public function getId(): ?int 
     {
         return $this->id;
     }
-    public function setId($id)
+    public function setId(?int $id): void
     {
         $this->id = $id;
 
@@ -45,7 +45,7 @@ Class Address extends Model{
  
     public function getIdForeign()
     {
-        return $this->idForeign;
+        return $this->idForeign;    
     }
 
     public function setIdForeign($idForeign)
@@ -96,7 +96,7 @@ Class Address extends Model{
         return $this->complement;
     }
 
-    public function setComplement($complement)
+    public function setComplement(?String $complement)
     {
         $this->complement = $complement;
 

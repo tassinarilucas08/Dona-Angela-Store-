@@ -1,7 +1,7 @@
 <?php
 require  __DIR__ . "/../vendor/autoload.php";
 
-namespace Source\Models\Store;
+namespace Source\Models;
 
 use Source\Core\Model;
 

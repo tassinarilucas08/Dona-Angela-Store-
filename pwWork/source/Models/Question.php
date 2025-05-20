@@ -1,7 +1,7 @@
 <?php
 require  __DIR__ . "/../vendor/autoload.php";
 
-namespace Source\Models\Faq;
+namespace Source\Models;
 
 use Source\Core\Model;
 
@@ -19,11 +19,11 @@ class Question extends Model
         string $answer = null
     )
     {
-        $this->table = "questions";
         $this->id = $id;
         $this->idCatergoryQuestion = $idCategoryQuestion;
         $this->question = $question;
         $this->answer = $answer;
+        $this->table = "questions";
     }
 
     public function getId(): ?int
