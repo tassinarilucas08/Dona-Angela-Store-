@@ -1,5 +1,7 @@
 <?php
 
+require  __DIR__ . "/../vendor/autoload.php";
+
 namespace Source\WebService;
 
 use Source\Models\User;
@@ -63,7 +65,7 @@ class Users extends Api
 
         $user = new User();
         if(!$user->findById($data["id"])){
-            $this->call(200, "error", "Usuário não encontrado", "error")->back();
+            $this->call(400, "bad_request", "Usuário não encontrado", "error")->back();
             return;
         }
         $response = [

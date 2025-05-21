@@ -15,6 +15,7 @@ class User extends Model
     protected $email;
     protected $password;
     protected $address;
+    protected $phone;
 
     public function __construct(
         int $id = null,
@@ -82,5 +83,17 @@ class User extends Model
     public function setPassword(?string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getPhoto(): ?String
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?String $photo): void
+    {
+        $this->photo = $photo;
+
+        return $this;
     }
 }

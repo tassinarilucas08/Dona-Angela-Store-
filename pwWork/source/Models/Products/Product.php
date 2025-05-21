@@ -1,16 +1,16 @@
 <?php
 require  __DIR__ . "/../vendor/autoload.php";
 
-namespace Source\Models;
+namespace Source\Models\Products;
 
 use Source\Core\Model;
 
 class Product extends Model
-{
+{    
+    private $idCategory;
     private $id;
     private $name;
     private $price;
-    private $idCategory;
 
     public function __construct(int $id = null, String $name = null, float $price = null, int $idCategory = null)
 {
@@ -21,41 +21,41 @@ class Product extends Model
     $this->table = "products";
  }
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }
 
-    public function getName()
+    public function getName(): ?String
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(?String $name): void
     {
         $this->name = $name;
     }
 
-    public function getPrice()
+    public function getPrice(): ?float
     {
         return $this->price;
     }
 
-    public function setPrice($price)
+    public function setPrice(?float $price): void
     {
         $this->price = $price;
     }
 
-    public function getIdCategory()
+    public function getIdCategory(): ?int
     {
         return $this->idCategory;
     }
-    public function setIdCategory($idCategory)
+    public function setIdCategory(?int $idCategory): void
     {
         $this->idCategory = $idCategory;
     }

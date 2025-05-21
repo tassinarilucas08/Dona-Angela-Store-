@@ -16,7 +16,7 @@ Class Address extends Model{
 
     public function __construct( 
     int $id = null, 
-    int $idForeign,
+    int $idForeign = null,
     string $zipCode = null, 
     string $street = null, 
     string $number = null, 
@@ -43,60 +43,60 @@ Class Address extends Model{
         return $this;
     }
  
-    public function getIdForeign()
+    public function getIdForeign(): ?int
     {
         return $this->idForeign;    
     }
 
-    public function setIdForeign($idForeign)
+    public function setIdForeign(?String $idForeign): void
     {
         $this->idForeign = $idForeign;
 
         return $this;
     }
 
-    public function getZipCode()
+    public function getZipCode(): ?String 
     {
         return $this->zipCode;
     }
 
-    public function setZipCode($zipCode)
+    public function setZipCode(?String $zipCode): void
     {
         $this->zipCode = $zipCode;
 
         return $this;
     }
 
-    public function getStreet()
+    public function getStreet(): ?String
     {
         return $this->street;
     }
 
-    public function setStreet($street)
+    public function setStreet(?String $street): void
     {
         $this->street = $street;
 
         return $this;
     }
 
-    public function getNumber()
+    public function getNumber(): ?String
     {
         return $this->number;
     }
 
-    public function setNumber($number)
+    public function setNumber(?String $number): void
     {
         $this->number = $number;
 
         return $this;
     }
 
-    public function getComplement()
+    public function getComplement(): ?String
     {
         return $this->complement;
     }
 
-    public function setComplement(?String $complement)
+    public function setComplement(?String $complement): void
     {
         $this->complement = $complement;
 

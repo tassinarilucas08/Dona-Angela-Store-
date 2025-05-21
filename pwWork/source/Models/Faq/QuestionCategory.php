@@ -1,11 +1,11 @@
 <?php
 require  __DIR__ . "/../vendor/autoload.php";
 
-namespace Source\Models;
+namespace Source\Models\Faq;
 
 use Source\Core\Model;
 
-class Type 
+class QuestionCategory
 {
     private $id;
     private $description;

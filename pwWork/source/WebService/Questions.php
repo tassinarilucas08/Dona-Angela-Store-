@@ -1,10 +1,12 @@
 <?php
 
+require  __DIR__ . "/../vendor/autoload.php";
+
 namespace Source\WebService;
 
 use Source\Models\User;
 
-class Questions extends Api
+class Question extends Api
 {
     public function listQuestion (): void
     {
