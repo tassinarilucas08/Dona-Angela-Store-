@@ -38,9 +38,6 @@ class Addresses extends Api
             $data["zipCode"] ?? null,
             $data["number"] ?? null,
             $data["complement"] ?? null,
-
-
-
         );
 
         if(!$question->insert()){
