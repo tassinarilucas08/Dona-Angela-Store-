@@ -6,17 +6,17 @@ namespace Source\WebService;
 
 use Source\Models\User;
 
-class Questions extends Api
+class Addresses extends Api
 {
-    public function listQuestion (): void
+    public function listAdresses (): void
     {
-        $question = new Question();
+        $address = new Address();
         //var_dump($users->findAll());
-        $this->call(200, "success", "Lista de perguntas e respostas", "success")
+        $this->call(200, "success", "Lista de endereços", "success")
             ->back($question->findAll());
     }
 
-    public function createQuestion(array $data)
+    public function createAddress(array $data)
     {
 
         // verifica se os dados estão preenchidos
@@ -25,12 +25,22 @@ class Questions extends Api
             return;
         }
 
-        $question = new Question(
+        $address = new Address(
+                protected $id;  
+    protected $idForeign;
+    protected $zipCode;
+    protected $street;
+    protected $number;
+    protected $complement;
             null,
             $data["id"] ?? null,
-            $data["idCategoryQuestion"] ?? null,
-            $data["question"] ?? null,
-            $data["answer"] ?? null
+            $data["idForeign"] ?? null,
+            $data["zipCode"] ?? null,
+            $data["number"] ?? null,
+            $data["complement"] ?? null,
+
+
+
         );
 
         if(!$question->insert()){

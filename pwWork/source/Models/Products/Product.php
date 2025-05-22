@@ -11,6 +11,7 @@ class Product extends Model
     private $id;
     private $name;
     private $price;
+    private $description;
 
     public function __construct(int $id = null, String $name = null, float $price = null, int $idCategory = null)
 {
@@ -58,5 +59,18 @@ class Product extends Model
     public function setIdCategory(?int $idCategory): void
     {
         $this->idCategory = $idCategory;
+    }
+
+
+    public function getDescription(): ?String
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?String $description): void
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }

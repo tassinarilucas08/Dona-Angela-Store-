@@ -1,7 +1,7 @@
 <?php
 require  __DIR__ . "/../vendor/autoload.php";
 
-namespace Source\Models;
+namespace Source\Models\Users;
 
 class UserCategory extends Model
 {

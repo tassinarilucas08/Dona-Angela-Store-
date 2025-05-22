@@ -10,7 +10,7 @@ use Source\Models\Users\Address;
 class User extends Model
 {
     protected $id;
-    protected $idType;
+    protected $idUserCategory;
     protected $name;
     protected $email;
     protected $password;
@@ -19,7 +19,7 @@ class User extends Model
 
     public function __construct(
         int $id = null,
-        int $idType = null,
+        int $idUserCategory = null,
         string $name = null,
         string $email = null,
         string $password = null,
@@ -28,7 +28,7 @@ class User extends Model
     {
         $this->table = "users";
         $this->id = $id;
-        $this->idType = $idType;
+        $this->idUserCategory = $idUserCategory;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
@@ -45,14 +45,14 @@ class User extends Model
         $this->id = $id;
     }
 
-    public function getIdType(): ?int
+    public function getIdUserCategory(): ?int
     {
-        return $this->idType;
+        return $this->idUserCategory;
     }
 
-    public function setIdType(?int $idType): void
+    public function setIdUserCategory(?int $idUserCategory): void
     {
-        $this->idType = $idType;
+        $this->idUserCategory = $idUserCategory;
     }
 
     public function getName(): ?string
