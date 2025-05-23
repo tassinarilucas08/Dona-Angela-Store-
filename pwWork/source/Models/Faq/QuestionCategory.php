@@ -13,6 +13,7 @@ class QuestionCategory
     public function __construct (int $id = null, string $description = null){
         $this->id = $id;
         $this->description = $description;
+        $this->table = "question_categories"
     }
 
     public function getId (): ?int
