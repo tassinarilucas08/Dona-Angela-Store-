@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS products (
 
 CREATE TABLE IF NOT EXISTS question_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    category_question VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS questions (
