@@ -198,6 +198,16 @@ header {
   justify-content: center;
 }
 
+a {
+  text-decoration: none;
+  
+}
+
+a h2 {
+  font-weight: bold;
+  color: #323232
+}
+
 /* Produto com selo */
 .product-card {
   position: relative;

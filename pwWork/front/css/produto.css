@@ -25,6 +25,7 @@ body {
   }
 
   .btn-voltar {
+    margin-bottom: 20px;
     padding: 6px 12px;
     background-color: #d04c92;
     color: white;

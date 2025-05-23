@@ -61,6 +61,10 @@ body {
     flex: 1;
     max-width: 500px;
   }
+
+  a {
+    text-decoration: none;
+  }
   
   .item {
     display: flex;
