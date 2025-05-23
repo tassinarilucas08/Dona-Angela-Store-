@@ -72,8 +72,16 @@ CREATE TABLE IF NOT EXISTS products (
 		REFERENCES product_categories(id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS question_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_question VARCHAR(255) NOT NULL,
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS questions (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    idCategory INT,
     question VARCHAR(255) NOT NULL,
-    answer VARCHAR(255) NOT NULL
+    answer VARCHAR(255) NOT NULL,
+    FOREIGN KEY (idCategory)
+        REFERENCES question_categories(id)
 ) ENGINE=InnoDB;
