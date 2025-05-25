@@ -1,8 +1,8 @@
 <?php
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 namespace Source\Models\Users;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 use Source\Models\Users\Address;
@@ -20,10 +20,11 @@ class User extends Model
     public function __construct(
         int $id = null,
         int $idUserCategory = null,
-        string $name = null,
-        string $email = null,
-        string $password = null,
-        Address $address = null
+        String $name = null,
+        String $email = null,
+        String $password = null,
+        Address $address = null,
+        String $phone = null
     )
     {
         $this->table = "users";
@@ -33,6 +34,7 @@ class User extends Model
         $this->email = $email;
         $this->password = $password;
         $this->address = $address;
+        $this->phone = $phone;
     }
 
     public function getId(): ?int
@@ -85,15 +87,14 @@ class User extends Model
         $this->password = $password;
     }
 
-    public function getPhoto(): ?String
+    public function getPhone(): ?String
     {
-        return $this->photo;
+        return $this->phone;
     }
 
-    public function setPhoto(?String $photo): void
+    public function setPhone(?String $phone): void
     {
-        $this->photo = $photo;
+        $this->phone = $phone;
 
-        return $this;
     }
 }

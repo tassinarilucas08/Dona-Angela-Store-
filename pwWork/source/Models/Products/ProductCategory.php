@@ -1,7 +1,8 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 
@@ -11,9 +12,9 @@ class ProductCategory extends Model
     private $id;
     private $name;
 
-    public function __construct(int $id = null, String $name = null, String $gender = null)
+    public function __construct(int $id = null, String $name = null, String $idGender = null)
 {
-    $this->gender = $idGender
+    $this->idGender = $idGender;
     $this->id = $id;
     $this->name = $name;
     $this->table = "products_categories";
@@ -27,8 +28,6 @@ class ProductCategory extends Model
     public function setId(?int $id): void
     {
         $this->id = $id;
-
-        return $this;
     }
 
     public function getName(): ?String
@@ -39,8 +38,6 @@ class ProductCategory extends Model
     public function setName(?int $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     public function getIdGender(): ?int
@@ -51,7 +48,5 @@ class ProductCategory extends Model
     public function setIdGender(?int $idGender): void
     {
         $this->idGender = $idGender;
-
-        return $this;
     }
 }

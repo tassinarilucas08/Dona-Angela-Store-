@@ -1,8 +1,8 @@
 <?php
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 namespace Source\Models\Users;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 use Source\Models\Users\Address;
@@ -87,7 +87,5 @@ class Cliente extends User
     public function setPhoto(?String $photo): void
     {
         $this->photo = $photo;
-
-        return $this;
     }
 }

@@ -1,7 +1,8 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models\Compras;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 
@@ -31,31 +32,31 @@ class Purchases extends Model
         $this->id = $id;
     }
 
-    public function getIdClient(): ?String
+    public function getIdClient(): ?int
     {
         return $this->idClient;
     }
 
-    public function setIdClient(?String $idClient): void
+    public function setIdClient(?int $idClient): void
     {
         $this->idClient = $idClient;
     }
 
-    public function getDate(): ?float
+    public function getDate(): ?date
     {
         return $this->date;
     }
 
-    public function setDate(?float $date): void
+    public function setDate(?date $date): void
     {
         $this->date = $date;
     }
 
-    public function getTotal(): ?int
+    public function getTotal(): ?float
     {
         return $this->total;
     }
-    public function setTotal(?int $total): void
+    public function setTotal(?float $total): void
     {
         $this->total = $total;
     }

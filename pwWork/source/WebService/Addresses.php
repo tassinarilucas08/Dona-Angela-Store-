@@ -1,8 +1,8 @@
 <?php
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 namespace Source\WebService;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Models\User;
 
@@ -30,26 +30,29 @@ class Addresses extends Api
             $data["id"] ?? null,
             $data["idForeign"] ?? null,
             $data["zipCode"] ?? null,
+            $data["street"] ?? null,
             $data["number"] ?? null,
             $data["complement"] ?? null,
         );
 
-        if(!$question->insert()){
-            $this->call(500, "internal_server_error", $question->getErrorMessage(), "error")->back();
+        if(!$address->insert()){
+            $this->call(500, "internal_server_error", $address->getErrorMessage(), "error")->back();
             return;
         }
         // montar $response com as informações necessárias para mostrar no front
         $response = [
-            "Pergunta" => $question->getQuestion(),
-            "Resposta" => $question->getAnswer(),
+            "ZipCode" => $address->getZipCode(),
+            "Street" => $address->getStreet(),
+            "Number" => $address->getNumber(),
+            "Complement" => $address->getComplement(),
         ];
 
-        $this->call(201, "created", "Pergunta criada com sucesso", "success")
+        $this->call(201, "created", "Endereço criado com sucesso", "success")
             ->back($response);
 
     }
 
-    public function listQuestionById (array $data): void
+    public function listAddressById (array $data): void
     {
 
         if(!isset($data["id"])) {
@@ -62,15 +65,17 @@ class Addresses extends Api
             return;
         }
 
-        $question = new Question();
-        if(!$question->findById($data["id"])){
-            $this->call(200, "error", "Pergunta não encontrada", "error")->back();
+        $address = new Address();
+        if(!$address->findById($data["id"])){
+            $this->call(200, "error", "Endereço não encontrado", "error")->back();
             return;
         }
         $response = [
-            "Pergunta" => $user->getQuestion(),
-            "Resposta" => $user->getAnswer()
+            "ZipCode" => $address->getZipCode(),
+            "Street" => $address->getStreet(),
+            "Number" => $address->getNumber(),
+            "Complement" => $address->getComplement()
         ];
-        $this->call(200, "success", "Pergunta encontrada com sucesso", "success")->back($response);
+        $this->call(200, "success", "Endereço encontrado com sucesso", "success")->back($response);
     }
 }

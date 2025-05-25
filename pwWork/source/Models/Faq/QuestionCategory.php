@@ -1,7 +1,8 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models\Faq;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 
@@ -13,7 +14,7 @@ class QuestionCategory
     public function __construct (int $id = null, string $description = null){
         $this->id = $id;
         $this->description = $description;
-        $this->table = "question_categories"
+        $this->table = "question_categories";
     }
 
     public function getId (): ?int

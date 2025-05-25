@@ -1,8 +1,8 @@
 <?php
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 namespace Source\WebService;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Models\User;
 

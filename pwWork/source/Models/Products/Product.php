@@ -1,7 +1,8 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models\Products;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 
@@ -12,13 +13,16 @@ class Product extends Model
     private $name;
     private $price;
     private $description;
+    private $photo;
 
-    public function __construct(int $id = null, String $name = null, float $price = null, int $idCategory = null)
+    public function __construct(int $id = null, String $name = null, float $price = null, int $idCategory = null, String $description, String $photo)
 {
     $this->id = $id;
     $this->name = $name;
     $this->price = $price;
     $this->idCategory = $idCategory;
+    $this->description = $description;
+    $this->photo = $photo;
     $this->table = "products";
  }
 
@@ -61,7 +65,6 @@ class Product extends Model
         $this->idCategory = $idCategory;
     }
 
-
     public function getDescription(): ?String
     {
         return $this->description;
@@ -70,7 +73,16 @@ class Product extends Model
     public function setDescription(?String $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
+
+    public function getPhoto(): ?String
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?String $photo): void
+    {
+        $this->photo = $photo;
+    }
+
 }

@@ -1,14 +1,15 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models\Users;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 class UserCategory extends Model
 {
     private $id;
     private $description;
 
-    public function __construct (int $id = null, string $description = null){
+    public function __construct (int $id = null, String $description = null){
         $this->id = $id;
         $this->description = $description;
     }
@@ -23,12 +24,12 @@ class UserCategory extends Model
         $this->id = $id;
     }
 
-    public function getDescription (): ?string
+    public function getDescription (): ?String
     {
         return $this->description;
     }
 
-    public function setDescription (?string $description): void
+    public function setDescription (?String $description): void
     {
         $this->description = $description;
     }}

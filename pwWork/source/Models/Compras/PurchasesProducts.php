@@ -57,19 +57,19 @@ class PurchasesProducts extends Model
     {
         return $this->quantity;
     }
+    
     public function setQuantity(?int $quantity): void
     {
         $this->quantity = $quantity;
     }
 
-
-    public function getDescription(): ?String
+    public function getValue(): ?float
     {
-        return $this->description;
+        return $this->value;
     }
 
-    public function setDescription(?String $description): void
+    public function setValue(?float $value): void
     {
-        $this->description = $description;
+        $this->value = $value;
     }
 }

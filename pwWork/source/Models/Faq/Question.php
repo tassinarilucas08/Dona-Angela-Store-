@@ -1,7 +1,8 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models\Faq;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 
@@ -36,14 +37,14 @@ class Question extends Model
         $this->id = $id;
     }
 
-    public function getIdType(): ?int
+    public function getIdCategoryQuestion(): ?int
     {
-        return $this->idType;
+        return $this->idCategoryQuestion;
     }
 
-    public function setIdType(?int $idType): void
+    public function setIdCategoryQuestion(?int $idCategoryQuestion): void
     {
-        $this->idType = $idType;
+        $this->idCategoryQuestion = $idCategoryQuestion;
     }
 
     public function getQuestion(): ?string

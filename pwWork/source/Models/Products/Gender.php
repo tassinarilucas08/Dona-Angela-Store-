@@ -1,18 +1,40 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
 
 namespace Source\Models\Products;
 
+require  __DIR__ . "/../vendor/autoload.php";
+
 use Source\Core\Model;
 
-public class Gender extends Model{
+class Gender extends Model {
     protected $id;
-    protected $desciption;
-}
+    protected $description;
+
 
 public function __construct(int $id = null, String $description = null)
 {
     $this->id = $id;
-    $this->description = $desciption
+    $this->description = $description;
     $this->table = "genders";
+}
+
+public function getId (): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId (?int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getDescription (): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription (?string $description): void
+    {
+        $this->description = $description;
+    }
 }
