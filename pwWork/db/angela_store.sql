@@ -6,19 +6,6 @@ CREATE TABLE IF NOT EXISTS users_categories (
     category_name VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    idType INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    address_id INT,
-    FOREIGN KEY (idType)
-        REFERENCES users_categories(id)
-) ENGINE=InnoDB;
-=======
->>>>>>> 73346ae3ea011d40f94767d5cc1452c250f693e9
 CREATE TABLE IF NOT EXISTS address (
     id INT AUTO_INCREMENT PRIMARY KEY,
     street VARCHAR(255) NOT NULL,
@@ -26,7 +13,7 @@ CREATE TABLE IF NOT EXISTS address (
     complement VARCHAR(255),
     city VARCHAR(255) NOT NULL,
     state VARCHAR(255) NOT NULL,
-    zip_code VARCHAR(255) NOT NULL,
+    zip_code VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS users (
@@ -42,22 +29,12 @@ CREATE TABLE IF NOT EXISTS users (
         REFERENCES address(id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS seller (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    address_id INT,
-    FOREIGN KEY (address_id)
-		REFERENCES address(id)
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS genders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     gender VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS product_categories (
+CREATE TABLE IF NOT EXISTS products_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     gender_id INT,
@@ -67,7 +44,6 @@ CREATE TABLE IF NOT EXISTS product_categories (
 
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    seller_id INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     price DOUBLE NOT NULL,
@@ -76,17 +52,15 @@ CREATE TABLE IF NOT EXISTS products (
     status VARCHAR(255),
     gender_id INT,
     category_id INT,
-    FOREIGN KEY (seller_id)
-		REFERENCES seller(id),
     FOREIGN KEY (gender_id)
-		REFERENCES product_gender(id),
+		REFERENCES genders(id),
     FOREIGN KEY (category_id)
-		REFERENCES product_categories(id)
+		REFERENCES products_categories(id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS question_categories (
+CREATE TABLE IF NOT EXISTS questions_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    description VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS questions (
@@ -95,5 +69,5 @@ CREATE TABLE IF NOT EXISTS questions (
     question VARCHAR(255) NOT NULL,
     answer VARCHAR(255) NOT NULL,
     FOREIGN KEY (idCategory)
-        REFERENCES question_categories(id)
+        REFERENCES questions_categories(id)
 ) ENGINE=InnoDB;
