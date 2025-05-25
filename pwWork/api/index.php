@@ -22,7 +22,6 @@ $route = new Router("http://localhost/Dona-Angela-Store-/pwWork/api",":");
 $route->namespace("Source\WebService");
 
 /* USERS */
-
 $route->group("/Users");
 
 $route->get("/", "Users:listUsers");

@@ -4,7 +4,7 @@ namespace Source\WebService;
 
 require  __DIR__ . "/../vendor/autoload.php";
 
-use Source\Models\User;
+use Source\Models\Users\Address;
 
 class Addresses extends Api
 {
@@ -32,7 +32,7 @@ class Addresses extends Api
             $data["zipCode"] ?? null,
             $data["street"] ?? null,
             $data["number"] ?? null,
-            $data["complement"] ?? null,
+            $data["complement"] ?? null
         );
 
         if(!$address->insert()){

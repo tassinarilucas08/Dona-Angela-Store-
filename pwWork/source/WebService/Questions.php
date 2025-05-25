@@ -4,7 +4,7 @@ namespace Source\WebService;
 
 require  __DIR__ . "/../vendor/autoload.php";
 
-use Source\Models\User;
+use Source\Models\Faq\Question;
 
 class Questions extends Api
 {
