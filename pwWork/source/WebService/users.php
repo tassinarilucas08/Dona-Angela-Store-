@@ -19,13 +19,11 @@ class Users extends Api
 
     public function createUser(array $data)
     {
-
         // verifica se os dados estão preenchidos
         if(in_array("", $data)){
             $this->call(400, "bad_request", "Dados inválidos", "error")->back();
             return;
         }
-
         $user = new User(
             null,
             $data["idType"] ?? null,

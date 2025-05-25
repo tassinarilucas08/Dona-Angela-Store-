@@ -23,7 +23,7 @@ $route->namespace("Source\WebService");
 
 /* USERS */
 
-$route->group("/users");
+$route->group("/Users");
 
 $route->get("/", "Users:listUsers");
 $route->get("/id/{id}", "Users:listUserById");
