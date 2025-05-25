@@ -23,6 +23,23 @@ body {
     justify-content: space-between;
     margin-bottom: 40px;
   }
+
+  .btn-voltar {
+    margin-bottom: 20px;
+    padding: 6px 12px;
+    background-color: #d04c92;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-voltar:hover {
+    background-color: #b3387c;
+  }
   
   .imagem-produto {
     flex: 1;
