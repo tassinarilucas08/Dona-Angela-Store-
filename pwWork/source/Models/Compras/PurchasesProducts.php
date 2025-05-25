@@ -1,7 +1,7 @@
 <?php
-require  __DIR__ . "/../vendor/autoload.php";
-
 namespace Source\Models\Compras;
+
+require  __DIR__ . "/../vendor/autoload.php";
 
 use Source\Core\Model;
 
@@ -13,7 +13,7 @@ class PurchasesProducts extends Model
     protected $quantity;
     protected $value;
     
-    public function __construct(int $id = null, int $idCompra = null, int $idProduto = null, int $quantity =, float $value = null)
+    public function __construct(int $id = null, int $idCompra = null, int $idProduto = null, int $quantity = null, float $value = null)
 {
     $this->id = $id;
     $this->idCompra = $idCompra;
@@ -33,33 +33,33 @@ class PurchasesProducts extends Model
         $this->id = $id;
     }
 
-    public function getName(): ?String
+    public function getIdCompra(): ?int
     {
-        return $this->name;
+        return $this->idCompra;
     }
 
-    public function setName(?String $name): void
+    public function setIdCompra(?int $idCompra): void
     {
-        $this->name = $name;
+        $this->idCompra = $idCompra;
     }
 
-    public function getPrice(): ?float
+    public function getIdProduto(): ?int
     {
-        return $this->price;
+        return $this->idProduto;
     }
 
-    public function setPrice(?float $price): void
+    public function setIdProduto(?int $idProduto): void
     {
-        $this->price = $price;
+        $this->idProduto = $idProduto;
     }
 
-    public function getIdCategory(): ?int
+    public function getQuantity(): ?int
     {
-        return $this->idCategory;
+        return $this->quantity;
     }
-    public function setIdCategory(?int $idCategory): void
+    public function setQuantity(?int $quantity): void
     {
-        $this->idCategory = $idCategory;
+        $this->quantity = $quantity;
     }
 
 
@@ -71,7 +71,5 @@ class PurchasesProducts extends Model
     public function setDescription(?String $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 }
