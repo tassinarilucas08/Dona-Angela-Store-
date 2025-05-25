@@ -1,0 +1,3 @@
+-Criar a tabela avaliações no Banco de Dados e relacionar com produtos e clientes.
+
+-Formulários para questions na página principal
