@@ -70,11 +70,7 @@ CREATE TABLE IF NOT EXISTS avaliacoes (
         REFERENCES products(id)
 ) ENGINE=InnoDB;
 
-<<<<<<< HEAD
-CREATE TABLE IF NOT EXISTS questions_categories (
-=======
 CREATE TABLE IF NOT EXISTS question_categories (
->>>>>>> 289c93d4a67d61f733a1caab893790d17f948d5b
     id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
