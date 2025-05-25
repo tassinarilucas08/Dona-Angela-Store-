@@ -2,8 +2,6 @@
 
 namespace Source\Models\Products;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Core\Model;
 
 class Gender extends Model {

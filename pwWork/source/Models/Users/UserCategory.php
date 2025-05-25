@@ -2,8 +2,6 @@
 
 namespace Source\Models\Users;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 class UserCategory extends Model
 {
     private $id;

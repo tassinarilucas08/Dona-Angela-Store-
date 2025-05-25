@@ -2,8 +2,6 @@
 
 namespace Source\WebService;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Models\Products\Gender;
 
 class Genders extends Api
