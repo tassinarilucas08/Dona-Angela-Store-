@@ -16,7 +16,6 @@ CREATE TABLE IF NOT EXISTS users (
     FOREIGN KEY (idType)
         REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS address (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
