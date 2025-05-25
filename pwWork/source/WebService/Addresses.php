@@ -26,12 +26,6 @@ class Addresses extends Api
         }
 
         $address = new Address(
-                protected $id;  
-    protected $idForeign;
-    protected $zipCode;
-    protected $street;
-    protected $number;
-    protected $complement;
             null,
             $data["id"] ?? null,
             $data["idForeign"] ?? null,
@@ -41,7 +35,7 @@ class Addresses extends Api
         );
 
         if(!$question->insert()){
-            $this->call(500, "internal_server_error", $questions->getErrorMessage(), "error")->back();
+            $this->call(500, "internal_server_error", $question->getErrorMessage(), "error")->back();
             return;
         }
         // montar $response com as informações necessárias para mostrar no front
