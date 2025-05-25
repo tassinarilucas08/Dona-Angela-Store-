@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users_categories (
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    idType INT NOT NULL
+    idType INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS address (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     street VARCHAR(255) NOT NULL,
-    number INT NOT NULL,
+    number VARCHAR(255) NOT NULL,
     complement VARCHAR(255),
     city VARCHAR(255) NOT NULL,
     state VARCHAR(255) NOT NULL,
