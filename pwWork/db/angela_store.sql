@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users_categories (
     category_name VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
+<<<<<<< HEAD
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idType INT NOT NULL,
@@ -16,17 +17,29 @@ CREATE TABLE IF NOT EXISTS users (
     FOREIGN KEY (idType)
         REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
+=======
+>>>>>>> 73346ae3ea011d40f94767d5cc1452c250f693e9
 CREATE TABLE IF NOT EXISTS address (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
     street VARCHAR(255) NOT NULL,
     number VARCHAR(255) NOT NULL,
     complement VARCHAR(255),
     city VARCHAR(255) NOT NULL,
     state VARCHAR(255) NOT NULL,
     zip_code VARCHAR(255) NOT NULL,
-    FOREIGN KEY (user_id)
-        REFERENCES users(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idUserCategory INT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    address_id INT,
+    FOREIGN KEY (idUserCategory)
+        REFERENCES users_categories(id),
+    FOREIGN KEY (address_id)
+        REFERENCES address(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS seller (
