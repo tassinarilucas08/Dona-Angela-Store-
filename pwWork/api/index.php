@@ -21,29 +21,26 @@ $route = new Router("http://localhost/Dona-Angela-Store-/pwWork/api",":");
 
 $route->namespace("Source\WebService");
 
-/* USERS */
+// Users
 $route->group("/Users");
-
 $route->get("/", "Users:listUsers");
 $route->get("/id/{id}", "Users:listUserById");
 $route->get("/id/", "Users:listUserById");
-
-// http://localhost:8080/inf-3am-2025/api/users/add
 $route->post("/add", "Users:createUser");
-// http://localhost:8080/inf-3am-2025/api/users/update
 $route->put("/update", "Users:updateUser");
 
-
-// $route->group("/users");
-
-// $route->post("/login", "Users:login");
-
-// $route->get("/", "Users:listUsers");
-// $route->get("/id/{id}", "Users:listUserById");
-// $route->get("/id/", "Users:listUserById");
+$route->dispatch();
 $route->group("null");
 
+//Genders
+
+$route->group("/Genders");
+$route->get("/", "Genders:listGenders");
+$route->get("/id/{id}", "Genders:listGenderById"); // Se você tiver essa função
+$route->get("/id/", "Genders:listGenderById");
+
 $route->dispatch();
+$route->group("null");
 
 /** ERROR REDIRECT */
 if ($route->error()) {
