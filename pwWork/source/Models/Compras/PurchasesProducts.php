@@ -19,6 +19,7 @@ class PurchasesProducts extends Model
     $this->idCompra = $idCompra;
     $this->idProduto = $idProduto;
     $this->quantity = $quantity;
+    $this->value = $value;
     $this->table = "purchasesProducts";
  }
 

@@ -34,7 +34,7 @@ class Questions extends Api
         );
 
         if(!$question->insert()){
-            $this->call(500, "internal_server_error", $questions->getErrorMessage(), "error")->back();
+            $this->call(500, "internal_server_error", $question->getErrorMessage(), "error")->back();
             return;
         }
         // montar $response com as informações necessárias para mostrar no front
