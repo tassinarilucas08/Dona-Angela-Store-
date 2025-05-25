@@ -2,8 +2,6 @@
 
 namespace Source\Models\Faq;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Core\Model;
 
 class Question extends Model

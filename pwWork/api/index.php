@@ -36,8 +36,30 @@ $route->group("null");
 
 $route->group("/Genders");
 $route->get("/", "Genders:listGenders");
-$route->get("/id/{id}", "Genders:listGenderById"); // Se você tiver essa função
+$route->get("/id/{id}", "Genders:listGenderById");
 $route->get("/id/", "Genders:listGenderById");
+
+$route->dispatch();
+$route->group("null");
+
+//Questions
+
+$route->group("/Questions");
+$route->get("/", "Questions:listQuestions");
+$route->get("/id/{id}", "Questions:listQuestionById");
+$route->get("/id/", "Questions:listQuestionById");
+$route->get("/id/{id}", "Questions:listQuestionByIdCategory");
+$route->get("/id/", "Questions:listQuestionByIdCategory");
+
+$route->dispatch();
+$route->group("null");
+
+//Address
+
+$route->group("/Addresses");
+$route->get("/", "Addresses:listAddresses");
+$route->get("/id/{id}", "Addresses:listAddressById");
+$route->get("/id/", "Addresses:listAddressById");
 
 $route->dispatch();
 $route->group("null");

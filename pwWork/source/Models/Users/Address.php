@@ -2,8 +2,6 @@
 
 namespace Source\Models\Users;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Core\Model;
 
 Class Address extends Model{
