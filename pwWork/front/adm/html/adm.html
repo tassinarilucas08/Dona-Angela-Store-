@@ -7,94 +7,188 @@
   <link rel="stylesheet" href="../css/adm.css" />
 </head>
 <body>
-  <div class="adm-container">
+  <div class="adm-wrapper">
+    <div class="container">
+      <button class="btn-voltar" type="button" onclick="window.history.back()">← Voltar</button>
 
-    <h1>Painel Administrativo</h1>
+      <h1>Painel Administrativo</h1>
 
-    <!-- Seção: Adicionar Cliente -->
-    <div class="section">
-      <h2>Adicionar Cliente</h2>
-      <form>
-        <div class="form-group">
+      <!-- Adicionar Cliente -->
+      <section class="section">
+        <h2>Adicionar Cliente</h2>
+        <form>
           <label for="nome">Nome Completo</label>
           <input type="text" id="nome" name="nome" required />
-        </div>
 
-        <div class="form-group">
           <label for="email">E-mail</label>
           <input type="email" id="email" name="email" required />
-        </div>
 
-        <div class="form-group">
           <label for="telefone">Telefone</label>
           <input type="tel" id="telefone" name="telefone" required />
-        </div>
 
-        <div class="form-group">
           <label for="rua">Rua</label>
           <input type="text" id="rua" name="rua" required />
-        </div>
 
-        <div class="form-group">
           <label for="numero">Número</label>
           <input type="number" id="numero" name="numero" required />
-        </div>
 
-        <div class="form-group">
           <label for="complemento">Complemento</label>
           <input type="text" id="complemento" name="complemento" />
-        </div>
 
-        <div class="form-group">
           <label for="cidade">Cidade</label>
           <input type="text" id="cidade" name="cidade" required />
-        </div>
 
-        <div class="form-group">
           <label for="estado">Estado</label>
           <input type="text" id="estado" name="estado" required />
-        </div>
 
-        <div class="form-group">
           <label for="cep">CEP</label>
           <input type="text" id="cep" name="cep" required />
-        </div>
 
-        <div class="button-group">
           <button type="submit">Adicionar Cliente</button>
-        </div>
-      </form>
-    </div>
+        </form>
+      </section>
 
-    <div class="divider"></div>
-
-    <!-- Seção: Gerenciar Cliente -->
-    <div class="section">
-      <h2>Gerenciar Clientes</h2>
-      <form>
-        <div class="form-group">
+      <!-- Gerenciar Cliente -->
+      <section class="gerenciar-clientes">
+        <h2>Gerenciar Clientes</h2>
+        <form>
           <label for="clientes">Selecionar Cliente</label>
           <select id="clientes" name="clientes" required>
-            <option value="">Selecione um cliente</option>
+            <option value="">...</option>
             <option value="1">Joana Silva</option>
             <option value="2">Carlos Oliveira</option>
             <option value="3">Maria dos Anjos</option>
-            <!-- Será populado dinamicamente no futuro -->
           </select>
-        </div>
 
-        <div class="form-group">
           <label for="idCliente">ID do Cliente</label>
-          <input type="text" id="idCliente" name="idCliente" readonly value="1" />
-        </div>
+          <input type="text" id="idCliente" name="idCliente"/>
 
-        <div class="button-group">
-          <button type="submit">Atualizar Cliente</button>
-          <button type="button">Excluir Cliente</button>
-        </div>
-      </form>
+          <label for="nome-editar">Nome Completo</label>
+          <input type="text" id="nome-editar" name="nome-editar" />
+
+          <label for="email-editar">E-mail</label>
+          <input type="email" id="email-editar" name="email-editar" />
+
+          <label for="telefone-editar">Telefone</label>
+          <input type="tel" id="telefone-editar" name="telefone-editar" />
+
+          <label for="rua-editar">Rua</label>
+          <input type="text" id="rua-editar" name="rua-editar" />
+
+          <label for="numero-editar">Número</label>
+          <input type="number" id="numero-editar" name="numero-editar" />
+
+          <label for="complemento-editar">Complemento</label>
+          <input type="text" id="complemento-editar" name="complemento-editar" />
+
+          <label for="cidade-editar">Cidade</label>
+          <input type="text" id="cidade-editar" name="cidade-editar" />
+
+          <label for="estado-editar">Estado</label>
+          <input type="text" id="estado-editar" name="estado-editar" />
+
+          <label for="cep-editar">CEP</label>
+          <input type="text" id="cep-editar" name="cep-editar" />
+
+          <div class="button-group">
+            <button type="submit">Atualizar Cliente</button>
+            <button type="button">Excluir Cliente</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Criar Produto -->
+      <section class="criar-produto">
+        <h2>Criar Produto</h2>
+        <form>
+          <label for="nome-produto">Nome do Produto:</label>
+          <input type="text" id="nome-produto" name="nome-produto">
+
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" name="descricao"></textarea>
+
+          <label for="preco">Preço:</label>
+          <input type="number" id="preco" name="preco" step="0.01">
+
+          <label for="imagem">Imagem (em observação):</label>
+          <input type="number" id="imagem" name="imagem">
+
+          <label for="quantidade">Quantidade:</label>
+          <div class="quantidade-wrapper">
+            <input type="number" id="quantidade" name="quantidade" min="0" value="0">
+            <button type="button">-</button>
+            <button type="button">+</button>
+          </div>
+
+          <label for="status">Status:</label>
+          <select id="status" name="status">
+            <option value="">...</option>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+
+          <label for="categoria">Categoria:</label>
+          <select id="categoria" name="categoria">
+            <option value="">...</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+          </select>
+
+          <button type="submit">Adicionar Produto</button>
+        </form>
+      </section>
+
+      <!-- Gerenciar Produto -->
+      <section class="gerenciar-produtos">
+        <h2>Gerenciar Produtos</h2>
+        <form>
+          <label for="selecionar-produto">Selecionar Produto:</label>
+          <select id="selecionar-produto" name="selecionar-produto">
+            <option value="">...</option>
+            <option value="lily">Lily</option>
+            <option value="biografia">Biografia</option>
+          </select>
+
+          <label for="nome-atualizar">Nome:</label>
+          <input type="text" id="nome-atualizar" name="nome-atualizar">
+
+          <label for="descricao-atualizar">Descrição:</label>
+          <textarea id="descricao-atualizar" name="descricao-atualizar"></textarea>
+
+          <label for="preco-atualizar">Preço:</label>
+          <input type="number" id="preco-atualizar" name="preco-atualizar" step="0.01">
+
+          <label for="imagem-atualizar">Imagem (em observação):</label>
+          <input type="number" id="imagem-atualizar" name="imagem-atualizar">
+
+          <label for="quantidade-atualizar">Quantidade:</label>
+          <div class="quantidade-wrapper">
+            <input type="number" id="quantidade-atualizar" name="quantidade-atualizar" min="0" value="0">
+            <button type="button">-</button>
+            <button type="button">+</button>
+          </div>
+
+          <label for="status-atualizar">Status:</label>
+          <select id="status-atualizar" name="status-atualizar">
+            <option value="">...</option>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+
+          <label for="categoria-atualizar">Categoria:</label>
+          <select id="categoria-atualizar" name="categoria-atualizar">
+            <option value="">...</option>
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+          </select>
+
+          <div class="button-group">
+            <button type="submit">Atualizar Produto</button>
+            <button type="submit">Excluir Produto</button>
+          </div>
+        </form>
+      </section>
     </div>
-
   </div>
 </body>
 </html>

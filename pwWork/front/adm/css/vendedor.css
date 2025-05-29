@@ -1,128 +1,161 @@
 body {
     margin: 0;
-    padding: 40px 20px;
-    background-color: #f9fafb;
+    padding: 20px;
+    background-color: #f2f2f2;
     font-family: 'Segoe UI', sans-serif;
-    color: #333;
+  }
+  
+  .vendedor-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 30px;
+    width: 1000px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   }
   
-  h1, h2 {
-    color: #a62c7b;
+  .btn-voltar {
+    padding: 8px 14px;
+    background-color: #d04c92;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    align-self: flex-start;
+  }
+  
+  .btn-voltar:hover {
+    background-color: #b3387c;
+  }
+  
+  h1 {
     text-align: center;
+    color: #a62c7b;
+    margin-bottom: 30px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #a62c7b;
+    margin-top: 40px;
+    margin-bottom: 20px;
   }
   
   form {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 30px;
   }
   
   label {
     font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
   }
   
   input[type="text"],
   input[type="number"],
-  input[type="email"],
   textarea,
   select {
     padding: 10px;
-    border: 1px solid #ccc;
+    font-size: 15px;
     border-radius: 6px;
-    font-size: 16px;
+    border: 1px solid #ccc;
     width: 100%;
     box-sizing: border-box;
   }
   
   textarea {
     resize: vertical;
+    min-height: 80px;
   }
   
-  input[type="submit"],
   button {
     background-color: #a62c7b;
     color: white;
+    font-weight: bold;
+    font-size: 14px;
     padding: 10px 16px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    font-weight: bold;
     transition: background-color 0.3s ease;
-    width: fit-content;
   }
   
-  input[type="submit"]:hover,
   button:hover {
-    background-color: #922366;
+    background-color: #922768;
+  }
+  
+  select {
+    background-color: white;
+    cursor: pointer;
   }
   
   .quantidade-wrapper {
     display: flex;
     align-items: center;
     gap: 8px;
-    max-width: 160px;
   }
   
   .quantidade-wrapper input[type="number"] {
-    text-align: center;
     width: 60px;
-    height: 36px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    text-align: center;
   }
   
   .quantidade-wrapper button {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
-    font-weight: bold;
-    background-color: #a62c7b;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
   }
   
-  .quantidade-wrapper button:hover {
-    background-color: #922366;
+  .criar-produto button[type="submit"] {
+    align-self: flex-start;
+    margin-top: 10px;
   }
   
-  select {
-    appearance: none;
-    background-color: white;
+  .gerenciar-produtos {
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
   }
   
-  fieldset {
-    border: 1px solid #ccc;
-    padding: 16px;
-    border-radius: 8px;
-    margin-bottom: 30px;
+  .gerenciar-produtos .botoes-gerenciar {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
   }
   
-  legend {
-    font-weight: bold;
-    color: #a62c7b;
-    padding: 0 10px;
+  .gerenciar-produtos button[type="submit"] {
+    margin: 0;
   }
   
-  .product-preview {
-    background-color: #f3f3f3;
-    padding: 16px;
-    border-radius: 8px;
-  }
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
   
-  .product-preview h3 {
-    margin-top: 0;
-    color: #a62c7b;
+    .btn-voltar {
+      margin-left: 0;
+      align-self: center;
+    }
+  
+    .gerenciar-produtos .botoes-gerenciar {
+      flex-direction: column;
+    }
+  
+    .quantidade-wrapper {
+      justify-content: center;
+    }
   }
