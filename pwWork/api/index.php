@@ -29,7 +29,7 @@ $route->get("/id/", "Users:listUserById");
 $route->post("/add", "Users:createUser");
 $route->put("/update", "Users:updateUser");
 
-$route->dispatch();
+
 $route->group("null");
 
 //Genders
@@ -37,9 +37,9 @@ $route->group("null");
 $route->group("/Genders");
 $route->get("/", "Genders:listGenders");
 $route->get("/id/{id}", "Genders:listGenderById");
-$route->get("/id/", "Genders:listGenderById");
+//$route->get("/id/", "Genders:listGenderById");
 
-$route->dispatch();
+
 $route->group("null");
 
 //Questions
@@ -51,7 +51,7 @@ $route->get("/id/", "Questions:listQuestionById");
 $route->get("/id/{id}", "Questions:listQuestionByIdCategory");
 $route->get("/id/", "Questions:listQuestionByIdCategory");
 
-$route->dispatch();
+
 $route->group("null");
 
 //Address
@@ -61,8 +61,10 @@ $route->get("/", "Addresses:listAddresses");
 $route->get("/id/{id}", "Addresses:listAddressById");
 $route->get("/id/", "Addresses:listAddressById");
 
-$route->dispatch();
+
 $route->group("null");
+
+$route->dispatch();
 
 /** ERROR REDIRECT */
 if ($route->error()) {
