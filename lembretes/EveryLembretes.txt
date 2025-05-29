@@ -1,3 +1,13 @@
--Criar a tabela avaliações no Banco de Dados e relacionar com produtos e clientes.
+-Criar a tabela avaliações no Banco de Dados e relacionar com produtos e clientes. -- OK
 
 -Formulários para questions na página principal
+
+-ver como irá fazer a imagem
+-botão melhor +/- na quantidade
+-status selecionar igual categoria
+-gerenciar produtos ter as opcoes
+
+-adm precisa ter opcoes dos produtos
+-ir para adm da pagina inicial
+
+-adicionar endereco no carrinho (modal) / retirar do registro / criar mais de 1 endereco e puxar 
