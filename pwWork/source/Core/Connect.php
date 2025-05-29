@@ -5,7 +5,7 @@
     use PDOException;
 
     const CONF_DB_HOST = "mysql";
-    const CONF_DB_NAME = "angela-store";
+    const CONF_DB_NAME = "angela_store";
     const CONF_DB_USER = "root";
     const CONF_DB_PASS = "asdf1234";
 

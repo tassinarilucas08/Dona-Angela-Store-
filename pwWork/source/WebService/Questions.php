@@ -2,13 +2,11 @@
 
 namespace Source\WebService;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Models\Faq\Question;
 
 class Questions extends Api
 {
-    public function listQuestion (): void
+    public function listQuestions (): void
     {
         $question = new Question();
         //var_dump($users->findAll());
@@ -63,6 +61,29 @@ class Questions extends Api
 
         $question = new Question();
         if(!$question->findById($data["id"])){
+            $this->call(200, "error", "Pergunta não encontrada", "error")->back();
+            return;
+        }
+        $response = [
+            "Pergunta" => $user->getQuestion(),
+            "Resposta" => $user->getAnswer()
+        ];
+        $this->call(200, "success", "Pergunta encontrada com sucesso", "success")->back($response);
+    }
+    public function listQuestionByIdCategory (array $data): void
+    {
+        if(!isset($data["idCategory"])) {
+            $this->call(400, "bad_request", "ID inválido", "error")->back();
+            return;
+        }
+
+        if(!filter_var($data["idCategory"], FILTER_VALIDATE_INT)) {
+            $this->call(400, "bad_request", "ID inválido", "error")->back();
+            return;
+        }
+
+        $question = new Question();
+        if(!$question->findById($data["idCategory"])){
             $this->call(200, "error", "Pergunta não encontrada", "error")->back();
             return;
         }

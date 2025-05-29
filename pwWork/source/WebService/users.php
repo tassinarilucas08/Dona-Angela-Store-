@@ -2,8 +2,6 @@
 
 namespace Source\WebService;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Models\Users\User;
 
 class Users extends Api

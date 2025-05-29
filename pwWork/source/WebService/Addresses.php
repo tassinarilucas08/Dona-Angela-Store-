@@ -2,18 +2,16 @@
 
 namespace Source\WebService;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Models\Users\Address;
 
 class Addresses extends Api
 {
-    public function listAdresses (): void
+    public function listAddresses (): void
     {
         $address = new Address();
         //var_dump($users->findAll());
         $this->call(200, "success", "Lista de endereços", "success")
-            ->back($question->findAll());
+            ->back($address->findAll());
     }
 
     public function createAddress(array $data)
