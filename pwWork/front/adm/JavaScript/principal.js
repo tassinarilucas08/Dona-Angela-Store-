@@ -52,3 +52,14 @@ function handleClick(button, category) {
     // Chama a função de filtro
     filterProducts(category);
   }
+
+let btnVendedor = document.querySelector("#btnVendedor");
+let btnAdmin = document.querySelector("#btnAdmin");
+
+btnVendedor.addEventListener("click", ()=> {
+  location.href = "../html/vendedor.html"; // Altere para o link real
+});
+
+btnAdmin.addEventListener("click", ()=> {
+  location.href = "../html/adm.html"; // Altere para o link real
+});
