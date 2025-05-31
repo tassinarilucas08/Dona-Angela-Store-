@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     address_id INT,
+    phone VARCHAR (255),
+    token VARCHAR (1024),
     FOREIGN KEY (idUserCategory)
         REFERENCES users_categories(id),
     FOREIGN KEY (address_id)
@@ -31,9 +33,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS genders (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    gender VARCHAR(255) NOT NULL
-) ENGINE=InnoDB;
-
+    description VARCHAR(255) NOT NULL
+) ENGINE=InnoDB; 
 CREATE TABLE IF NOT EXISTS products_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -41,7 +42,6 @@ CREATE TABLE IF NOT EXISTS products_categories (
     FOREIGN KEY (gender_id)
         REFERENCES genders(id)
 ) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

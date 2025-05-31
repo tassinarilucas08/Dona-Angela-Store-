@@ -24,10 +24,12 @@ class Users extends Api
         }
         $user = new User(
             null,
-            $data["idType"] ?? null,
+            $data["idUserCategory"] ?? null,
             $data["name"] ?? null,
             $data["email"] ?? null,
-            $data["password"] ?? null
+            $data["password"] ?? null,
+            $data["address"] ?? null,
+            $data["phone"] ?? null
         );
 
         if(!$user->insert()){
@@ -38,12 +40,10 @@ class Users extends Api
         $response = [
             "name" => $user->getName(),
             "email" => $user->getEmail(),
-            "photo" => $user->getPhoto()
         ];
 
         $this->call(201, "created", "Usuário criado com sucesso", "success")
             ->back($response);
-
     }
 
     public function listUserById (array $data): void
@@ -70,4 +70,57 @@ class Users extends Api
         ];
         $this->call(200, "success", "Encontrado com sucesso", "success")->back($response);
     }
+
+     public function updateUser (array $data): void
+    {
+       $this->auth();
+       var_dump($data);
+       var_dump( $this->userAuth);
+       var_dump($this->userAuth->id, $this->userAuth->email, $this->userAuth->idCategoryUser);
+    }
+
+    public function login(array $data): void
+    {
+        // Verificar se os dados de login foram fornecidos
+        if (empty($data["email"]) || empty($data["password"])) {
+            $this->call(400, "bad_request", "Credenciais inválidas", "error")->back();
+            return;
+        }
+
+        $user = new User();
+
+        if(!$user->findByEmail($data["email"])){
+            $this->call(401, "unauthorized", "Usuário não encontrado", "error")->back();
+            return;
+        }
+
+        if(!password_verify($data["password"], $user->getPassword())){
+            $this->call(401, "unauthorized", "Senha inválida", "error")->back();
+            return;
+        }
+
+        // Gerar o token JWT
+        $jwt = new JWTToken();
+        $token = $jwt->create([
+            "id" => $user->getId(),
+            "email" => $user->getEmail(),
+            "idUserCategory" => $user->getIdUserCategory()
+        ]);
+
+        // Retornar o token JWT na resposta
+        $this->call(200, "success", "Login realizado com sucesso", "success")
+            ->back([
+                "token" => $token,
+                "user" => [
+                    "id" => $user->getId(),
+                    "name" => $user->getName(),
+                    "email" => $user->getEmail(),
+                ]
+            ]);
+
+    }
+    function deleteUser(array $data)
+  {
+      var_dump($data);
+  }
 }

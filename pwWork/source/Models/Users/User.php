@@ -95,4 +95,75 @@ class User extends Model
         $this->phone = $phone;
 
     }
+
+      public function getAddress(): ?String
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?String $address): void
+    {
+        $this->address = $address;
+
+    }
+
+        public function login () {
+        echo "Olá, {$this->name}! Você está logado!";
+    }
+
+    public function insert (): bool
+    {
+
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $this->errorMessage = "E-mail inválido";
+            return false;
+        }
+
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = Connect::getInstance()->prepare($sql);
+        $stmt->bindValue(":email", $this->email);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            $this->errorMessage = "E-mail já cadastrado";
+            return false;
+        }
+
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+
+        if(!parent::insert()){
+            $this->errorMessage = "Erro ao inserir o registro: {$this->getErrorMessage()}";
+            return false;
+        }
+
+        return true;
+    }
+
+    public function findByEmail (string $email): bool
+    {
+        $sql = "SELECT * FROM users WHERE email = :email";
+        $stmt = Connect::getInstance()->prepare($sql);
+        $stmt->bindValue(":email", $email);
+
+        try {
+            $stmt->execute();
+            $result = $stmt->fetch();
+            if (!$result) {
+                return false;
+            }
+            $this->id = $result->id;
+            $this->idType = $result->idType;
+            $this->name = $result->name;
+            $this->email = $result->email;
+            $this->password = $result->password;
+            $this->photo = $result->photo;
+
+            return true;
+        } catch (PDOException $e) {
+            $this->errorMessage = "Erro ao buscar o registro: {$e->getMessage()}";
+            return false;
+        }
+
+    }
+
 }

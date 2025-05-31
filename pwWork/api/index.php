@@ -23,12 +23,18 @@ $route->namespace("Source\WebService");
 
 // Users
 $route->group("/Users");
+
+$route->post("/login", "Users:login");
+
 $route->get("/", "Users:listUsers");
+
 $route->get("/id/{id}", "Users:listUserById");
-$route->get("/id/", "Users:listUserById");
+
 $route->post("/add", "Users:createUser");
+
 $route->put("/update", "Users:updateUser");
 
+$route->delete("/delete/id/{id}", "Users:deleteUser");
 
 $route->group("null");
 
@@ -37,8 +43,8 @@ $route->group("null");
 $route->group("/Genders");
 $route->get("/", "Genders:listGenders");
 $route->get("/id/{id}", "Genders:listGenderById");
-//$route->get("/id/", "Genders:listGenderById");
-
+$route->post("/add", "Genders:createGender");
+$route->put("/update", "Genders:updateGender");
 
 $route->group("null");
 
@@ -47,10 +53,7 @@ $route->group("null");
 $route->group("/Questions");
 $route->get("/", "Questions:listQuestions");
 $route->get("/id/{id}", "Questions:listQuestionById");
-$route->get("/id/", "Questions:listQuestionById");
 $route->get("/id/{id}", "Questions:listQuestionByIdCategory");
-$route->get("/id/", "Questions:listQuestionByIdCategory");
-
 
 $route->group("null");
 
