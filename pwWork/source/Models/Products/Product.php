@@ -7,24 +7,24 @@ require  __DIR__ . "/../vendor/autoload.php";
 use Source\Core\Model;
 
 class Product extends Model
-{    
+{   
+    private $id; 
     private $idCategory;
-    private $id;
     private $name;
     private $price;
     private $description;
     private $photo;
     private $deletedAt;
 
-    public function __construct(int $id = null, String $name = null, float $price = null, int $idCategory = null, String $description, String $photo, String $deletedAt = null)
+    public function __construct(int $id = null, int $idCategory = null, String $name = null, float $price = null, String $description, String $photo, String $deletedAt = null)
 {
     $this->id = $id;
+    $this->idCategory = $idCategory;
     $this->name = $name;
     $this->price = $price;
-    $this->idCategory = $idCategory;
     $this->description = $description;
     $this->photo = $photo;
-    $this->deletedAt = $deletedAt
+    $this->deletedAt = $deletedAt;
     $this->table = "products";
  }
 
@@ -36,6 +36,15 @@ class Product extends Model
     public function setId(?int $id): void
     {
         $this->id = $id;
+    }
+
+    public function getIdCategory(): ?int
+    {
+        return $this->idCategory;
+    }
+    public function setIdCategory(?int $idCategory): void
+    {
+        $this->idCategory = $idCategory;
     }
 
     public function getName(): ?String
@@ -56,15 +65,6 @@ class Product extends Model
     public function setPrice(?float $price): void
     {
         $this->price = $price;
-    }
-
-    public function getIdCategory(): ?int
-    {
-        return $this->idCategory;
-    }
-    public function setIdCategory(?int $idCategory): void
-    {
-        $this->idCategory = $idCategory;
     }
 
     public function getDescription(): ?String
