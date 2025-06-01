@@ -10,6 +10,7 @@ class UserCategory extends Model
     public function __construct (int $id = null, String $description = null){
         $this->id = $id;
         $this->description = $description;
+        $this->table = "users_categories";
     }
 
     public function getId (): ?int

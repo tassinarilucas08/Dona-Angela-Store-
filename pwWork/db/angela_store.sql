@@ -85,3 +85,24 @@ CREATE TABLE IF NOT EXISTS questions (
     FOREIGN KEY (idCategoryQuestion)
         REFERENCES questions_categories(id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS purchases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idUser INT,
+    date DATE,
+    total DOUBLE NOT NULL,
+    FOREIGN KEY (idUser)
+        REFERENCES users(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS purchasesProducts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idPurchase INT,
+    idProduct INT,
+    quantity INT NOT NULL,
+    value DOUBLE NOT NULL,
+    FOREIGN KEY (idPurchase)
+        REFERENCES purchases(id),
+    FOREIGN KEY (idProduct)
+        REFERENCES products(id)
+) ENGINE=InnoDB;
