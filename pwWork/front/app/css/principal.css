@@ -68,6 +68,28 @@ header {
   text-decoration: underline;
 }
 
+.perfil-link {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.perfil-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #a62c7b;
+  background-color: white;
+  padding: 2px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.perfil-icon:hover {
+  transform: scale(1.1);
+}
+
 .cart-icon {
   position: relative;
 }
@@ -450,29 +472,4 @@ background-color: lightpink;
 }
 .movButton.clicked {
   transform: scale(0.9);
-}
-
-.vendedor-buttons{
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 40px 0;
-}
-
-.vendedor-btn{
-  background-color: #f8b6c1; /* rosa claro */
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.vendedor:hover{
-  background-color: #f48ca3; /* rosa mais forte */
-  transform: scale(1.05);
 }
