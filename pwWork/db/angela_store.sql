@@ -53,11 +53,8 @@ CREATE TABLE IF NOT EXISTS products (
     photo INT,
     quantity INT NOT NULL,
     status VARCHAR(255),
-    idGender INT,
     FOREIGN KEY (idCategory)
 		REFERENCES products_categories(id),
-    FOREIGN KEY (idGender)
-		REFERENCES genders(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS avaliacoes (
