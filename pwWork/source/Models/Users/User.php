@@ -3,6 +3,7 @@
 namespace Source\Models\Users;
 
 use Source\Core\Model;
+use Source\Core\Connect;
 use Source\Models\Users\Address;
 
 class User extends Model
@@ -14,6 +15,7 @@ class User extends Model
     protected $password;
     protected $address;
     protected $phone;
+    protected $token;
 
     public function __construct(
         int $id = null,
@@ -22,7 +24,8 @@ class User extends Model
         String $email = null,
         String $password = null,
         Address $address = null,
-        String $phone = null
+        String $phone = null,
+        String $token = null
     )
     {
         $this->table = "users";
@@ -107,13 +110,18 @@ class User extends Model
 
     }
 
-        public function login () {
-        echo "Olá, {$this->name}! Você está logado!";
+    public function getToken(): ?String
+    {
+        return $this->token;
+    }
+
+    public function setToken(?String $token): void
+    {
+        $this->token = $token;
     }
 
     public function insert (): bool
     {
-
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             $this->errorMessage = "E-mail inválido";
             return false;
@@ -152,11 +160,13 @@ class User extends Model
                 return false;
             }
             $this->id = $result->id;
-            $this->idType = $result->idType;
+            $this->idUserCategory = $result->idUserCategory;
             $this->name = $result->name;
             $this->email = $result->email;
             $this->password = $result->password;
-            $this->photo = $result->photo;
+            $this->address = $result->address_id;
+            $this->phone = $result->phone;
+            $this->token = $result->token;
 
             return true;
         } catch (PDOException $e) {
@@ -165,5 +175,4 @@ class User extends Model
         }
 
     }
-
 }

@@ -3,9 +3,11 @@
 namespace Source\WebService;
 
 use Source\Models\Users\User;
+use Source\WebService\Addresses;
 
 class Users extends Api
 {
+
     // Controller -> Usa as coisas que tu define no model para criar a funçao da rota em si.
     public function listUsers (): void
     {
@@ -17,18 +19,26 @@ class Users extends Api
 
     public function createUser(array $data)
     {
+        
+    $addressId = $data['address'];
+
+    // Busca o objeto Address usando seu método já existente
+    $addressObject = Addresses::findById($addressId);
+
         // verifica se os dados estão preenchidos
         if(in_array("", $data)){
             $this->call(400, "bad_request", "Dados inválidos", "error")->back();
             return;
         }
+        $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
+        
         $user = new User(
             null,
             $data["idUserCategory"] ?? null,
             $data["name"] ?? null,
             $data["email"] ?? null,
-            $data["password"] ?? null,
-            $data["address"] ?? null,
+            $hashedPassword,
+            $addressObject,
             $data["phone"] ?? null
         );
 
