@@ -156,3 +156,86 @@ body {
   .whatsapp-container img {
     margin-right: 0.4rem;
   }
+
+  #btnEndereco {
+    background-color: #a62c7b;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  #btnEndereco:hover {
+    background-color: #922768;
+  }
+
+  /* Modal Endereço */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  h3 {
+    margin-top: 0;
+    color: #d04c92;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 12px 0;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .modal-content button {
+    background-color: #a62c7b;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .modal-content button:hover {
+    background-color: #922768;
+  }
+
+  .modal .close {
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #d04c92;
+  }

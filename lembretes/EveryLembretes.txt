@@ -10,4 +10,4 @@
 -adm precisa ter opcoes dos produtos -- OK
 -ir para adm da pagina inicial -- OK
 
--adicionar endereco no carrinho (modal) / retirar do registro / criar mais de 1 endereco e puxar 
+-adicionar endereco no carrinho (modal) / retirar do registro -- OK / criar mais de 1 endereco e puxar 
