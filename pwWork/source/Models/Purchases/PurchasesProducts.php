@@ -1,5 +1,5 @@
 <?php
-namespace Source\Models\Compras;
+namespace Source\Models\Purchases;
 
 require  __DIR__ . "/../vendor/autoload.php";
 
@@ -8,15 +8,15 @@ use Source\Core\Model;
 class PurchasesProducts extends Model
 {    
     protected $id;
-    protected $idCompra;
+    protected $idPurchase;
     protected $idProduto;
     protected $quantity;
     protected $value;
     
-    public function __construct(int $id = null, int $idCompra = null, int $idProduto = null, int $quantity = null, float $value = null)
+    public function __construct(int $id = null, int $idPurchase = null, int $idProduto = null, int $quantity = null, float $value = null)
 {
     $this->id = $id;
-    $this->idCompra = $idCompra;
+    $this->idPurchase = $idPurchase;
     $this->idProduto = $idProduto;
     $this->quantity = $quantity;
     $this->value = $value;
@@ -33,14 +33,14 @@ class PurchasesProducts extends Model
         $this->id = $id;
     }
 
-    public function getIdCompra(): ?int
+    public function getIdPurchase(): ?int
     {
-        return $this->idCompra;
+        return $this->idPurchase;
     }
 
-    public function setIdCompra(?int $idCompra): void
+    public function setIdPurchase(?int $idPurchase): void
     {
-        $this->idCompra = $idCompra;
+        $this->idPurchase = $idPurchase;
     }
 
     public function getIdProduto(): ?int

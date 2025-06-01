@@ -1,6 +1,6 @@
 <?php
 
-namespace Source\Models\Compras;
+namespace Source\Models\Purchases;
 
 require  __DIR__ . "/../vendor/autoload.php";
 

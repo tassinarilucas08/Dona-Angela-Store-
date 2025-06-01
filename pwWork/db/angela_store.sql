@@ -5,32 +5,30 @@ CREATE TABLE IF NOT EXISTS users_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category_name VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS address (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL,
     street VARCHAR(255) NOT NULL,
     number VARCHAR(255) NOT NULL,
     complement VARCHAR(255),
     city VARCHAR(255) NOT NULL,
     state VARCHAR(255) NOT NULL,
-    zip_code VARCHAR(255) NOT NULL
+    zip_code VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_user)
+        REFERENCES users(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    idUserCategory INT NOT NULL,
+    id_user_category INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    address_id INT,
     phone VARCHAR (255),
     token VARCHAR (1024),
-    FOREIGN KEY (idUserCategory)
-        REFERENCES users_categories(id),
-    FOREIGN KEY (address_id)
-        REFERENCES address(id)
+    FOREIGN KEY (id_user_category)
+        REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS genders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL
@@ -69,7 +67,6 @@ CREATE TABLE IF NOT EXISTS avaliacoes (
     FOREIGN KEY (product_id)
         REFERENCES products(id)
 ) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS questions_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL
@@ -77,9 +74,9 @@ CREATE TABLE IF NOT EXISTS questions_categories (
 
 CREATE TABLE IF NOT EXISTS questions (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    idCategory INT,
+    id_category INT,
     question VARCHAR(255) NOT NULL,
     answer VARCHAR(255) NOT NULL,
-    FOREIGN KEY (idCategory)
+    FOREIGN KEY (id_category)
         REFERENCES questions_categories(id)
 ) ENGINE=InnoDB;

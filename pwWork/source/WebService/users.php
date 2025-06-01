@@ -4,6 +4,7 @@ namespace Source\WebService;
 
 use Source\Models\Users\User;
 use Source\WebService\Addresses;
+use Source\Models\Users\Address;
 
 class Users extends Api
 {
@@ -19,12 +20,6 @@ class Users extends Api
 
     public function createUser(array $data)
     {
-        
-    $addressId = $data['address'];
-
-    // Busca o objeto Address usando seu método já existente
-    $addressObject = Addresses::findById($addressId);
-
         // verifica se os dados estão preenchidos
         if(in_array("", $data)){
             $this->call(400, "bad_request", "Dados inválidos", "error")->back();
@@ -34,12 +29,12 @@ class Users extends Api
         
         $user = new User(
             null,
-            $data["idUserCategory"] ?? null,
+            $data["id_user_category"] ?? null,
             $data["name"] ?? null,
             $data["email"] ?? null,
             $hashedPassword,
-            $addressObject,
-            $data["phone"] ?? null
+            $data["phone"] ?? null,
+            $token ?? null
         );
 
         if(!$user->insert()){

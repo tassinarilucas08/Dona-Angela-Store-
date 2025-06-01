@@ -13,7 +13,6 @@ class User extends Model
     protected $name;
     protected $email;
     protected $password;
-    protected $address;
     protected $phone;
     protected $token;
 
@@ -23,7 +22,6 @@ class User extends Model
         String $name = null,
         String $email = null,
         String $password = null,
-        Address $address = null,
         String $phone = null,
         String $token = null
     )
@@ -34,7 +32,6 @@ class User extends Model
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        $this->address = $address;
         $this->phone = $phone;
     }
 
@@ -99,17 +96,6 @@ class User extends Model
 
     }
 
-      public function getAddress(): ?String
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?String $address): void
-    {
-        $this->address = $address;
-
-    }
-
     public function getToken(): ?String
     {
         return $this->token;
@@ -164,7 +150,6 @@ class User extends Model
             $this->name = $result->name;
             $this->email = $result->email;
             $this->password = $result->password;
-            $this->address = $result->address_id;
             $this->phone = $result->phone;
             $this->token = $result->token;
 

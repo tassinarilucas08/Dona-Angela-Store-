@@ -11,3 +11,13 @@
 -ir para adm da pagina inicial -- OK
 
 -adicionar endereco no carrinho (modal) / retirar do registro -- OK / criar mais de 1 endereco e puxar 
+
+01/06
+
+Nao usar idUser, usar id_user
+
+Nao colocar coisa a mais na db sem colocar no objeto
+
+Tarefa: Criar a purchases e purchases_products na db - PRESTA ATENÇÃO NOS NOMES DAS TABELAS NO CONSTRUTOR!!!!!!
+
+Arrumar tudo q tiver de diferente nos nomes da db pra deixar TODOS em um mesmo padrao
