@@ -103,6 +103,22 @@
       background-color:  #b3387c;
     }
 
+    .link-reset {
+      margin-top: 10px;
+      font-size: 13px;
+      text-align: center;
+    }
+    
+    .link-reset a {
+      color: #a62c7b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .link-reset a:hover {
+      text-decoration: underline;
+    }
+
     .link-register {
       margin-top: 15px;
       font-size: 14px;

@@ -3,70 +3,75 @@ USE angela_store;
 
 CREATE TABLE IF NOT EXISTS users_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    category_name VARCHAR(255) NOT NULL
-) ENGINE=InnoDB;
-CREATE TABLE IF NOT EXISTS address (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_user INT NOT NULL,
-    street VARCHAR(255) NOT NULL,
-    number VARCHAR(255) NOT NULL,
-    complement VARCHAR(255),
-    city VARCHAR(255) NOT NULL,
-    state VARCHAR(255) NOT NULL,
-    zip_code VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_user)
-        REFERENCES users(id)
+    description VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_user_category INT NOT NULL,
+    idUserCategory INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     phone VARCHAR (255),
     token VARCHAR (1024),
-    FOREIGN KEY (id_user_category)
+    FOREIGN KEY (idUserCategory)
         REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS address (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idUser INT NOT NULL,
+    zipCode VARCHAR(255) NOT NULL,
+    street VARCHAR(255) NOT NULL,
+    number VARCHAR(255) NOT NULL,
+    complement VARCHAR(255),
+    state VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    FOREIGN KEY (idUser)
+        REFERENCES users(id)
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS genders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL
-) ENGINE=InnoDB; 
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS products_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    gender_id INT,
-    FOREIGN KEY (gender_id)
+    idGender INT,
+    FOREIGN KEY (idGender)
         REFERENCES genders(id)
 ) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    idCategory INT,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
     price DOUBLE NOT NULL,
-    image INT,
+    description TEXT NOT NULL,
+    photo INT,
     quantity INT NOT NULL,
     status VARCHAR(255),
-    gender_id INT,
-    category_id INT,
-    FOREIGN KEY (gender_id)
-		REFERENCES genders(id),
-    FOREIGN KEY (category_id)
-		REFERENCES products_categories(id)
+    idGender INT,
+    FOREIGN KEY (idCategory)
+		REFERENCES products_categories(id),
+    FOREIGN KEY (idGender)
+		REFERENCES genders(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS avaliacoes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    product_id INT,
+    idUser INT,
+    idProduct INT,
     stars INT NOT NULL,
     comment LONGTEXT,
-    FOREIGN KEY (user_id)
+    FOREIGN KEY (idUser)
         REFERENCES users(id),
-    FOREIGN KEY (product_id)
+    FOREIGN KEY (idProduct)
         REFERENCES products(id)
 ) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS questions_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL
@@ -74,9 +79,30 @@ CREATE TABLE IF NOT EXISTS questions_categories (
 
 CREATE TABLE IF NOT EXISTS questions (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_category INT,
+    idCategoryQuestion INT,
     question VARCHAR(255) NOT NULL,
     answer VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_category)
+    FOREIGN KEY (idCategoryQuestion)
         REFERENCES questions_categories(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS purchases (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idUser INT,
+    date DATE,
+    total DOUBLE NOT NULL,
+    FOREIGN KEY (idUser)
+        REFERENCES users(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS purchasesProducts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idPurchase INT,
+    idProduct INT,
+    quantity INT NOT NULL,
+    value DOUBLE NOT NULL,
+    FOREIGN KEY (idPurchase)
+        REFERENCES purchases(id),
+    FOREIGN KEY (idProduct)
+        REFERENCES products(id)
 ) ENGINE=InnoDB;

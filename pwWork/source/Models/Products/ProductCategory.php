@@ -8,14 +8,14 @@ use Source\Core\Model;
 
 class ProductCategory extends Model
 {
-    private $idGender;
     private $id;
+    private $idGender;
     private $name;
 
-    public function __construct(int $id = null, String $name = null, String $idGender = null)
+    public function __construct(int $id = null, String $idGender = null, String $name = null)
 {
-    $this->idGender = $idGender;
     $this->id = $id;
+    $this->idGender = $idGender;
     $this->name = $name;
     $this->table = "products_categories";
  }
@@ -30,16 +30,6 @@ class ProductCategory extends Model
         $this->id = $id;
     }
 
-    public function getName(): ?String
-    {
-        return $this->name;
-    }
-
-    public function setName(?int $name): void
-    {
-        $this->name = $name;
-    }
-
     public function getIdGender(): ?int
     {
         return $this->idGender;
@@ -48,5 +38,15 @@ class ProductCategory extends Model
     public function setIdGender(?int $idGender): void
     {
         $this->idGender = $idGender;
+    }
+
+    public function getName(): ?String
+    {
+        return $this->name;
+    }
+
+    public function setName(?int $name): void
+    {
+        $this->name = $name;
     }
 }

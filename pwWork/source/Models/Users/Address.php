@@ -122,7 +122,7 @@ Class Address extends Model{
         if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             return new Address(
                 $row['id'],
-                $row['id_user']
+                $row['id_user'],
                 $row['street'],
                 $row['number'],
                 $row['complement'],

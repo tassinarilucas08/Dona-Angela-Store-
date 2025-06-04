@@ -26,13 +26,14 @@ class User extends Model
         String $token = null
     )
     {
-        $this->table = "users";
         $this->id = $id;
         $this->idUserCategory = $idUserCategory;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
         $this->phone = $phone;
+        $this->token = $token;
+        $this->table = "users";
     }
 
     public function getId(): ?int
