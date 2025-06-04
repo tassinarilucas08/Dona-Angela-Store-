@@ -5,6 +5,7 @@ namespace Source\WebService;
 use Source\Models\Users\User;
 use Source\WebService\Addresses;
 use Source\Models\Users\Address;
+use Source\Core\JWTToken;
 
 class Users extends Api
 {
