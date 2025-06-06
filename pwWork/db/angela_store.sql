@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS genders (
 
 CREATE TABLE IF NOT EXISTS products_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
     idGender INT,
+    description VARCHAR(255) NOT NULL,
     FOREIGN KEY (idGender)
         REFERENCES genders(id)
 ) ENGINE=InnoDB;
@@ -49,13 +49,13 @@ CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idCategory INT,
     name VARCHAR(255) NOT NULL,
-    price DOUBLE NOT NULL,
+    price FLOAT NOT NULL,
     description TEXT NOT NULL,
     photo INT,
     quantity INT NOT NULL,
     status VARCHAR(255),
     FOREIGN KEY (idCategory)
-		REFERENCES products_categories(id),
+		REFERENCES products_categories(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS avaliacoes (
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS purchases (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idUser INT,
     date DATE,
-    total DOUBLE NOT NULL,
+    total FLOAT NOT NULL,
     FOREIGN KEY (idUser)
         REFERENCES users(id)
 ) ENGINE=InnoDB;
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS purchasesProducts (
     idPurchase INT,
     idProduct INT,
     quantity INT NOT NULL,
-    value DOUBLE NOT NULL,
+    value FLOAT NOT NULL,
     FOREIGN KEY (idPurchase)
         REFERENCES purchases(id),
     FOREIGN KEY (idProduct)

@@ -9,15 +9,15 @@ class PurchasesProducts extends Model
 {    
     protected $id;
     protected $idPurchase;
-    protected $idProduto;
+    protected $idProduct;
     protected $quantity;
     protected $value;
     
-    public function __construct(int $id = null, int $idPurchase = null, int $idProduto = null, int $quantity = null, float $value = null)
+    public function __construct(int $id = null, int $idPurchase = null, int $idProduct = null, int $quantity = null, float $value = null)
 {
     $this->id = $id;
     $this->idPurchase = $idPurchase;
-    $this->idProduto = $idProduto;
+    $this->idProduct = $idProduct;
     $this->quantity = $quantity;
     $this->value = $value;
     $this->table = "purchasesProducts";
@@ -43,14 +43,14 @@ class PurchasesProducts extends Model
         $this->idPurchase = $idPurchase;
     }
 
-    public function getIdProduto(): ?int
+    public function getIdProduct(): ?int
     {
-        return $this->idProduto;
+        return $this->idProduct;
     }
 
-    public function setIdProduto(?int $idProduto): void
+    public function setIdProduct(?int $idProduct): void
     {
-        $this->idProduto = $idProduto;
+        $this->idProduct = $idProduct;
     }
 
     public function getQuantity(): ?int

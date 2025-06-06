@@ -18,7 +18,7 @@ class Product extends Model
     private $status;
     private $deletedAt;
 
-    public function __construct(int $id = null, int $idCategory = null, String $name = null, float $price = null, String $description, String $photo, int $quantity, String $status, String $deletedAt = null)
+    public function __construct(int $id = null, int $idCategory = null, String $name = null, float $price = null, String $description, int $photo, int $quantity, String $status, String $deletedAt = null)
 {
     $this->id = $id;
     $this->idCategory = $idCategory;
@@ -26,9 +26,9 @@ class Product extends Model
     $this->price = $price;
     $this->description = $description;
     $this->photo = $photo;
-    $this->deletedAt = $deletedAt;
     $this->quantity = $quantity;
     $this->status = $status;
+    $this->deletedAt = $deletedAt;
     $this->table = "products";
  }
 
@@ -81,12 +81,12 @@ class Product extends Model
         $this->description = $description;
     }
 
-    public function getPhoto(): ?String
+    public function getPhoto(): ?int
     {
         return $this->photo;
     }
 
-    public function setPhoto(?String $photo): void
+    public function setPhoto(?int $photo): void
     {
         $this->photo = $photo;
     }
