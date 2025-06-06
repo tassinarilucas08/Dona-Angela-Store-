@@ -25,7 +25,6 @@ class Questions extends Api
 
         $question = new Question(
             null,
-            $data["id"] ?? null,
             $data["idCategoryQuestion"] ?? null,
             $data["question"] ?? null,
             $data["answer"] ?? null
