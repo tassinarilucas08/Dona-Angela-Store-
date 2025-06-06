@@ -25,12 +25,13 @@ class Addresses extends Api
 
         $address = new Address(
             null,
-            $data["id"] ?? null,
-            $data["idForeign"] ?? null,
+            $data["idUser"] ?? null,
             $data["zipCode"] ?? null,
             $data["street"] ?? null,
             $data["number"] ?? null,
-            $data["complement"] ?? null
+            $data["complement"] ?? null,
+            $data["state"] ?? null,
+            $data["city"] ?? null
         );
 
         if(!$address->insert()){
@@ -43,6 +44,8 @@ class Addresses extends Api
             "Street" => $address->getStreet(),
             "Number" => $address->getNumber(),
             "Complement" => $address->getComplement(),
+            "State" => $address->getState(),
+            "City" => $address->getCity()
         ];
 
         $this->call(201, "created", "Endereço criado com sucesso", "success")
@@ -72,7 +75,9 @@ class Addresses extends Api
             "ZipCode" => $address->getZipCode(),
             "Street" => $address->getStreet(),
             "Number" => $address->getNumber(),
-            "Complement" => $address->getComplement()
+            "Complement" => $address->getComplement(),
+            "State" => $address->getState(),
+            "City" => $address->getCity()
         ];
         $this->call(200, "success", "Endereço encontrado com sucesso", "success")->back($response);
     }

@@ -9,14 +9,14 @@ use Source\Core\Model;
 class Purchases extends Model
 {    
     protected $id;
-    protected $idClient;
+    protected $idUser;
     protected $date;
     protected $total;
     
-    public function __construct(int $id = null, int $idClient = null, date $date = null, float $total = null)
+    public function __construct(int $id = null, int $idUser = null, date $date = null, float $total = null)
 {
     $this->id = $id;
-    $this->idClient = $idClient;
+    $this->idUser = $idUser;
     $this->date = $date;
     $this->total = $total;
     $this->table = "purchases";
@@ -32,14 +32,14 @@ class Purchases extends Model
         $this->id = $id;
     }
 
-    public function getIdClient(): ?int
+    public function getIdUser(): ?int
     {
-        return $this->idClient;
+        return $this->idUser;
     }
 
-    public function setIdClient(?int $idClient): void
+    public function setIdUser(?int $idUser): void
     {
-        $this->idClient = $idClient;
+        $this->idUser = $idUser;
     }
 
     public function getDate(): ?date

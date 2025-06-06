@@ -10,13 +10,13 @@ class ProductCategory extends Model
 {
     private $id;
     private $idGender;
-    private $name;
+    private $description;
 
-    public function __construct(int $id = null, String $idGender = null, String $name = null)
+    public function __construct(int $id = null, int $idGender = null, String $description = null)
 {
     $this->id = $id;
     $this->idGender = $idGender;
-    $this->name = $name;
+    $this->description = $description;
     $this->table = "products_categories";
  }
 
@@ -40,13 +40,13 @@ class ProductCategory extends Model
         $this->idGender = $idGender;
     }
 
-    public function getName(): ?String
+    public function getDescription(): ?String
     {
-        return $this->name;
+        return $this->description;
     }
 
-    public function setName(?int $name): void
+    public function setDescription(?int $description): void
     {
-        $this->name = $name;
+        $this->description = $description;
     }
 }
