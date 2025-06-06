@@ -26,14 +26,13 @@ class Users extends Api
             $this->call(400, "bad_request", "Dados inválidos", "error")->back();
             return;
         }
-        $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
         
         $user = new User(
             null,
-            $data["id_user_category"] ?? null,
+            $data["idUserCategory"] ?? null,
             $data["name"] ?? null,
             $data["email"] ?? null,
-            $hashedPassword,
+            $data["password"] ?? null,
             $data["phone"] ?? null,
             $token ?? null
         );
@@ -123,8 +122,7 @@ class Users extends Api
                     "email" => $user->getEmail(),
                 ]
             ]);
-
-    }
+}
     function deleteUser(array $data)
   {
       var_dump($data);
