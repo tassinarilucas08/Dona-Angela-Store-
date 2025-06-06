@@ -142,7 +142,7 @@ class User extends Model
 
         try {
             $stmt->execute();
-            $result = $stmt->fetch();
+            $result = $stmt->fetch(\PDO::FETCH_OBJ);
             if (!$result) {
                 return false;
             }
@@ -152,7 +152,6 @@ class User extends Model
             $this->email = $result->email;
             $this->password = $result->password;
             $this->phone = $result->phone;
-            $this->token = $result->token;
 
             return true;
         } catch (PDOException $e) {

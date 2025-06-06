@@ -33,8 +33,7 @@ class Users extends Api
             $data["name"] ?? null,
             $data["email"] ?? null,
             $data["password"] ?? null,
-            $data["phone"] ?? null,
-            $token ?? null
+            $data["phone"] ?? null
         );
 
         if(!$user->insert()){
@@ -80,8 +79,8 @@ class Users extends Api
     {
        $this->auth();
        var_dump($data);
-       var_dump( $this->userAuth);
-       var_dump($this->userAuth->id, $this->userAuth->email, $this->userAuth->idCategoryUser);
+       var_dump($this->userAuth);
+       var_dump($this->userAuth->id, $this->userAuth->email, $this->userAuth->idUserCategory);
     }
 
     public function login(array $data): void
