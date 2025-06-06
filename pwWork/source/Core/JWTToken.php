@@ -53,5 +53,4 @@ class JWTToken
             return false;
         }
     }
-
 }
