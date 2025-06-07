@@ -65,4 +65,17 @@ class Genders extends Api
         ];
         $this->call(200, "success", "Gênero encontrado com sucesso", "success")->back($response);
     }
+
+    public function updateGender (array $data): void
+    {
+       $this->auth();
+       var_dump($data);
+       var_dump($this->genderAuth);
+       var_dump($this->genderAuth->id, $this->genderAuth->description);
+    }
+
+    function deleteGender(array $data)
+  {
+      var_dump($data);
+  }
 }
