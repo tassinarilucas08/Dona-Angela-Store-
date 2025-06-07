@@ -64,8 +64,8 @@ class Questions extends Api
             return;
         }
         $response = [
-            "Pergunta" => $user->getQuestion(),
-            "Resposta" => $user->getAnswer()
+            "Pergunta" => $question->getQuestion(),
+            "Resposta" => $question->getAnswer()
         ];
         $this->call(200, "success", "Pergunta encontrada com sucesso", "success")->back($response);
     }
@@ -87,9 +87,22 @@ class Questions extends Api
             return;
         }
         $response = [
-            "Pergunta" => $user->getQuestion(),
-            "Resposta" => $user->getAnswer()
+            "Pergunta" => $question->getQuestion(),
+            "Resposta" => $question->getAnswer()
         ];
         $this->call(200, "success", "Pergunta encontrada com sucesso", "success")->back($response);
     }
+
+    public function updateQuestion (array $data): void
+    {
+       $this->auth();
+       var_dump($data);
+       var_dump($this->questionAuth);
+       var_dump($this->questionAuth->id, $this->questionAuth->question, $this->questionAuth->answer, $this->questionAuth->idCategoryQuestion);
+    }
+
+    function deleteQuestion(array $data)
+  {
+      var_dump($data);
+  }
 }
