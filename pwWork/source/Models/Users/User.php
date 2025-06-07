@@ -14,7 +14,6 @@ class User extends Model
     protected $email;
     protected $password;
     protected $phone;
-    protected $token;
 
     public function __construct(
         int $id = null,
@@ -22,8 +21,7 @@ class User extends Model
         String $name = null,
         String $email = null,
         String $password = null,
-        String $phone = null,
-        String $token = null
+        String $phone = null
     )
     {
         $this->id = $id;
@@ -32,7 +30,6 @@ class User extends Model
         $this->email = $email;
         $this->password = $password;
         $this->phone = $phone;
-        $this->token = $token;
         $this->table = "users";
     }
 
@@ -95,16 +92,6 @@ class User extends Model
     {
         $this->phone = $phone;
 
-    }
-
-    public function getToken(): ?String
-    {
-        return $this->token;
-    }
-
-    public function setToken(?String $token): void
-    {
-        $this->token = $token;
     }
 
     public function insert (): bool

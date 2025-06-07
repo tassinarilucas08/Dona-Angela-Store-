@@ -75,13 +75,73 @@ class Users extends Api
         $this->call(200, "success", "Encontrado com sucesso", "success")->back($response);
     }
 
-     public function updateUser (array $data): void
-    {
-       $this->auth();
-       var_dump($data);
-       var_dump($this->userAuth);
-       var_dump($this->userAuth->id, $this->userAuth->email, $this->userAuth->idUserCategory);
+    public function updateUser(array $data): void
+{
+    // Verifica autenticação via token
+    $this->auth();
+
+    // Verifica se há pelo menos um campo para atualizar
+    if (empty($data)) {
+        $this->call(400, "bad_request", "Nenhum dado enviado para atualização", "error")->back();
+        return;
     }
+
+    $user = new User();
+
+    // Busca o usuário atual pelo ID do token JWT
+    if (!$user->findById($this->userAuth->id)) {
+        $this->call(404, "not_found", "Usuário não encontrado", "error")->back();
+        return;
+    }
+
+    // Verifica e aplica os campos recebidos
+    if (isset($data["name"])) {
+        if (empty($data["name"])) {
+            $this->call(400, "bad_request", "O nome não pode ser vazio", "error")->back();
+            return;
+        }
+        $user->setName($data["name"]);
+    }
+
+    if (isset($data["email"])) {
+        if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
+            $this->call(400, "bad_request", "Formato de e-mail inválido", "error")->back();
+            return;
+        }
+
+        // Verifica se o novo email já está sendo usado por outro usuário
+        $checkEmail = new User();
+        $checkEmailResult = $checkEmail->findByEmail($data["email"]);
+        if ($checkEmailResult && $checkEmailResult->getId() !== $this->userAuth->id) {
+            $this->call(409, "conflict", "Este e-mail já está em uso", "error")->back();
+            return;
+        }
+
+        $user->setEmail($data["email"]);
+    }
+
+    if (isset($data["phone"])) {
+        if (empty($data["phone"])) {
+            $this->call(400, "bad_request", "O telefone não pode ser vazio", "error")->back();
+            return;
+        }
+        $user->setPhone($data["phone"]);
+    }
+
+    // Tenta atualizar usando o método inteligente
+    if (!$user->updateById()) {
+        $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao atualizar usuário", "error")->back();
+        return;
+    }
+
+    // Sucesso!
+    $this->call(200, "success", "Usuário atualizado com sucesso", "success")->back([
+        "id" => $user->getId(),
+        "name" => $user->getName(),
+        "email" => $user->getEmail(),
+        "phone" => $user->getPhone()
+    ]);
+}
 
     public function login(array $data): void
     {
