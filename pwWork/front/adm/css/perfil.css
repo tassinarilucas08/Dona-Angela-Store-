@@ -70,6 +70,43 @@ h1 {
   font-size: 14px;
 }
 
+.btn-excluir-conta {
+  margin-top: 10px;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-excluir-conta:hover {
+  background-color: #d93636;
+}
+
+.botoes-conta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.btn-alterar {
+  background-color: transparent;
+  border: none;
+  color: #a62c7b;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-alterar:hover {
+  text-decoration: underline;
+}
+
 .subtitulo {
   color: #a62c7b;
   font-size: 20px;
