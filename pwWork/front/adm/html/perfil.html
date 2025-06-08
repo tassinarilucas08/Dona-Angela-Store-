@@ -18,8 +18,9 @@
         <p>e-mail: joana@email.com</p>
         <p>telefone: 51 94567-6312</p>
       </div>
-      <div>
+      <div class="botoes-conta">
         <button class="btn-alterar" onclick="abrirModalEdicao()">ALTERAR DADOS ✎</button>
+        <button class="btn-excluir-conta" onclick="abrirModalExcluirConta()">Excluir Conta</button>
       </div>
     </div>
 
@@ -91,29 +92,54 @@
     </div>
   </div>
 
+  <!-- MODAL EXCLUIR CONTA -->
+  <div class="modal" id="modal-excluir-conta">
+    <div class="modal-content">
+      <h3>Deseja realmente excluir sua conta?</h3>
+      <p>Esta ação é irreversível e todos os seus dados serão removidos.</p>
+      <div class="modal-buttons">
+        <button onclick="fecharModalExcluirConta()">Cancelar</button>
+        <button class="salvar" onclick="confirmarExclusao()">Confirmar Exclusão</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     function abrirModalEdicao() {
       document.getElementById("modal-edicao").style.display = "flex";
     }
-
+  
     function fecharModalEdicao() {
       document.getElementById("modal-edicao").style.display = "none";
     }
-
+  
     function abrirModalEndereco() {
       document.getElementById("modal-endereco").style.display = "flex";
     }
-
+  
     function fecharModalEndereco() {
       document.getElementById("modal-endereco").style.display = "none";
     }
-
+  
     function abrirModalEditarEndereco() {
       document.getElementById("modal-editar-endereco").style.display = "flex";
     }
-
+  
     function fecharModalEditarEndereco() {
       document.getElementById("modal-editar-endereco").style.display = "none";
+    }
+  
+    function abrirModalExcluirConta() {
+      document.getElementById("modal-excluir-conta").style.display = "flex";
+    }
+  
+    function fecharModalExcluirConta() {
+      document.getElementById("modal-excluir-conta").style.display = "none";
+    }
+  
+    function confirmarExclusao() {
+      fecharModalExcluirConta();
+      window.location.href = 'principal.html';
     }
   </script>
 </body>
