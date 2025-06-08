@@ -116,7 +116,7 @@ abstract class Model
     {
         try {
             $stmt = Connect::getInstance()
-                ->prepare("SELECT * FROM {$this->table} WHERE id = :id");
+            ->prepare("SELECT * FROM {$this->table} WHERE id = :id");
             $stmt->bindValue("id",$id);
             $stmt->execute();
             $result = $stmt->fetch();

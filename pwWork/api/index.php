@@ -45,14 +45,14 @@ $route->group("null");
 
 //Questions
 
-$route->group("/Questions");
-$route->get("/", "Questions:listQuestions");
-$route->get("/id/{id}", "Questions:listQuestionById");
-$route->post("/add", "Question:createQuestion");
-$route->put("/update", "Question:updateQuestion");
-$route->delete("/delete/id/{id}", "Question:deleteQuestion");
+// $route->group("/Questions");
+// $route->get("/", "Questions:listQuestions");
+// $route->get("/id/{id}", "Questions:listQuestionById");
+// $route->post("/add", "Question:createQuestion");
+// $route->put("/update", "Question:updateQuestion");
+// $route->delete("/delete/id/{id}", "Question:deleteQuestion");
 
-$route->group("null");
+// $route->group("null");
 
 //Address
 

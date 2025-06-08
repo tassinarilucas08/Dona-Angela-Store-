@@ -3,60 +3,93 @@
 namespace Source\WebService;
 
 use Source\Models\Users\User;
-use Source\WebService\Addresses;
-use Source\Models\Users\Address;
 use Source\Core\JWTToken;
 
 class Users extends Api
 {
 
     // Controller -> Usa as coisas que tu define no model para criar a funçao da rota em si.
-    public function listUsers (): void
-    {
-        $users = new User();
-        //var_dump($users->findAll());
-        $this->call(200, "success", "Lista de usuários", "success")
-            ->back($users->findAll());
+   public function listUsers(): void
+{
+    $users = new User();
+    $result = $users->findAll();
+
+    if (empty($result)) {
+        $this->call(404, "not_found", "Nenhum usuário encontrado", "error")->back();
+        return;
     }
 
-    public function createUser(array $data)
-    {
-        // verifica se os dados estão preenchidos
-        if(in_array("", $data)){
-            $this->call(400, "bad_request", "Dados inválidos", "error")->back();
+    $this->call(200, "success", "Lista de usuários", "success")->back([
+        "count" => count($result),
+        "users" => $result
+    ]);
+}
+
+public function createUser(array $data)
+{
+    // Verifica se todos os campos obrigatórios estão preenchidos
+    $required = ["idUserCategory", "name", "email", "password", "phone"];
+    foreach ($required as $field) {
+        if (empty($data[$field])) {
+            $this->call(400, "bad_request", "O campo '$field' é obrigatório", "error")->back();
             return;
         }
-        
-        $user = new User(
-            null,
-            $data["idUserCategory"] ?? null,
-            $data["name"] ?? null,
-            $data["email"] ?? null,
-            $data["password"] ?? null,
-            $data["phone"] ?? null
-        );
-
-        if(!$user->insert()){
-            $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
-            return;
-        }
-        // montar $response com as informações necessárias para mostrar no front
-        $response = [
-            "name" => $user->getName(),
-            "email" => $user->getEmail(),
-        ];
-
-        $this->call(201, "created", "Usuário criado com sucesso", "success")
-            ->back($response);
     }
+
+    // Valida e-mail
+    if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
+        $this->call(400, "bad_request", "E-mail inválido", "error")->back();
+        return;
+    }
+
+    // Verifica se o e-mail já está em uso
+    $userCheck = new User();
+    if ($userCheck->findByEmail($data["email"])) {
+    $this->call(409, "conflict", "E-mail já cadastrado", "error")->back();
+    return;
+    }
+
+    // Verifica se o telefone já está em uso
+    $userCheck = new User();
+    if ($userCheck->findByPhone($data["phone"])) {
+    $this->call(409, "conflict", "Telefone já cadastrado", "error")->back();
+    return;
+    }
+
+
+    // Valida senha (mínimo 6 caracteres)
+    if (strlen($data["password"]) < 6) {
+        $this->call(400, "bad_request", "A senha deve ter no mínimo 6 caracteres", "error")->back();
+        return;
+    }
+
+    // Criação do usuário
+    $user = new User(
+        null,
+        $data["idUserCategory"],
+        $data["name"],
+        $data["email"],
+        $data["password"],
+        $data["phone"]
+    );
+
+    if (!$user->insert()) {
+        $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
+        return;
+    }
+
+    // Retorno personalizado
+    $response = [
+        "id"    => $user->getId(),
+        "name"  => $user->getName(),
+        "email" => $user->getEmail()
+    ];
+
+    $this->call(201, "created", "Usuário criado com sucesso", "success")->back($response);
+}
 
     public function listUserById (array $data): void
     {
-
-        if(!isset($data["id"])) {
-            $this->call(400, "bad_request", "ID inválido", "error")->back();
-            return;
-        }
 
         if(!filter_var($data["id"], FILTER_VALIDATE_INT)) {
             $this->call(400, "bad_request", "ID inválido", "error")->back();
@@ -127,6 +160,14 @@ class Users extends Api
         }
         $user->setPhone($data["phone"]);
     }
+    if (isset($data["password"])) {
+    if (strlen($data["password"]) < 6) {
+        $this->call(400, "bad_request", "A senha deve ter pelo menos 6 caracteres", "error")->back();
+        return;
+    }
+    $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
+    $user->setPassword($hashedPassword);
+}
 
     // Tenta atualizar usando o método inteligente
     if (!$user->updateById()) {
@@ -184,6 +225,38 @@ class Users extends Api
 }
     function deleteUser(array $data)
   {
-      var_dump($data);
+    $this->auth(); // autentica e define $this->userAuth
+
+    // Verifica se o ID foi enviado e é válido
+    if (!isset($data["id"]) || !filter_var($data["id"], FILTER_VALIDATE_INT)) {
+        $this->call(400, "bad_request", "ID inválido", "error")->back();
+        return;
+    }
+
+    $user = new User();
+
+    // Verifica se o usuário existe
+    if (!$user->findById($data["id"])) {
+        $this->call(404, "not_found", "Usuário não encontrado", "error")->back();
+        return;
+    }
+
+    // Só o próprio usuário ou um admin pode deletar
+    $isOwner = $this->userAuth->id == $data["id"];
+    $isAdmin = $this->userAuth->idUserCategory == 1;
+
+    if (!$isOwner && !$isAdmin) {
+        $this->call(403, "forbidden", "Você não tem permissão para deletar este usuário", "error")->back();
+        return;
+    }
+
+    // Tenta deletar
+    if (!$user->deleteById($data["id"])) {
+        $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao deletar usuário", "error")->back();
+        return;
+    }
+
+    $this->call(200, "success", "Usuário deletado com sucesso", "success")->back();
+    }
+
   }
-}

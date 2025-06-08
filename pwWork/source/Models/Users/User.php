@@ -147,4 +147,30 @@ class User extends Model
         }
 
     }
+    public function findByPhone(string $phone): bool
+{
+    $sql = "SELECT * FROM users WHERE phone = :phone";
+    $stmt = Connect::getInstance()->prepare($sql);
+    $stmt->bindValue(":phone", $phone);
+
+    try {
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_OBJ);
+        if (!$result) {
+            return false;
+        }
+        $this->id = $result->id;
+        $this->idUserCategory = $result->idUserCategory;
+        $this->name = $result->name;
+        $this->email = $result->email;
+        $this->password = $result->password;
+        $this->phone = $result->phone;
+
+        return true;
+    } catch (PDOException $e) {
+        $this->errorMessage = "Erro ao buscar o registro: {$e->getMessage()}";
+        return false;
+    }
+}
+
 }

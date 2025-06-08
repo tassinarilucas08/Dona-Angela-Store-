@@ -113,24 +113,4 @@ Class Address extends Model{
     {
         $this->city = $city;
     }
-     public static function findById(int $id): ?Address
-    {
-        $stmt = Connect::getInstance()->prepare("SELECT * FROM address WHERE id = :id");
-        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            return new Address(
-                $row['id'],
-                $row['idUser'],
-                $row['zipCode'],
-                $row['street'],
-                $row['number'],
-                $row['complement'],
-                $row['state'],
-                $row['city']
-            );
-        }
-        return null;
-    }
 }
