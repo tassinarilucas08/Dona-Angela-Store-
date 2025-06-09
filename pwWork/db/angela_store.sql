@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS address (
     idUser INT NOT NULL,
     zipCode VARCHAR(255) NOT NULL,
     street VARCHAR(255) NOT NULL,
-    number VARCHAR(255) NOT NULL,
+    number INT NOT NULL,
     complement VARCHAR(255),
     state VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
@@ -83,7 +83,6 @@ CREATE TABLE IF NOT EXISTS questions (
     FOREIGN KEY (idCategoryQuestion)
         REFERENCES questions_categories(id)
 ) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS purchases (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idUser INT,

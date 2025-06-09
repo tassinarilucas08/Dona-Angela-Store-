@@ -10,19 +10,19 @@ class Users extends Api
 
     // Controller -> Usa as coisas que tu define no model para criar a funçao da rota em si.
    public function listUsers(): void
-{
-    $users = new User();
-    $result = $users->findAll();
+    {
+        $users = new User();
+        $result = $users->findAll();
 
-    if (empty($result)) {
-        $this->call(404, "not_found", "Nenhum usuário encontrado", "error")->back();
-        return;
-    }
+        if (empty($result)) {
+            $this->call(404, "not_found", "Nenhum usuário encontrado", "error")->back();
+            return;
+        }
 
-    $this->call(200, "success", "Lista de usuários", "success")->back([
-        "count" => count($result),
-        "users" => $result
-    ]);
+        $this->call(200, "success", "Lista de usuários", "success")->back([
+            "count" => count($result),
+            "users" => $result
+        ]);
 }
 
 public function createUser(array $data)
@@ -66,11 +66,11 @@ public function createUser(array $data)
     // Criação do usuário
     $user = new User(
         null,
-        $data["idUserCategory"],
-        $data["name"],
-        $data["email"],
-        $data["password"],
-        $data["phone"]
+        $data["idUserCategory"] ?? null,
+        $data["name"] ?? null,
+        $data["email"] ?? null,
+        $data["password"] ?? null, 
+        $data["phone"] ?? null
     );
 
     if (!$user->insert()) {
@@ -141,25 +141,30 @@ public function createUser(array $data)
             $this->call(400, "bad_request", "Formato de e-mail inválido", "error")->back();
             return;
         }
-
         // Verifica se o novo email já está sendo usado por outro usuário
-        $checkEmail = new User();
-        $checkEmailResult = $checkEmail->findByEmail($data["email"]);
-        if ($checkEmailResult && $checkEmailResult->getId() !== $this->userAuth->id) {
-            $this->call(409, "conflict", "Este e-mail já está em uso", "error")->back();
-            return;
+        $userCheck = new User();
+        if ($userCheck->findByEmail($data["email"])) {
+        $this->call(409, "conflict", "E-mail já cadastrado", "error")->back();
+        return;
         }
-
         $user->setEmail($data["email"]);
     }
 
     if (isset($data["phone"])) {
-        if (empty($data["phone"])) {
-            $this->call(400, "bad_request", "O telefone não pode ser vazio", "error")->back();
-            return;
-        }
-        $user->setPhone($data["phone"]);
+    if (empty($data["phone"])) {
+        $this->call(400, "bad_request", "O telefone não pode ser vazio", "error")->back();
+        return;
     }
+
+    $userCheck = new User();
+    if ($userCheck->findByPhone($data["phone"])) {
+        $this->call(409, "conflict", "Telefone já cadastrado", "error")->back();
+        return;
+    }
+
+    $user->setPhone($data["phone"]);
+}
+
     if (isset($data["password"])) {
     if (strlen($data["password"]) < 6) {
         $this->call(400, "bad_request", "A senha deve ter pelo menos 6 caracteres", "error")->back();
