@@ -56,7 +56,6 @@ public function createUser(array $data)
     return;
     }
 
-
     // Valida senha (mínimo 6 caracteres)
     if (strlen($data["password"]) < 6) {
         $this->call(400, "bad_request", "A senha deve ter no mínimo 6 caracteres", "error")->back();
@@ -80,8 +79,8 @@ public function createUser(array $data)
 
     // Retorno personalizado
     $response = [
-        "id"    => $user->getId(),
-        "name"  => $user->getName(),
+        "id" => $user->getId(),
+        "name" => $user->getName(),
         "email" => $user->getEmail()
     ];
 
@@ -90,7 +89,6 @@ public function createUser(array $data)
 
     public function listUserById (array $data): void
     {
-
         if(!filter_var($data["id"], FILTER_VALIDATE_INT)) {
             $this->call(400, "bad_request", "ID inválido", "error")->back();
             return;
@@ -112,18 +110,23 @@ public function createUser(array $data)
 {
     // Verifica autenticação via token
     $this->auth();
-
+       
     // Verifica se há pelo menos um campo para atualizar
     if (empty($data)) {
         $this->call(400, "bad_request", "Nenhum dado enviado para atualização", "error")->back();
         return;
     }
+        // Busca o usuário atual pelo ID do token JWT
 
-    $user = new User();
-
-    // Busca o usuário atual pelo ID do token JWT
     if (!$user->findById($this->userAuth->id)) {
         $this->call(404, "not_found", "Usuário não encontrado", "error")->back();
+        return;
+    }
+    
+    $user = new User();
+   
+    if ($address->getIdUser() !== $this->userAuth->id && $this->userAuth->idUserCategory !== 3) {
+        $this->call(403, "forbidden", "Você não tem permissão para atualizar este endereço", "error")->back();
         return;
     }
 
@@ -263,5 +266,4 @@ public function createUser(array $data)
 
     $this->call(200, "success", "Usuário deletado com sucesso", "success")->back();
     }
-
   }
