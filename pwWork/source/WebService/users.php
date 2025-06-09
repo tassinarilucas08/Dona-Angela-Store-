@@ -115,7 +115,9 @@ public function createUser(array $data)
     if (empty($data)) {
         $this->call(400, "bad_request", "Nenhum dado enviado para atualização", "error")->back();
         return;
-    }
+    }    
+    $user = new User();
+
         // Busca o usuário atual pelo ID do token JWT
 
     if (!$user->findById($this->userAuth->id)) {
@@ -123,9 +125,7 @@ public function createUser(array $data)
         return;
     }
     
-    $user = new User();
-   
-    if ($address->getIdUser() !== $this->userAuth->id && $this->userAuth->idUserCategory !== 3) {
+    if ($user->getId() !== $this->userAuth->id && $this->userAuth->idUserCategory !== 3) {
         $this->call(403, "forbidden", "Você não tem permissão para atualizar este endereço", "error")->back();
         return;
     }

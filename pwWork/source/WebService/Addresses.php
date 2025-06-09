@@ -113,7 +113,7 @@ class Addresses extends Api
         $this->call(200, "success", "Endereço encontrado com sucesso", "success")->back($response);
     }
       
-    public function updateAddress(array $data): void
+  public function updateAddress(array $data): void
 {
     $this->auth();
 
@@ -123,36 +123,42 @@ class Addresses extends Api
         return;
     }
 
-    $addressModel = new Address();
-    $address = $addressModel->findById($data["id"]);
+    $address = new Address();
 
-    if (!$address) {
+    if (!$address->findById($data["id"])) {
         $this->call(404, "not_found", "Endereço não encontrado", "error")->back();
         return;
     }
 
+    // Verifica permissão
     if ($address->getIdUser() !== $this->userAuth->id && $this->userAuth->idUserCategory !== 3) {
         $this->call(403, "forbidden", "Você não tem permissão para atualizar este endereço", "error")->back();
         return;
     }
 
-    // Validações simples
-     if (!preg_match('/^\d{5}-\d{3}$/', $data["zipCode"])) {
-        $this->call(400, "bad_request", "CEP inválido. Use o formato XXXXX-XXX", "error")->back();
-        return;
+    // Validações com isset acima
+    if (isset($data["zipCode"])) {
+        if (!preg_match("/^\d{5}-\d{3}$/", $data["zipCode"])) {
+            $this->call(400, "bad_request", "CEP inválido. Use o formato XXXXX-XXX", "error")->back();
+            return;
+        }
     }
 
-    if (isset($data["number"]) && !is_numeric($data["number"])) {
-        $this->call(400, "bad_request", "Número deve ser numérico", "error")->back();
-        return;
+    if (isset($data["number"])) {
+        if (!is_numeric($data["number"])) {
+            $this->call(400, "bad_request", "Número deve ser numérico", "error")->back();
+            return;
+        }
     }
 
-    if (isset($data["state"]) && (!preg_match('/^[A-Z]{2}$/', strtoupper($data["state"])))) {
-        $this->call(400, "bad_request", "Estado deve conter 2 letras (ex: SP)", "error")->back();
-        return;
+    if (isset($data["state"])) {
+        if (!preg_match('/^[A-Z]{2}$/', strtoupper($data["state"]))) {
+            $this->call(400, "bad_request", "Estado deve conter 2 letras (ex: SP)", "error")->back();
+            return;
+        }
     }
 
-    // Atualização dos campos
+    // Atualiza somente os campos informados
     if (isset($data["zipCode"])) $address->setZipCode($data["zipCode"]);
     if (isset($data["street"])) $address->setStreet($data["street"]);
     if (isset($data["number"])) $address->setNumber($data["number"]);
@@ -160,12 +166,13 @@ class Addresses extends Api
     if (isset($data["state"])) $address->setState(strtoupper($data["state"]));
     if (isset($data["city"])) $address->setCity($data["city"]);
 
-    // Atualiza no banco
+    // Tenta salvar
     if (!$address->updateById()) {
         $this->call(500, "internal_server_error", "Erro ao atualizar endereço", "error")->back();
         return;
     }
 
+    // Retorno de sucesso
     $this->call(200, "success", "Endereço atualizado com sucesso", "success")->back([
         "id" => $address->getId(),
         "zipCode" => $address->getZipCode(),
