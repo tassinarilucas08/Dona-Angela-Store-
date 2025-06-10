@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Redefinir Senha - Angela Store</title>
-  <link rel="stylesheet" href="../css/redefinir_senha.css" />
+  <title>Redefinir por Telefone - Angela Store</title>
+  <link rel="stylesheet" href="../css/redefinir_senha_telefone.css" />
 </head>
 <body>
   <div class="container">
@@ -12,21 +12,17 @@
       <div class="topo-redefinir">
         <button class="btn-voltar" onclick="window.history.back()">← Voltar</button>
       </div>
-      <h2>Redefinir Senha</h2>
-      <p>Informe seu e-mail para receber um link de redefinição.</p>
+      <h2>Redefinir por Telefone</h2>
+      <p>Informe seu telefone para receber um código de redefinição.</p>
 
       <form>
         <div class="form-group">
-          <label for="email">E-mail cadastrado</label>
-          <input type="email" id="email" placeholder="exemplo@email.com" required>
+          <label for="telefone">Telefone cadastrado</label>
+          <input type="tel" id="telefone" placeholder="(51) 91234-5678" required>
         </div>
 
-        <button id="enviar-link" type="submit">Enviar Link</button>
+        <button type="submit">Enviar Código</button>
       </form>
-
-      <div class="link-outro-modo">
-        <a href="redefinir_senha_telefone.html">Redefinir por telefone</a>
-      </div>
     </div>
 
     <div class="image-container">
