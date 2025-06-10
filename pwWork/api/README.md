@@ -17,188 +17,278 @@ Não há um mecanismo de autenticação implementado nesta API no momento. Todas
 
 ## Rotas Disponíveis
 
+---
+
 ### 1. **Usuários**
 
-#### `GET /api/users`
+#### `GET /api/Users/`
 
 Retorna todos os usuários cadastrados.
 
 **Resposta:**
-
 ```json
-[
-  {
-    "id": 1,
-    "name": "Joana Silva",
-    "email": "joana@email.com"
-  }
-]
+{
+  "success": true,
+  "message": "Lista de usuários",
+  "count": 10,
+  "users": [...]
+}
 ```
 
 **Códigos HTTP:**
 
-- 200 OK
+- 200 OK  
+- 404 Not Found  
+```json
+{
+  "success": false,
+  "message": "Nenhum usuário encontrado"
+}
+```
 
-#### `POST /api/users`
+#### `GET /api/Users/id/{id}`
+
+Busca usuário por ID.
+
+**Resposta:**
+```json
+{
+  "success": true,
+  "message": "Encontrado com sucesso",
+  "name": "Fulano",
+  "email": "fulano@email.com"
+}
+```
+
+**Códigos HTTP:**
+
+- 200 OK  
+- 400 Bad Request  
+```json
+{
+  "success": false,
+  "message": "ID inválido"
+}
+```
+- 400 Bad Request  
+```json
+{
+  "success": false,
+  "message": "Usuário não encontrado"
+}
+```
+
+#### `POST /api/Users/add`
 
 Cria um novo usuário.
 
-**Parâmetros JSON:**
-
-```json
-{
-  "name": "Joana Silva",
-  "email": "joana@email.com",
-  "password": "123456"
-}
-```
-
 **Resposta:**
-
 ```json
 {
   "success": true,
-  "message": "Usuário criado com sucesso."
+  "message": "Usuário criado com sucesso",
+  "id": 1,
+  "name": "Fulano",
+  "email": "fulano@email.com"
 }
 ```
 
 **Códigos HTTP:**
 
-- 201 Created
-- 400 Bad Request
-
-### 2. **Endereços**
-
-#### `GET /api/addresses/{user_id}`
-
-Lista os endereços vinculados a um usuário.
-
-**Resposta:**
-
-```json
-[
-  {
-    "id": 1,
-    "rua": "Rua das Flores",
-    "numero": "123",
-    "bairro": "Centro",
-    "cidade": "Porto Alegre",
-    "estado": "RS"
-  }
-]
-```
-
-**Códigos HTTP:**
-
-- 200 OK
-
-#### `POST /api/addresses`
-
-Adiciona um novo endereço a um usuário.
-
-**Parâmetros JSON:**
-
+- 201 Created  
+- 400 Bad Request  
 ```json
 {
-  "user_id": 1,
-  "rua": "Rua das Flores",
-  "numero": "123",
-  "bairro": "Centro",
-  "cidade": "Porto Alegre",
-  "estado": "RS",
-  "cep": "99999-000"
+  "success": false,
+  "message": "O campo 'email' é obrigatório"
 }
 ```
-
-**Resposta:**
-
+- 400 Bad Request  
 ```json
 {
-  "success": true,
-  "message": "Endereço cadastrado."
+  "success": false,
+  "message": "E-mail inválido"
 }
 ```
-
-**Códigos HTTP:**
-
-- 201 Created
-- 400 Bad Request
-
-### 3. **Gêneros de Produtos**
-
-#### `GET /api/genders`
-
-Lista todos os gêneros de produtos (masculino, feminino, unissex, etc).
-
-**Resposta:**
-
-```json
-[
-  {
-    "id": 1,
-    "genero": "Feminino"
-  },
-  {
-    "id": 2,
-    "genero": "Masculino"
-  }
-]
-```
-
-**Códigos HTTP:**
-
-- 200 OK
-
-### 4. **Dúvidas (Perguntas)**
-
-#### `GET /api/questions`
-
-Lista as perguntas recebidas.
-
-**Resposta:**
-
-```json
-[
-  {
-    "id": 1,
-    "nome": "Maria",
-    "email": "maria@email.com",
-    "mensagem": "Vocês vendem por atacado?"
-  }
-]
-```
-
-**Códigos HTTP:**
-
-- 200 OK
-
-#### `POST /api/questions`
-
-Recebe uma nova pergunta de um cliente.
-
-**Parâmetros JSON:**
-
+- 409 Conflict  
 ```json
 {
-  "nome": "Maria",
-  "email": "maria@email.com",
-  "mensagem": "Vocês vendem por atacado?"
+  "success": false,
+  "message": "E-mail já cadastrado"
+}
+```
+- 409 Conflict  
+```json
+{
+  "success": false,
+  "message": "Telefone já cadastrado"
+}
+```
+- 400 Bad Request  
+```json
+{
+  "success": false,
+  "message": "A senha deve ter no mínimo 6 caracteres"
+}
+```
+- 500 Internal Server Error  
+```json
+{
+  "success": false,
+  "message": "Erro ao criar usuário"
 }
 ```
 
-**Resposta:**
+---
 
+### 2. **Gêneros**
+
+#### `GET /api/Genders/`
+
+Retorna todos os gêneros de produtos.
+
+**Resposta:**
 ```json
 {
   "success": true,
-  "message": "Mensagem recebida com sucesso."
+  "message": "Lista de gêneros encontrada com sucesso",
+  "count": 5,
+  "users": [...]
 }
 ```
 
 **Códigos HTTP:**
 
-- 201 Created
-- 400 Bad Request
+- 200 OK  
+- 404 Not Found  
+```json
+{
+  "success": false,
+  "message": "Nenhum gênero encontrado"
+}
+```
+
+---
+
+### 3. **Perguntas Frequentes**
+
+#### `GET /api/Questions/`
+
+Retorna todas as perguntas.
+
+**Resposta:**
+```json
+{
+  "success": true,
+  "message": "Lista de perguntas e respostas",
+  "questions": [...]
+}
+```
+
+#### `POST /api/Questions/add`
+
+Adiciona uma nova pergunta.
+
+**Resposta:**
+```json
+{
+  "success": true,
+  "message": "Pergunta criada com sucesso",
+  "Pergunta": "Qual o horário de funcionamento?",
+  "Resposta": "De segunda a sexta das 9h às 18h"
+}
+```
+
+**Códigos HTTP:**
+
+- 201 Created  
+- 400 Bad Request  
+```json
+{
+  "success": false,
+  "message": "Dados inválidos"
+}
+```
+- 500 Internal Server Error  
+```json
+{
+  "success": false,
+  "message": "Erro ao salvar pergunta"
+}
+```
+
+---
+
+### 4. **Endereços**
+
+#### `GET /api/Addresses/`
+
+Retorna todos os endereços cadastrados.
+
+**Resposta:**
+```json
+{
+  "success": true,
+  "message": "Lista de endereços encontrada com sucesso",
+  "count": 3,
+  "endereços": [...]
+}
+```
+
+**Códigos HTTP:**
+
+- 200 OK  
+- 404 Not Found  
+```json
+{
+  "success": false,
+  "message": "Nenhum endereço encontrado"
+}
+```
+
+#### `POST /api/Addresses/add`
+
+Cadastra um novo endereço.
+
+**Resposta:**
+```json
+{
+  "success": true,
+  "message": "Endereço criado com sucesso",
+  "id": 1,
+  "zipCode": "12345-678",
+  "street": "Rua Exemplo",
+  "number": "123",
+  "complement": "Apto 4",
+  "state": "SP",
+  "city": "São Paulo"
+}
+```
+
+**Códigos HTTP:**
+
+- 201 Created  
+- 400 Bad Request  
+```json
+{
+  "success": false,
+  "message": "O campo 'zipCode' é obrigatório"
+}
+```
+- 400 Bad Request  
+```json
+{
+  "success": false,
+  "message": "CEP inválido. Use o formato XXXXX-XXX"
+}
+```
+- 500 Internal Server Error  
+```json
+{
+  "success": false,
+  "message": "Erro ao cadastrar endereço"
+}
+```
 
 ---
 
