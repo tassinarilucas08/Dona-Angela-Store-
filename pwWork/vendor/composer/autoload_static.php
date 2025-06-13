@@ -11,6 +11,10 @@ class ComposerStaticInit407f5200d01eac44508186c93e79db18
         array (
             'Source\\' => 7,
         ),
+        'L' => 
+        array (
+            'League\\Plates\\' => 14,
+        ),
         'F' => 
         array (
             'Firebase\\JWT\\' => 13,
@@ -25,6 +29,10 @@ class ComposerStaticInit407f5200d01eac44508186c93e79db18
         'Source\\' => 
         array (
             0 => __DIR__ . '/../..' . '/source',
+        ),
+        'League\\Plates\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/plates/src',
         ),
         'Firebase\\JWT\\' => 
         array (

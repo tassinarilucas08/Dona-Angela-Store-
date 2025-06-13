@@ -1,0 +1,41 @@
+-Criar a tabela avaliações no Banco de Dados e relacionar com produtos e clientes. -- OK
+
+-Formulários para questions na página principal *******
+
+-ver como irá fazer a imagem -- OK
+-botão melhor +/- na quantidadel -- OK
+-status selecionar igual categoria -- OK
+-gerenciar produtos ter as opcoes -- OK
+
+-adm precisa ter opcoes dos produtos -- OK
+-ir para adm da pagina inicial -- OK
+
+-adicionar endereco no carrinho (modal) -- OK / retirar do registro -- OK / criar mais de 1 endereco e puxar -- OK
+
+01/06
+
+Nao usar id_user, usar idUser -- OK
+
+Nao colocar coisa a mais na db sem colocar no objeto -- OK
+
+Tarefa: Criar a purchases e purchases_products na db - PRESTA ATENÇÃO NOS NOMES DAS TABELAS NO CONSTRUTOR!!!!!! -- OK
+
+Arrumar tudo q tiver de diferente nos nomes da db pra deixar TODOS em um mesmo padrao -- OK
+
+
+13-06
+
+site.php:
+echo $this->view->render("register");
+
+theme.php:
+<html>
+...
+<main>
+<?= $this->section("content") ?> (echo)
+</main>
+...
+</html>
+
+register.php:
+$this->layout("theme",[]);
