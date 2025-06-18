@@ -17,11 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 use CoffeeCode\Router\Router;
 
-$route = new Router("http://localhost/Dona-Angela-Store-/pwWork/api",":");
+$route = new Router("http://localhost/Dona-Angela-Store-/api",":");
 
 $route->namespace("Source\WebService");
 
-// Users
+//Users
 $route->group("/Users");
 $route->post("/login", "Users:login");
 $route->get("/", "Users:listUsers");
@@ -43,17 +43,6 @@ $route->delete("/delete/id/{id}", "Genders:deleteGender");
 
 $route->group("null");
 
-//Questions
-
-// $route->group("/Questions");
-// $route->get("/", "Questions:listQuestions");
-// $route->get("/id/{id}", "Questions:listQuestionById");
-// $route->post("/add", "Question:createQuestion");
-// $route->put("/update", "Question:updateQuestion");
-// $route->delete("/delete/id/{id}", "Question:deleteQuestion");
-
-// $route->group("null");
-
 //Address
 
 $route->group("/Addresses");
@@ -64,6 +53,17 @@ $route->put("/update", "Addresses:updateAddress");
 $route->delete("/delete/id/{id}", "Addresses:deleteAddress");
 
 $route->group("null");
+
+//Questions
+
+// $route->group("/Questions");
+// $route->get("/", "Questions:listQuestions");
+// $route->get("/id/{id}", "Questions:listQuestionById");
+// $route->post("/add", "Question:createQuestion");
+// $route->put("/update", "Question:updateQuestion");
+// $route->delete("/delete/id/{id}", "Question:deleteQuestion");
+
+// $route->group("null");
 
 $route->dispatch();
 
