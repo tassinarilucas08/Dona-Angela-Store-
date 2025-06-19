@@ -32,7 +32,7 @@ class Site extends Controller
 
     public function cart(): void
     {
-        echo "Shopping Cart";
+        echo $this->view->render("cart");
     }
 
     public function services(): void
@@ -47,7 +47,7 @@ class Site extends Controller
 
     public function login(): void
     {
-        echo "Login Page";
+        echo $this->view->render("login");
     }
 
     public function error (array $data): void
@@ -58,5 +58,25 @@ class Site extends Controller
     public function register (array $data): void
     {
         echo $this->view->render("register");
+    }
+
+    public function profile (array $data): void
+    {
+        echo $this->view->render("profile");
+    }
+
+    public function reset_password (array $data): void
+    {
+        echo $this->view->render("reset_password");
+    }
+
+    public function reset_password_phone (array $data): void
+    {
+        echo $this->view->render("reset_password_phone");
+    }
+
+    public function product (array $data): void
+    {
+        echo $this->view->render("product");
     }
 }
