@@ -39,7 +39,6 @@ $route->get("/perfil","App:profile");
 $route->get("/redefinir-senha","App:reset_password");
 $route->get("/redefinir-senha-telefone","App:reset_password_phone");
 $route->get("/produto","App:product");
-$route->get("/administrador","App:adm");
 $route->get("/vendedor","App:seller");
 
 $route->group(null);
