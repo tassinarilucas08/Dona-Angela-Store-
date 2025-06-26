@@ -16,7 +16,11 @@
   "autoload": {
     "psr-4": {
       "Source\\": "source/"
-    }
+  },
+  "files": [
+      "source/Core/Helpers.php",
+      "source/Core/Config.php"
+    ]
   },
   "require": {
     "php": ">=8.0",
