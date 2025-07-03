@@ -4,206 +4,44 @@
 ]);
 ?>
 
-    <style>
-        * {
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f2f2f2;
-        }
-
-        .container {
-        display: flex;
-        width: 1000px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-        border-radius: 12px;
-        overflow: hidden;
-        background-color: #f2f2f2;
-        }
-
-        .login-container {
-        flex: 1;
-        padding: 40px 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        }
-
-        .topo-login {
-        text-align: left;
-        margin-bottom: 10px;
-        }
-
-        .btn-voltar {
-        padding: 6px 12px;
-        background-color: #d04c92;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        }
-        
-        .btn-voltar:hover {
-        background-color: #b3387c;
-        }
-
-        .login-container h2 {
-        color: #d04c92;
-        margin-bottom: 25px;
-        font-size: 28px;
-        }
-
-        .form-group {
-        margin-bottom: 25px;
-        text-align: left;
-        }
-
-        .form-group label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 5px;
-        color: #444;
-        }
-
-        .form-group input {
-        width: 100%;
-        padding: 10px 5px;
-        border: none;
-        border-bottom: 2px solid #ccc;
-        font-size: 16px;
-        background: transparent;
-        outline: none;
-        transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus {
-        border-bottom-color: #d04c92;
-        }
-
-        #login {
-        width: 100%;
-        padding: 12px;
-        background-color: #d04c92;
-        color: white;
-        font-size: 16px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-        }
-
-        #login:hover {
-        background-color:  #b3387c;
-        }
-
-        .link-reset {
-        margin-top: 10px;
-        font-size: 13px;
-        text-align: center;
-        }
-        
-        .link-reset a {
-        color: #a62c7b;
-        text-decoration: none;
-        font-weight: 600;
-        }
-        
-        .link-reset a:hover {
-        text-decoration: underline;
-        }
-
-        .link-register {
-        margin-top: 15px;
-        font-size: 14px;
-        text-align: center;
-        }
-
-        .link-register a {
-        color: #d63384;
-        text-decoration: none;
-        font-weight: bold;
-        }
-
-        .link-register a:hover {
-        text-decoration: underline;
-        }
-
-        .image-container {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        }
-
-        .image-container img {
-        max-width: 100%;
-        max-height: 400px;
-        object-fit: contain;
-        border-radius: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .image-container {
-                padding: 10px;
-            }
-
-            .image-container img {
-                max-height: 200px;
-            }
-        }
-    </style>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="<?= url("/assets/web/css/login.css") ?>">
+    <script src="<?= url("/assets/web/js/login.js") ?>" async></script>
+</head>
+<body>
     <div class="container">
         <div class="login-container">
-        <div class="topo-login">
-        <button type="submit" class="btn-voltar" onclick="window.history.back()">← Voltar</button>
-        </div>
-        <h2>Login</h2>
-        <form id="loginForm">
-            <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" required>
+            <div class="topo-login">
+                <button type="submit" class="btn-voltar" onclick="window.history.back()">← Voltar</button>
             </div>
-            <div class="form-group">
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" required>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" required>
+                </div>
+                <button type="submit" id="login">Entrar</button>
+                <div class="link-reset">
+                    <a href="/Dona-Angela-Store-/redefinir-senha">Esqueci minha senha</a>
+                </div>
+            </form>
+            <div class="link-register">
+                Não tem uma conta? <a href="/Dona-Angela-Store-/cadastro">Cadastre-se</a>
             </div>
-            <button type="submit" id="login">Entrar</button>
-            <div class="link-reset">
-            <a href="/Dona-Angela-Store-/redefinir-senha">Esqueci minha senha</a>
-            </div>
-        </form>
-        <div class="link-register">
-            Não tem uma conta? <a href="/Dona-Angela-Store-/cadastro">Cadastre-se</a>
-        </div>
         </div>
 
         <div class="image-container">
-        <img src="/Dona-Angela-Store-/images/perfums/biografia.jpg" alt="Imagem de Produto">
+            <img src="/Dona-Angela-Store-/images/perfums/biografia.jpg" alt="Imagem de Produto">
         </div>
     </div>
-
-  <script>
-    let login = document.querySelector("#login");
-
-    login.addEventListener('click', ()=>{
-        window.location.href = "/Dona-Angela-Store-/";
-    })
-  </script>
+</body>
+</html>

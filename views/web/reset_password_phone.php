@@ -4,150 +4,35 @@
 ]);
 ?>
 
-    <style>
-    * {
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-        margin: 0;
-        padding: 0;
-        background-color: #f2f2f2;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .container {
-        display: flex;
-        width: 950px;
-        background-color: #f2f2f2;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-    }
-    
-    .redefinir-container {
-        flex: 1;
-        padding: 40px 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    
-    .btn-voltar {
-        margin-bottom: 20px;
-        padding: 6px 12px;
-        background-color: #d04c92;
-        color: white;
-        font-size: 14px;
-        font-weight: bold;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        width: fit-content;
-    }
-    
-    .btn-voltar:hover {
-        background-color: #b3387c;
-    }
-    
-    h2 {
-        color: #d04c92;
-        margin-bottom: 10px;
-    }
-    
-    p {
-        font-size: 14px;
-        margin-bottom: 25px;
-        color: #444;
-    }
-    
-    label {
-        margin-bottom: 6px;
-        font-weight: bold;
-        color: #444;
-    }
-    
-    input[type="tel"] {
-        width: 100%;
-        padding: 10px 5px;
-        border: none;
-        border-bottom: 2px solid #ccc;
-        font-size: 16px;
-        background: transparent;
-        outline: none;
-        margin-bottom: 25px;
-    }
-    
-    input[type="tel"]:focus {
-        border-bottom-color: #d04c92;
-    }
-    
-    button[type="submit"] {
-        width: 100%;
-        padding: 12px;
-        background-color: #d04c92;
-        color: white;
-        font-size: 16px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-    
-    button[type="submit"]:hover {
-        background-color: #b3387c;
-    }
-    
-    .image-container {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-    
-    .image-container img {
-        max-width: 100%;
-        max-height: 400px;
-        object-fit: contain;
-        border-radius: 8px;
-    }
-    
-    @media (max-width: 768px) {
-        .container {
-        flex-direction: column;
-        }
-    
-        .image-container img {
-        max-height: 200px;
-        }
-    }
-    </style>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="<?= url("/assets/web/css/reset_password_phone.css") ?>">
+</head>
+<body>
     <div class="container">
         <div class="redefinir-container">
-        <div class="topo-redefinir">
-            <button class="btn-voltar" onclick="window.history.back()">← Voltar</button>
-        </div>
-        <h2>Redefinir por Telefone</h2>
-        <p>Informe seu telefone para receber um código de redefinição.</p>
-
-        <form>
-            <div class="form-group">
-            <label for="telefone">Telefone cadastrado</label>
-            <input type="tel" id="telefone" placeholder="(51) 91234-5678" required>
+            <div class="topo-redefinir">
+                <button class="btn-voltar" onclick="window.history.back()">← Voltar</button>
             </div>
+            <h2>Redefinir por Telefone</h2>
+            <p>Informe seu telefone para receber um código de redefinição.</p>
 
-            <button type="submit">Enviar Código</button>
-        </form>
+            <form>
+                <div class="form-group">
+                    <label for="telefone">Telefone cadastrado</label>
+                    <input type="tel" id="telefone" placeholder="(51) 91234-5678" required>
+                </div>
+                <button type="submit">Enviar Código</button>
+            </form>
         </div>
 
         <div class="image-container">
-        <img src="/Dona-Angela-Store-/images/perfums/ekos_hidra.jpg" alt="Perfume Ilustrativo">
+            <img src="/Dona-Angela-Store-/images/perfums/ekos_hidra.jpg" alt="Perfume Ilustrativo">
         </div>
     </div>
+</body>
+</html>

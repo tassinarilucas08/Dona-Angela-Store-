@@ -1,5 +1,5 @@
 function scrollToProdutos() {
-    const produtosSection = document.getElementById('products');
+    const produtosSection = document.querySelector('#products');
     produtosSection.scrollIntoView({ behavior: 'smooth' });
   }
   

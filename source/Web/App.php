@@ -82,7 +82,7 @@ class App extends Controller
 
     public function seller (array $data): void
     {
-        echo $this->view->render("vendedor");
+        echo $this->view->render("seller");
     }
 
 }

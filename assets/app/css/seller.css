@@ -1,0 +1,168 @@
+body {
+    margin-top: 40px;
+    background-color: #f2f2f2;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .vendedor-wrapper {
+    display: flex;
+    margin-bottom: 40px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .container {
+    width: 1000px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  }
+  
+  .btn-voltar {
+    padding: 8px 14px;
+    background-color: #d04c92;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    align-self: flex-start;
+  }
+  
+  .btn-voltar:hover {
+    background-color: #b3387c;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #a62c7b;
+    margin-bottom: 30px;
+  }
+  
+  .criar-produto h2 {
+    text-align: center;
+    color: #a62c7b;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .gerenciar-produtos h2 {
+    text-align: center;
+    color: #a62c7b;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  button {
+    background-color: #a62c7b;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #922768;
+  }
+  
+  select {
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .quantidade-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .quantidade-wrapper input[type="number"] {
+    width: 60px;
+    text-align: center;
+  }
+  
+  .quantidade-wrapper button {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+  }
+  
+  .criar-produto button[type="submit"] {
+    align-self: flex-start;
+    margin-top: 10px;
+  }
+  
+  .gerenciar-produtos {
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+  }
+  
+  .gerenciar-produtos .botoes-gerenciar {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  
+  .gerenciar-produtos button[type="submit"] {
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px;
+    }
+  
+    .btn-voltar {
+      margin-left: 0;
+      align-self: center;
+    }
+  
+    .gerenciar-produtos .botoes-gerenciar {
+      flex-direction: column;
+    }
+  
+    .quantidade-wrapper {
+      justify-content: center;
+    }
+  }
