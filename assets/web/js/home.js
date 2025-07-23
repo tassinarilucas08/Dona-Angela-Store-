@@ -1,59 +1,53 @@
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM carregado");
+});
+
+console.log("JS CARREGOU");
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+console.log(usuario.data.user.name);
+
 function scrollToProdutos() {
-    const produtosSection = document.getElementById('products');
-    produtosSection.scrollIntoView({ behavior: 'smooth' });
-  }
-  
-    let hideTimeout;
+  const produtosSection = document.querySelector('#products');
+  produtosSection.scrollIntoView({ behavior: 'smooth' });
+}
 
-    function showModal() {
-      clearTimeout(hideTimeout);
-      document.getElementById('modal').classList.add('active');
-    }
+let hideTimeout;
 
-    function startHideModal() {
-      hideTimeout = setTimeout(() => {
-        document.getElementById('modal').classList.remove('active');
-      }, 150);
-    }
+function showModal() {
+  clearTimeout(hideTimeout);
+  document.querySelector('#modal').classList.add('active');
+}
 
-    function hideModal() {
-      document.getElementById('modal').classList.remove('active');
-    }
+function startHideModal() {
+  hideTimeout = setTimeout(() => {
+    document.querySelector('#modal').classList.remove('active');
+  }, 150);
+}
 
-    function cancelHideModal() {
-      clearTimeout(hideTimeout);
-    }
+function hideModal() {
+  document.querySelector('#modal').classList.remove('active');
+}
 
-    let motherInformationsClick = document.querySelector("#mother-informations");
-    motherInformationsClick.addEventListener('click', ()=>{
-        showModal();
-    });
+function cancelHideModal() {
+  clearTimeout(hideTimeout);
+}
 
-    function filterProducts(category) {
+document.querySelector('#mother-informations')?.addEventListener('click', () => {
+  showModal();
+});
+
+function filterProducts(category) {
   const products = document.querySelectorAll('.product-card');
   products.forEach(product => {
-    if (category === 'all') {
-      product.style.display = 'block';
-    } else {
-      product.style.display = product.classList.contains(category) ? 'block' : 'none';
-    }
+    product.style.display = category === 'todos' || product.classList.contains(category)
+      ? 'block'
+      : 'none';
   });
   scrollToProdutos();
 }
+
 function handleClick(button, category) {
-    // Adiciona classe de animação
-    button.classList.add('clicked');
-
-    // Remove a classe após a animação
-    setTimeout(() => {
-      button.classList.remove('clicked');
-    }, 100);
-
-    // Chama a função de filtro
-    filterProducts(category);
-  }
-
-let btnVendedor = document.querySelector("#btnVendedor");
-btnVendedor.addEventListener("click", ()=> {
-  location.href = "../html/vendedor.html"; // Altere para o link real
-});
+  button.classList.add('clicked');
+  setTimeout(() => button.classList.remove('clicked'), 100);
+  filterProducts(category);
+}

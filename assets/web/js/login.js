@@ -1,53 +1,36 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector("#loginForm");
-  const mensagem = document.querySelector("#mensagemLogin");
+document.querySelector("#loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#senha").value;
 
-    const email = document.querySelector("#email").value;
-    const senha = document.querySelector("#senha").value;
+  const headers = new Headers();
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
 
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  const body = new URLSearchParams();
+  body.append("email", email);
+  body.append("password", password);
 
-    const urlencoded = new URLSearchParams();
-    urlencoded.append("email", email);
-    urlencoded.append("password", senha);
+  const options = {
+    method: "POST",
+    headers: headers,
+    body: body,
+    redirect: "follow"
+  };
 
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: "follow"
-    };
+  try {
+    const response = await fetch("http://localhost/Dona-Angela-Store-/api/Users/login", options);
 
-    fetch("http://localhost/Dona-Angela-Store-/api/Users/login", requestOptions)
-      .then((response) => response.json()) // ajusta se a API retornar texto
-      .then((result) => {
-        console.log("Resposta:", result);
+    if (!response.ok) {
+      throw new Error("Login falhou");
+    }
+    const data = await response.json(); // <- Aqui pega os dados do usuário
+    localStorage.setItem("usuario", JSON.stringify(data));
 
-        if (result.success) { // <- Ajuste isso conforme sua API
-          // Salva no localStorage
-          localStorage.setItem("user", JSON.stringify(result.user));
-
-          // Mostra mensagem
-          mensagem.textContent = "Login bem-sucedido!";
-          mensagem.style.color = "green";
-
-          // Redireciona após 1 segundo
-          setTimeout(() => {
-            window.location.href = "index.html"; // ou caminho certo
-          }, 1000);
-        } else {
-          mensagem.textContent = "Email ou senha incorretos.";
-          mensagem.style.color = "red";
-        }
-      })
-      .catch((error) => {
-        console.error("Erro:", error);
-        mensagem.textContent = "Erro ao conectar com o servidor.";
-        mensagem.style.color = "red";
-      });
-  });
+    // Login ok → redireciona para a tela principal
+    window.location.href = "/Dona-Angela-Store-/";
+  } catch (error) {
+    console.error("Erro no login:", error);
+    alert("Email ou senha incorretos.");
+  }
 });
