@@ -14,9 +14,9 @@
 
     <div class="card perfil-info">
       <div class="dados">
-        <h2>Joana Silva</h2>
-        <p>e-mail: joana@email.com</p>
-        <p>telefone: 51 94567-6312</p>
+        <h2 id="nomeUsuario">Nome</h2>
+        <p id="emailUsuario">e-mail: </p>
+        <p id="telefoneUsuario">telefone: </p>
       </div>
       <div class="botoes-conta">
         <button class="btn-alterar" onclick="abrirModalEdicao()">ALTERAR DADOS ✎</button>
@@ -105,6 +105,19 @@
   </div>
 
   <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const userData = localStorage.getItem("user");
+
+    if (userData) {
+      const user = JSON.parse(userData);
+      document.getElementById("nomeUsuario").textContent = user.name;
+      document.getElementById("emailUsuario").textContent = "e-mail: " + user.email;
+      document.getElementById("telefoneUsuario").textContent = "telefone: " + (user.phone || "não informado");
+    } else {
+      // Se não tiver usuário, volta pro login
+      window.location.href = "login.html";
+    }
+  });
     function abrirModalEdicao() {
       document.getElementById("modal-edicao").style.display = "flex";
     }

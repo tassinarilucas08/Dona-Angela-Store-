@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="../JavaScript/register.js" async></script>
+  <script src="../JavaScript/register.js" defer></script>
   <link rel="stylesheet" href="../css/register.css">
   <title>Cadastro - Angela Revendedora</title>
 </head>
@@ -20,7 +20,7 @@
 
     <div class="form-container">
       <h2>Cadastre-se</h2>
-      <form action="/cadastrar" method="POST">
+        <form id="registerForm" action="/cadastrar" method="POST">
         <label for="nome">Nome Completo</label>
         <input type="text" id="nome" name="nome" required>
 
@@ -44,9 +44,8 @@
             <input type="checkbox" name="termos" id="termos" required>
             <label for="termos">Aceito os Termos e Condições</label>
           </div>          
-
+        <button type="submit" id="register">Cadastrar</button>
       </form>
-      <button type="submit" id="register">Cadastrar</button>
       <div class="link-login">
         Já tem uma conta? <a href="login.html">Faça login</a>
       </div>
