@@ -19,7 +19,7 @@
         <h2>📞 Fale Conosco</h2>
         <ul>
           <li>
-            <img src="https://img.icons8.com/color/24/000000/whatsapp--v1.png" alt="WhatsApp" />
+            <img src="https://img.icons8.com/color/24/000000/whatsapp.png" alt="WhatsApp" />
             <a href="https://wa.me/5551997532447">WhatsApp</a>
           </li>
           <li>

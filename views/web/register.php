@@ -25,7 +25,7 @@
 
         <div class="form-container">
             <h2>Cadastre-se</h2>
-            <form action="/cadastrar" method="POST">
+            <form method="POST">
                 <label for="nome">Nome Completo</label>
                 <input type="text" id="nome" name="nome" required>
 
@@ -50,8 +50,9 @@
                     <label for="termos">Aceito os Termos e Condições</label>
                 </div>          
 
+                <button type="button" id="register">Cadastrar</button>
             </form>
-            <button type="submit" id="register">Cadastrar</button>
+            
             <div class="link-login">
                 Já tem uma conta? <a href="/Dona-Angela-Store-/login">Faça login</a>
             </div>

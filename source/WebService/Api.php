@@ -36,6 +36,7 @@ class Api
             $this->response["data"] = $data;
         }
         echo json_encode($this->response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        exit();
         return $this;
     }
 

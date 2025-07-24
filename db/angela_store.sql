@@ -103,3 +103,6 @@ CREATE TABLE IF NOT EXISTS purchasesProducts (
     FOREIGN KEY (idProduct)
         REFERENCES products(id)
 ) ENGINE=InnoDB;
+
+INSERT INTO users_categories (id, description)
+VALUES (1, 'Cliente'), (2, 'Administrador'), (3, 'Vendedor');
