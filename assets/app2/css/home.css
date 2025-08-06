@@ -57,15 +57,37 @@
     height: 20px;
   }
   
-  .login-link {
+  .logout-link {
     margin-right: 16px;
-    color: #d45c94;
+    color: #f60606;
     text-decoration: none;
     font-size: 14px;
   }
   
-  .login-link:hover {
+  .logout-link:hover {
     text-decoration: underline;
+  }
+  
+  .perfil-link {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+  }
+  
+  .perfil-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #a62c7b;
+    background-color: white;
+    padding: 2px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .perfil-icon:hover {
+    transform: scale(1.1);
   }
   
   .cart-icon {

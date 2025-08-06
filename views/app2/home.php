@@ -10,8 +10,8 @@ $this->layout("_theme", [
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Angela Revendedora</title>
-  <link rel="stylesheet" href="<?= url("/assets/web/css/home.css") ?>" />
-  <script src="<?= url("/assets/web/js/home.js") ?>" defer></script>
+  <link rel="stylesheet" href="<?= url("/assets/app2/css/home.css") ?>" />
+  <script src="<?= url("/assets/app2/js/home.js") ?>" defer></script>
 </head>
 <body>
   <!-- Modal -->
@@ -50,10 +50,14 @@ $this->layout("_theme", [
 
     <span id="nomeUsuario" style="margin-right: 10px;"></span>
 
-    <a href="/Dona-Angela-Store-/login" class="login-link" id="btnLogin">Entrar</a>
+    <a href="/Dona-Angela-Store-/" class="logout-link" id="btnLogout">sair</a>
+
+    <a href="/Dona-Angela-Store-/app2/perfil" class="perfil-link" id="btnPerfil" > 
+      <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="Perfil do Usuário" class="perfil-icon">
+    </a>
 
     <div class="cart-icon">
-      <a href="/Dona-Angela-Store-/login">
+      <a href="/Dona-Angela-Store-/app2/carrinho">
         <img src="/Dona-Angela-Store-/images/layout/sacola.png" alt="Sacola de Compras">
       </a>
       <span class="cart-badge">3</span>
@@ -105,7 +109,7 @@ $this->layout("_theme", [
         </div>
       </div>
 
-      <a href="/Dona-Angela-Store-/produto">
+      <a href="/Dona-Angela-Store-/app2/produto">
         <div class="product-card todos feminino perfumes">
           <span class="tag tag-boticario">O Boticário</span>
           <img src="/Dona-Angela-Store-/images/perfums/lily.jpg" alt="Produto O Boticário Lily">

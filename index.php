@@ -25,6 +25,18 @@ $route->get("/redefinir-senha-telefone","Site:reset_password_phone");
 $route->get("/produto","Site:product");
 
 // Rotas amigáveis da área restrita
+$route->group("/app2");
+$route->get("/", "App2:home");
+$route->get("/sobre", "App2:about");
+$route->get("/contato", "App2:contact");
+$route->get("/localizacao", "App2:location");
+$route->get("/carrinho","App2:cart");
+$route->get("/servicos","App2:services");
+$route->get("/faqs","App2:faqs");
+$route->get("/perfil","App2:profile");
+$route->get("/produto","App2:product");
+
+// Rotas amigáveis do vendedor
 $route->group("/app");
 $route->get("/", "App:home");
 $route->get("/sobre", "App:about");

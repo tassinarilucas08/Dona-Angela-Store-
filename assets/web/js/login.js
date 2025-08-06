@@ -28,7 +28,7 @@ document.querySelector("#loginForm").addEventListener("submit", async (e) => {
     localStorage.setItem("usuario", JSON.stringify(data));
 
     // Login ok → redireciona para a tela principal
-    window.location.href = "/Dona-Angela-Store-/";
+    window.location.href = "/Dona-Angela-Store-/app2/";
   } catch (error) {
     console.error("Erro no login:", error);
     alert("Email ou senha incorretos.");

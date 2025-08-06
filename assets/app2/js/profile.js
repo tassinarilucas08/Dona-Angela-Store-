@@ -34,4 +34,3 @@ function abrirModalEdicao() {
     fecharModalExcluirConta();
     window.location.href = '/Dona-Angela-Store-/';
   }
-  console.log("OI")
