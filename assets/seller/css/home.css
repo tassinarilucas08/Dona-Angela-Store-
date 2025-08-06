@@ -1,10 +1,4 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+
   /* Estilos Gerais */
   body {
     font-family: Arial, sans-serif;
@@ -57,14 +51,14 @@
     height: 20px;
   }
   
-  .logout-link {
+  .login-link {
     margin-right: 16px;
-    color: #f60606;
+    color: #d45c94;
     text-decoration: none;
     font-size: 14px;
   }
   
-  .logout-link:hover {
+  .login-link:hover {
     text-decoration: underline;
   }
   

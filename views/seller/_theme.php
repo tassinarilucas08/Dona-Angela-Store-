@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Loja de Beleza' ?></title>
-    <link rel="stylesheet" href="<?= url("/assets/app2/css/_theme.css") ?>">
+    <link rel="stylesheet" href="<?= url("/assets/seller/css/_theme.css") ?>">
 </head>
 <body>
 
@@ -19,7 +19,7 @@
         <h2>📞 Fale Conosco</h2>
         <ul>
           <li>
-            <img src="https://img.icons8.com/color/24/000000/whatsapp.png" alt="WhatsApp" />
+            <img src="https://img.icons8.com/color/24/000000/whatsapp--v1.png" alt="WhatsApp" />
             <a href="https://wa.me/5551997532447">WhatsApp</a>
           </li>
           <li>

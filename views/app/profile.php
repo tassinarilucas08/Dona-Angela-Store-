@@ -19,7 +19,7 @@
     <h1>Sua conta</h1>
     <div class="card perfil-info">
       <div class="dados">
-        <h2>Joana Silva</h2>
+        <h2>EU VO MATAR O MATHEUS</h2>
         <p>e-mail: joana@email.com</p>
         <p>telefone: 51 94567-6312</p>
       </div>

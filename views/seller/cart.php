@@ -10,8 +10,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrinho</title>
-  <script src="<?= url("/assets/app2/js/cart.js") ?>" async></script>
-  <link rel="stylesheet" href="<?= url("/assets/app2/css/cart.css") ?>">
+  <script src="<?= url("/assets/seller/js/cart.js") ?>" async></script>
+  <link rel="stylesheet" href="<?= url("/assets/seller/css/cart.css") ?>">
 </head>
 <body>
     <header class="cabecalho-compras">
@@ -21,7 +21,7 @@
 
   <main class="container">
     <section class="cart-items">
-      <a href="/Dona-Angela-Store-/app2/produto">
+      <a href="/Dona-Angela-Store-/seller/produto">
         <div class="item">
           <img src="/Dona-Angela-Store-/images/perfums/lily.jpg" alt="Lily">
           <div class="info">

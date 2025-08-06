@@ -10,8 +10,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= url("/assets/app2/css/product.css") ?>">
-    <script src="<?= url("/assets/app2/js/product.js") ?>" async></script>
+    <link rel="stylesheet" href="<?= url("/assets/seller/css/product.css") ?>">
+    <script src="<?= url("/assets/seller/js/product.js") ?>" async></script>
 </head>
 <body>
     <div class="produto-container">

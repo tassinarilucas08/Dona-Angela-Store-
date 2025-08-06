@@ -1,54 +1,53 @@
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM carregado");
+});
+
+console.log("JS CARREGOU");
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+console.log(usuario.data.user.name);
+
 function scrollToProdutos() {
-    const produtosSection = document.querySelector('#products');
-    produtosSection.scrollIntoView({ behavior: 'smooth' });
+  const produtosSection = document.querySelector('#products');
+  produtosSection.scrollIntoView({ behavior: 'smooth' });
 }
-  
+
 let hideTimeout;
 
 function showModal() {
-    clearTimeout(hideTimeout);
-    document.querySelector('#modal').classList.add('active');
+  clearTimeout(hideTimeout);
+  document.querySelector('#modal').classList.add('active');
 }
 
 function startHideModal() {
-    hideTimeout = setTimeout(() => {
+  hideTimeout = setTimeout(() => {
     document.querySelector('#modal').classList.remove('active');
-    }, 150);
+  }, 150);
 }
 
 function hideModal() {
-    document.querySelector('#modal').classList.remove('active');
+  document.querySelector('#modal').classList.remove('active');
 }
 
 function cancelHideModal() {
-    clearTimeout(hideTimeout);
+  clearTimeout(hideTimeout);
 }
 
-let motherInformationsClick = document.querySelector("#mother-informations");
-motherInformationsClick.addEventListener('click', ()=>{
-    showModal();
+document.querySelector('#mother-informations')?.addEventListener('click', () => {
+  showModal();
 });
 
 function filterProducts(category) {
-const products = document.querySelectorAll('.product-card');
-products.forEach(product => {
-if (category === 'all') {
-    product.style.display = 'block';
-} else {
-    product.style.display = product.classList.contains(category) ? 'block' : 'none';
+  const products = document.querySelectorAll('.product-card');
+  products.forEach(product => {
+    product.style.display = category === 'todos' || product.classList.contains(category)
+      ? 'block'
+      : 'none';
+  });
+  scrollToProdutos();
 }
-});
-scrollToProdutos();
-}
+
 function handleClick(button, category) {
-// Adiciona classe de animação
-button.classList.add('clicked');
-
-// Remove a classe após a animação
-setTimeout(() => {
-    button.classList.remove('clicked');
-}, 100);
-
-// Chama a função de filtro
-filterProducts(category);
+  button.classList.add('clicked');
+  setTimeout(() => button.classList.remove('clicked'), 100);
+  filterProducts(category);
 }

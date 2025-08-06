@@ -10,8 +10,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= url("/assets/app/css/login.css") ?>">
-    <script src="<?= url("/assets/app/js/login.js") ?>" async></script>
+    <link rel="stylesheet" href="<?= url("/assets/seller/css/login.css") ?>">
+    <script src="<?= url("/assets/seller/js/login.js") ?>" async></script>
 </head>
 <body>
     <div class="container">
@@ -31,11 +31,11 @@
                 </div>
                 <button type="submit" id="login">Entrar</button>
                 <div class="link-reset">
-                    <a href="/Dona-Angela-Store-/app/redefinir-senha">Esqueci minha senha</a>
+                    <a href="/Dona-Angela-Store-/seller/redefinir-senha">Esqueci minha senha</a>
                 </div>
             </form>
             <div class="link-register">
-                Não tem uma conta? <a href="/Dona-Angela-Store-/app/cadastro">Cadastre-se</a>
+                Não tem uma conta? <a href="/Dona-Angela-Store-/seller/cadastro">Cadastre-se</a>
             </div>
         </div>
 

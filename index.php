@@ -25,18 +25,6 @@ $route->get("/redefinir-senha-telefone","Site:reset_password_phone");
 $route->get("/produto","Site:product");
 
 // Rotas amigáveis da área restrita
-$route->group("/app2");
-$route->get("/", "App2:home");
-$route->get("/sobre", "App2:about");
-$route->get("/contato", "App2:contact");
-$route->get("/localizacao", "App2:location");
-$route->get("/carrinho","App2:cart");
-$route->get("/servicos","App2:services");
-$route->get("/faqs","App2:faqs");
-$route->get("/perfil","App2:profile");
-$route->get("/produto","App2:product");
-
-// Rotas amigáveis do vendedor
 $route->group("/app");
 $route->get("/", "App:home");
 $route->get("/sobre", "App:about");
@@ -45,13 +33,25 @@ $route->get("/localizacao", "App:location");
 $route->get("/carrinho","App:cart");
 $route->get("/servicos","App:services");
 $route->get("/faqs","App:faqs");
-$route->get("/login","App:login");
-$route->get("/cadastro","App:register");
 $route->get("/perfil","App:profile");
-$route->get("/redefinir-senha","App:reset_password");
-$route->get("/redefinir-senha-telefone","App:reset_password_phone");
 $route->get("/produto","App:product");
-$route->get("/vendedor","App:seller");
+
+// Rotas amigáveis do vendedor
+$route->group("/seller");
+$route->get("/", "Seller:home");
+$route->get("/sobre", "Seller:about");
+$route->get("/contato", "Seller:contact");
+$route->get("/localizacao", "Seller:location");
+$route->get("/carrinho","Seller:cart");
+$route->get("/servicos","Seller:services");
+$route->get("/faqs","Seller:faqs");
+$route->get("/login","Seller:login");
+$route->get("/cadastro","Seller:register");
+$route->get("/perfil","Seller:profile");
+$route->get("/redefinir-senha","Seller:reset_password");
+$route->get("/redefinir-senha-telefone","Seller:reset_password_phone");
+$route->get("/produto","Seller:product");
+$route->get("/vendedor","Seller:seller");
 
 $route->group(null);
 

@@ -10,8 +10,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="<?= url("/assets/app2/css/profile.css") ?>">
-  <script src="<?= url("/assets/app2/js/profile.js") ?>" async></script>
+  <link rel="stylesheet" href="<?= url("/assets/seller/css/profile.css") ?>">
+  <script src="<?= url("/assets/seller/js/profile.js") ?>" async></script>
 </head>
 <body>
   <div class="perfil-wrapper">
@@ -19,7 +19,7 @@
     <h1>Sua conta</h1>
     <div class="card perfil-info">
       <div class="dados">
-        <h2>EU VO MATAR O MATHEUS</h2>
+        <h2>Joana Silva</h2>
         <p>e-mail: joana@email.com</p>
         <p>telefone: 51 94567-6312</p>
       </div>

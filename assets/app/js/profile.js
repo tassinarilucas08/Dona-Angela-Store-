@@ -29,7 +29,8 @@ function abrirModalEdicao() {
   function fecharModalExcluirConta() {
     document.querySelector("#modal-excluir-conta").style.display = "none";
   }
+
   function confirmarExclusao() {
     fecharModalExcluirConta();
-    window.location.href = '/Dona-Angela-Store-/app/';
+    window.location.href = '/Dona-Angela-Store-/';
   }

@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= url("/assets/app/css/reset_password.css") ?>">
+    <link rel="stylesheet" href="<?= url("/assets/seller/css/reset_password.css") ?>">
 </head>
 <body>
     <div class="container">
@@ -31,7 +31,7 @@
             </form>
 
             <div class="link-outro-modo">
-                <a href="/Dona-Angela-Store-/app/redefinir-senha-telefone">Redefinir por telefone</a>
+                <a href="/Dona-Angela-Store-/seller/redefinir-senha-telefone">Redefinir por telefone</a>
             </div>
         </div>
 

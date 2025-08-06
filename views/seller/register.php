@@ -10,8 +10,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= url("/assets/app/css/register.css") ?>">
-  <script src="<?= url("/assets/app/js/register.js") ?>" async></script>
+    <link rel="stylesheet" href="<?= url("/assets/seller/css/register.css") ?>">
+  <script src="<?= url("/assets/seller/js/register.js") ?>" async></script>
 </head>
 <body>
     <div class="container">
@@ -53,7 +53,7 @@
             </form>
             <button type="submit" id="register">Cadastrar</button>
             <div class="link-login">
-                Já tem uma conta? <a href="/Dona-Angela-Store-/app/login">Faça login</a>
+                Já tem uma conta? <a href="/Dona-Angela-Store-/seller/login">Faça login</a>
             </div>
         </div>
     </div>

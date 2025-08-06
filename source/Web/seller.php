@@ -2,11 +2,11 @@
 
 namespace Source\Web;
 
-class App2 extends Controller
+class Seller extends Controller
 {
     public function __construct()
     {
-        parent::__construct("app2");
+        parent::__construct("seller");
     }
 
     public function home(): void
@@ -45,9 +45,19 @@ class App2 extends Controller
         echo "Frequently Asked Questions";
     }
 
+    public function login(): void
+    {
+        echo $this->view->render("login");
+    }
+
     public function error (array $data): void
     {
         echo "Error {$data["errcode"]}...";
+    }
+
+    public function register (array $data): void
+    {
+        echo $this->view->render("register");
     }
 
     public function profile (array $data): void
@@ -55,8 +65,24 @@ class App2 extends Controller
         echo $this->view->render("profile");
     }
 
+    public function reset_password (array $data): void
+    {
+        echo $this->view->render("reset_password");
+    }
+
+    public function reset_password_phone (array $data): void
+    {
+        echo $this->view->render("reset_password_phone");
+    }
+
     public function product (array $data): void
     {
         echo $this->view->render("product");
     }
+
+    public function seller (array $data): void
+    {
+        echo $this->view->render("seller");
+    }
+
 }
