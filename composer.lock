@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87ae605894d48115624addb3354f68f6",
+    "content-hash": "c97deee9d54714aab66512f9ab9cc87e",
     "packages": [
         {
             "name": "coffeecode/router",
@@ -181,17 +181,57 @@
                 "source": "https://github.com/thephpleague/plates/tree/v3.6.0"
             },
             "time": "2024-11-02T15:03:35+00:00"
+        },
+        {
+            "name": "sorfabiosantos/uploader",
+            "version": "v1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sorfabiosantos/uploader.git",
+                "reference": "b917ba2e68f0679fdb230a5fda72d2e2d77aa2b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sorfabiosantos/uploader/zipball/b917ba2e68f0679fdb230a5fda72d2e2d77aa2b7",
+                "reference": "b917ba2e68f0679fdb230a5fda72d2e2d77aa2b7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SorFabioSantos\\Uploader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fábio Santos",
+                    "email": "fabiosantos@ifsul.edu.br"
+                }
+            ],
+            "description": "Uploader is a simple PHP library for handling file uploads with validation and error handling.",
+            "support": {
+                "issues": "https://github.com/sorfabiosantos/uploader/issues",
+                "source": "https://github.com/sorfabiosantos/uploader/tree/v1.0.8"
+            },
+            "time": "2025-08-15T12:07:56+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.0"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
