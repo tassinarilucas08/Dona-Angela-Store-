@@ -25,32 +25,32 @@
 
         <div class="form-container">
             <h2>Cadastre-se</h2>
-            <form method="POST">
+            <form method="POST" id = "registerForm">
                 <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="name" name="nome" required>
 
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" required>
 
-                <label for="telefone">Telefone - (XX) XXXXX-XXXX</label>
-                <input type="tel" id="telefone" name="telefone" required>
+                <label for="telefone">Telefone - XX XXXXX-XXXX</label>
+                <input type="tel" id="phone" name="telefone" required>
 
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required>
+                <input type="password" id="password" name="senha" required>
 
                 <label for="senhaConfirmar">Confirmar Senha</label>
-                <input type="password" id="senhaConfirmar" name="senhaConfirmar" required>
+                <input type="password" id="passwordAgain" name="senhaConfirmar" required>
 
                 <div class="terms">
                     <p>Leia nossos <a href="/Dona-Angela-Store-/pdfs/termos_e_condicoes.pdf" target="_blank">Termos e Condições</a></p>
                 </div>
                 
                 <div class="terms">
-                    <input type="checkbox" name="termos" id="termos" required>
+                    <input type="checkbox" name="termos" id="terms" required>
                     <label for="termos">Aceito os Termos e Condições</label>
                 </div>          
 
-                <button type="button" id="register">Cadastrar</button>
+                <button type="submit" id="register">Cadastrar</button>
             </form>
             
             <div class="link-login">
