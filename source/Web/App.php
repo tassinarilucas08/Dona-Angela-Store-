@@ -17,7 +17,7 @@ class App extends Controller
 
     public function about(): void
     {
-        echo "Olha que bonito o SOBRE do Site...";
+        echo $this->view->render("about");
     }
 
     public function contact(): void

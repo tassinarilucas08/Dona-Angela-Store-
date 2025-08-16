@@ -20,19 +20,26 @@
 
   <main class="sobre-container">
     <section class="texto-sobre">
-      <h2>Quem são os desenvolvedores?</h2>
-        <h3>Lucas Tassinari</h3>
-            <p>
-                Aluno da INF3AM, 17 anos. Progamador Java e Backend, adorador do VSCode e desprezador do php.
-            </p>
-        <h3>Matheus Espíndola</h3>
-            <p>
-                Colega de Lucas Tassinari, 17 anos. Desenvolvedor Frontend e progamador SQL, adora um bom WorkBench.
-            </p>
+      <h2>Bem-vindo à Dona Angela Store</h2>
       <p>
-        Este espaço foi criado para facilitar suas compras, trazer mais praticidade ao dia a dia e manter a proximidade
-        que sempre foi marca registrada da Dona Angela.
+        A <strong>Dona Angela Store</strong> é mais do que um simples catálogo virtual. Foi criada com o objetivo de facilitar a experiência de compra dos nossos clientes, oferecendo uma navegação intuitiva, moderna e organizada.
       </p>
+      <p>
+        Aqui, você encontra uma vitrine digital com todos os nossos produtos, com visual limpo e categorização prática, para que você encontre rapidamente o que procura. Seja para uso pessoal, presente ou reposição de itens essenciais.
+      </p>
+      <p>
+        O sistema foi pensado para ser simples e eficiente, ideal tanto para quem tem familiaridade com tecnologia quanto para aqueles que estão navegando pela primeira vez em um ambiente virtual. 
+        A Dona Angela Store mantém a tradição de proximidade e cuidado com cada cliente.
+      </p>
+      <p>
+        Nossa missão é proporcionar uma experiência agradável, funcional e segura para todos os nossos usuários. Por isso, criamos um catálogo visual e direto, para que você sinta que está sendo atendido com carinho e atenção.
+      </p>
+    </section>
+
+    <section class="cartaz-container">
+      <div class="cartaz">
+        <img src="<?= url('/images/layout/note_tela.png') ?>" alt="Tela principal do catálogo" />
+      </div>
     </section>
   </main>
 </body>

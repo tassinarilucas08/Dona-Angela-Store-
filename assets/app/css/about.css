@@ -70,29 +70,3 @@ body {
     line-height: 1.6;
     margin-bottom: 16px;
   }
-
-  .cartaz-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  perspective: 1000px;
-}
-
-.cartaz {
-  width: 90%;
-  max-width: 700px;
-  padding: 1rem;
-  border-radius: 15px;
-  transform: rotateX(3deg) rotateY(-2deg);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-.cartaz:hover {
-  transform: rotateX(0deg) rotateY(0deg) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-.cartaz img {
-  width: 100%;
-  border-radius: 10px;
-}
