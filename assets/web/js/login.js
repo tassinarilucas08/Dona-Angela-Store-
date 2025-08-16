@@ -1,36 +1,32 @@
-document.querySelector("#loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+// login.js
 
-  const email = document.querySelector("#email").value;
-  const password = document.querySelector("#senha").value;
+const loginForm = document.querySelector("#loginForm");
 
-  const headers = new Headers();
-  headers.append("Content-Type", "application/x-www-form-urlencoded");
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  const body = new URLSearchParams();
-  body.append("email", email);
-  body.append("password", password);
+    const email = loginForm.querySelector("#email").value.trim();
+    const password = loginForm.querySelector("#password").value.trim();
 
-  const options = {
-    method: "POST",
-    headers: headers,
-    body: body,
-    redirect: "follow"
-  };
+    try {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-  try {
-    const response = await fetch("http://localhost/Dona-Angela-Store-/api/Users/login", options);
+      const result = await res.json();
 
-    if (!response.ok) {
-      throw new Error("Login falhou");
+      if (res.ok) {
+        alert("Login realizado com sucesso!");
+        window.location.href = "/home"; // ajusta se tua rota for outra
+      } else {
+        alert(result.message || "Credenciais inválidas.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erro no servidor. Tente novamente mais tarde.");
     }
-    const data = await response.json(); // <- Aqui pega os dados do usuário
-    localStorage.setItem("usuario", JSON.stringify(data));
-
-    // Login ok → redireciona para a tela principal
-    window.location.href = "/Dona-Angela-Store-/app2/";
-  } catch (error) {
-    console.error("Erro no login:", error);
-    alert("Email ou senha incorretos.");
-  }
-});
+  });
+}

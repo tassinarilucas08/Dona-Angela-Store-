@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="<?= url("/assets/web/css/register.css") ?>">
-  <script src="<?= url("/assets/web/js/register.js") ?>" async></script>
+  <script src="<?= url("/assets/web/js/register.js") ?>" defer></script>
 </head>
 <body>
     <div class="container">
@@ -32,7 +32,7 @@
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" required>
 
-                <label for="telefone">Telefone</label>
+                <label for="telefone">Telefone - (XX) XXXXX-XXXX</label>
                 <input type="tel" id="telefone" name="telefone" required>
 
                 <label for="senha">Senha</label>
