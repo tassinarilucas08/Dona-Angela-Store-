@@ -39,3 +39,7 @@ theme.php:
 
 register.php:
 $this->layout("theme",[]);
+
+- Página FAQs com formulário para criar perguntas.
+
+- Fazer a mensagem e a imagem da página principal passar para outras mensagens e imagens.

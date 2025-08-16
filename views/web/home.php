@@ -48,7 +48,10 @@ $this->layout("_theme", [
       <img src="/Dona-Angela-Store-/images/layout/lupa.png" alt="Buscar">
     </div>
 
-    <span id="nomeUsuario" style="margin-right: 10px;"></span>
+    <a href="/Dona-Angela-Store-/sobre" class="sobre-link">
+      <img src="/Dona-Angela-Store-/images/layout/sobre.png" alt="Sobre">
+      Sobre
+    </a>
 
     <a href="/Dona-Angela-Store-/login" class="login-link" id="btnLogin">Entrar</a>
 
