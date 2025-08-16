@@ -4,10 +4,11 @@
     use PDO;
     use PDOException;
 
-    const CONF_DB_HOST = "localhost";
+    const CONF_DB_HOST = "mysql"; // ou o host do seu container Docker
     const CONF_DB_NAME = "angela_store";
     const CONF_DB_USER = "root";
-    const CONF_DB_PASS = "";
+    const CONF_DB_PASS = "asdf1234";
+
 
     abstract class Connect
     {

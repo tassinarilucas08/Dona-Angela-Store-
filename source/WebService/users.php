@@ -25,10 +25,17 @@ class Users extends Api
         ]);
 }
 
-public function createUser(array $data)
+public function createUser(): void
 {
+    $data = json_decode(file_get_contents("php://input"), true);
+
+    if (!is_array($data)) {
+        $this->call(400, "bad_request", "JSON inválido", "error")->back();
+        return;
+    }
+
     // Verifica se todos os campos obrigatórios estão preenchidos
-    $required = ["idUserCategory", "name", "email", "password", "phone"];
+    $required = ["name", "email", "password", "phone"];
     foreach ($required as $field) {
         if (empty($data[$field])) {
             $this->call(400, "bad_request", "O campo '$field' é obrigatório", "error")->back();
@@ -45,15 +52,14 @@ public function createUser(array $data)
     // Verifica se o e-mail já está em uso
     $userCheck = new User();
     if ($userCheck->findByEmail($data["email"])) {
-    $this->call(409, "conflict", "E-mail já cadastrado", "error")->back();
-    return;
+        $this->call(409, "conflict", "E-mail já cadastrado", "error")->back();
+        return;
     }
 
     // Verifica se o telefone já está em uso
-    $userCheck = new User();
     if ($userCheck->findByPhone($data["phone"])) {
-    $this->call(409, "conflict", "Telefone já cadastrado", "error")->back();
-    return;
+        $this->call(409, "conflict", "Telefone já cadastrado", "error")->back();
+        return;
     }
 
     // Valida senha (mínimo 6 caracteres)
@@ -64,16 +70,16 @@ public function createUser(array $data)
 
     // Criação do usuário
     $user = new User(
-        null,
-        $data["idUserCategory"] ?? null,
-        $data["name"] ?? null,
-        $data["email"] ?? null,
-        $data["password"] ?? null, 
-        $data["phone"] ?? null
+        null, // id (vai ser gerado)
+        1,    // categoria padrão
+        $data["name"],
+        $data["email"],
+        password_hash($data["password"], PASSWORD_DEFAULT), // senha criptografada
+        $data["phone"]
     );
 
     if (!$user->insert()) {
-        $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
+        $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao criar usuário", "error")->back();
         return;
     }
 
@@ -81,7 +87,8 @@ public function createUser(array $data)
     $response = [
         "id" => $user->getId(),
         "name" => $user->getName(),
-        "email" => $user->getEmail()
+        "email" => $user->getEmail(),
+        "phone" => $user->getPhone()
     ];
 
     $this->call(201, "created", "Usuário criado com sucesso", "success")->back($response);
@@ -251,7 +258,7 @@ public function createUser(array $data)
 
     // Só o próprio usuário ou um admin pode deletar
     $isOwner = $this->userAuth->id == $data["id"];
-    $isAdmin = $this->userAuth->idUserCategory == 1;
+    $isAdmin = $this->userAuth->idUserCategory == 3;
 
     if (!$isOwner && !$isAdmin) {
         $this->call(403, "forbidden", "Você não tem permissão para deletar este usuário", "error")->back();
@@ -264,6 +271,4 @@ public function createUser(array $data)
         return;
     }
 
-    $this->call(200, "success", "Usuário deletado com sucesso", "success")->back();
-    }
-  }
+    $this->call(200, "success", "Usuário deletado com sucesso", "success")->back();}}
