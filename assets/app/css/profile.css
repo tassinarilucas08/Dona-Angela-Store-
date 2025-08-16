@@ -233,3 +233,61 @@ h1 {
   cursor: pointer;
   margin-left: 10px;
 }
+
+.perfil-info {
+    gap: 10px;
+  }
+
+  .perfil-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .dados {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .perfil-imagem img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #a62c7b;
+  }
+
+  .input-file {
+    display: none;
+  }
+  
+  .upload-label {
+    background-color: #a62c7b;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+  }
+  
+  .upload-label:hover {
+    opacity: 0.9;
+  }
+  
+  #file-name {
+    display: block;
+    color: #555;
+    font-size: 13px;
+  }
+
+  .photo {
+    display: inline-block;
+    min-width: 120px;
+    margin-bottom: 8px;
+  }
