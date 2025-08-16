@@ -18,10 +18,15 @@
     <button class="btn-voltar" onclick="window.history.back()">← Voltar</button>
     <h1>Sua conta</h1>
     <div class="card perfil-info">
-      <div class="dados">
-        <h2>EU VO MATAR O MATHEUS</h2>
-        <p>e-mail: joana@email.com</p>
-        <p>telefone: 51 94567-6312</p>
+      <div class="perfil-container">
+        <div class="perfil-imagem">
+          <img src="<?= url("/images/layout/user.png") ?>" alt="Foto do usuário">
+        </div>
+        <div class="dados">
+          <h2>Joana Silva</h2>
+          <p>e-mail: joana@email.com</p>
+          <p>telefone: 51 94567-6312</p>
+        </div>
       </div>
       <div class="botoes-conta">
         <button class="btn-alterar" onclick="abrirModalEdicao()">ALTERAR DADOS ✎</button>
@@ -47,6 +52,12 @@
   <div class="modal" id="modal-edicao">
     <div class="modal-content">
       <h3>Alterar Dados</h3>
+      <label for="nova-imagem" class="photo">Foto de perfil:</label>
+      <div class="file-upload">
+        <label for="upload" class="upload-label">📁 Escolher Arquivo</label>
+        <input type="file" id="upload" class="input-file" name="imagem">
+        <span id="file-name">Nenhum arquivo selecionado</span>
+      </div>
       <label for="novo-nome">Nome:</label>
       <input type="text" id="novo-nome" value="Joana Silva">
       <label for="novo-email">E-mail:</label>
