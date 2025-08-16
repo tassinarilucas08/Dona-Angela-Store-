@@ -15,6 +15,7 @@ class ComposerStaticInit407f5200d01eac44508186c93e79db18
         'S' => 
         array (
             'Source\\' => 7,
+            'SorFabioSantos\\Uploader\\' => 24,
         ),
         'L' => 
         array (
@@ -34,6 +35,10 @@ class ComposerStaticInit407f5200d01eac44508186c93e79db18
         'Source\\' => 
         array (
             0 => __DIR__ . '/../..' . '/source',
+        ),
+        'SorFabioSantos\\Uploader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sorfabiosantos/uploader/src',
         ),
         'League\\Plates\\' => 
         array (
