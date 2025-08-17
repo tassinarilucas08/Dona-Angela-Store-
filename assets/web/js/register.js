@@ -10,25 +10,26 @@ if (registerForm) {
     const email = registerForm.querySelector("#email").value.trim();
     const phone = registerForm.querySelector("#phone").value.trim();
     const password = registerForm.querySelector("#password").value.trim();
+    const passwordConfirm = registerForm.querySelector("#password_confirm").value.trim();
 
     try {
-      console.log({name, email, password, phone});
+      console.log({name, email, password, phone, passwordConfirm});
       const res = await fetch("http://localhost/Dona-Angela-Store-/api/Users/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({name, email, password, phone}),
+        body: JSON.stringify({name, email, password, phone, passwordConfirm}),
       });
 
       const result = await res.json();
 
       if (res.ok) {
         alert("Cadastro realizado com sucesso!");
-        window.location.href = "/login";
+        window.location.href = "/Dona-Angela-Store-/login";
       } else {
         alert(result.message || "Erro ao cadastrar usuário.");
       }
     } catch (err) {
-      console.error(err);
+      console.error(err); 
       alert("Erro no servidor. Tente novamente mais tarde.");
   }
  });

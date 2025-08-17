@@ -35,7 +35,7 @@ public function createUser(): void
     }
 
     // Verifica se todos os campos obrigatórios estão preenchidos
-    $required = ["name", "email", "password", "phone"];
+    $required = ["name", "email", "password", "phone", "passwordConfirm"];
     foreach ($required as $field) {
         if (empty($data[$field])) {
             $this->call(400, "bad_request", "O campo '$field' é obrigatório", "error")->back();
@@ -67,6 +67,11 @@ public function createUser(): void
         $this->call(400, "bad_request", "A senha deve ter no mínimo 6 caracteres", "error")->back();
         return;
     }
+    // Validação de senha e confirmação
+    if ($data["password"] !== $data["passwordConfirm"]) {
+    $this->call(400, "bad_request", "As senhas não coincidem", "error")->back();
+    return;
+    }
 
     // Criação do usuário
     $user = new User(
@@ -74,7 +79,7 @@ public function createUser(): void
         1,    // categoria padrão
         $data["name"],
         $data["email"],
-        password_hash($data["password"], PASSWORD_DEFAULT), // senha criptografada
+        $data["password"], // senha criptografada
         $data["phone"]
     );
 
@@ -201,6 +206,9 @@ public function createUser(): void
 
     public function login(array $data): void
     {
+
+        $data = json_decode(file_get_contents("php://input"), true);
+
         // Verificar se os dados de login foram fornecidos
         if (empty($data["email"]) || empty($data["password"])) {
             $this->call(400, "bad_request", "Credenciais inválidas", "error")->back();
@@ -213,7 +221,7 @@ public function createUser(): void
             $this->call(401, "unauthorized", "Usuário não encontrado", "error")->back();
             return;
         }
-
+        
         if(!password_verify($data["password"], $user->getPassword())){
             $this->call(401, "unauthorized", "Senha inválida", "error")->back();
             return;

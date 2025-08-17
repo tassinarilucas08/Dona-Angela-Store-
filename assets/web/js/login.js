@@ -1,32 +1,41 @@
 // login.js
+const loginForm = document.getElementById("loginForm");
 
-const loginForm = document.querySelector("#loginForm");
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-if (loginForm) {
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-    const email = loginForm.querySelector("#email").value.trim();
-    const password = loginForm.querySelector("#password").value.trim();
+  if (!email || !password) {
+    alert("Preencha todos os campos!");
+    return;
+  }
 
-    try {
-      const res = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    console.log(email, password);
+    const response = await fetch("http://localhost/Dona-Angela-Store-/api/Users/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }), // enviar senha em texto
+    });
 
-      const result = await res.json();
+    const data = await response.json();
 
-      if (res.ok) {
-        alert("Login realizado com sucesso!");
-        window.location.href = "/home"; // ajusta se tua rota for outra
-      } else {
-        alert(result.message || "Credenciais inválidas.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Erro no servidor. Tente novamente mais tarde.");
+    if (!response.ok) {
+      alert(data.message || "Erro ao fazer login");
+      return;
     }
-  });
-}
+
+    // Salva o token e os dados do usuário no localStorage
+    localStorage.setItem("userToken", data.token);
+    localStorage.setItem("userData", JSON.stringify(data.user));
+
+    alert("Login realizado com sucesso!");
+    window.location.href = "/Dona-Angela-Store-/app"; // ou página principal
+
+  } catch (error) {
+    console.error("Erro ao conectar à API:", error);
+    alert("Erro de conexão");
+  }
+});

@@ -27,7 +27,7 @@ $this->layout("_theme", [
         </div>
         <div class="form-group">
           <label for="senha">Senha</label>
-          <input type="password" id="senha" name="password" required>
+          <input type="password" id="password" name="password" required>
         </div>
         <button type="submit" id="login">Entrar</button>
         <div class="link-reset">

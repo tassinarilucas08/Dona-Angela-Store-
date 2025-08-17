@@ -39,7 +39,7 @@
                 <input type="password" id="password" name="senha" required>
 
                 <label for="senhaConfirmar">Confirmar Senha</label>
-                <input type="password" id="passwordAgain" name="senhaConfirmar" required>
+                <input type="password" id="password_confirm" name="senhaConfirmar" required>
 
                 <div class="terms">
                     <p>Leia nossos <a href="/Dona-Angela-Store-/pdfs/termos_e_condicoes.pdf" target="_blank">Termos e Condições</a></p>
