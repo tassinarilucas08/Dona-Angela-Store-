@@ -23,9 +23,9 @@
           <img src="<?= url("/images/layout/user.png") ?>" alt="Foto do usuário">
         </div>
         <div class="dados">
-          <h2>Joana Silva</h2>
-          <p>e-mail: joana@email.com</p>
-          <p>telefone: 51 94567-6312</p>
+          <h2 id = "nomeView"></h2>
+          <p id = "emailView"></p>
+          <p id = "phoneView"></p>
         </div>
       </div>
       <div class="botoes-conta">

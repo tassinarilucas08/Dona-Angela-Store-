@@ -34,3 +34,26 @@ function abrirModalEdicao() {
     fecharModalExcluirConta();
     window.location.href = '/Dona-Angela-Store-/';
   }
+
+  // profile.js
+const userData = JSON.parse(localStorage.getItem("userData"));
+const userToken = localStorage.getItem("userToken");
+
+if (!userData || !userToken) {
+  alert("Você precisa estar logado!");
+  window.location.href = "/Dona-Angela-Store-/login";
+}
+
+// Agora você pode usar userData e userToken em qualquer função JS
+// exemplo:
+console.log("Usuário logado:", userData);
+console.log("Token JWT:", userToken);
+
+let nomeView = document.querySelector("#nomeView");
+let emailView = document.querySelector("#emailView");
+let phoneView = document.querySelector("#phoneView");
+
+nomeView.innerHTML = userData.name;
+emailView.innerHTML = userData.email;
+phoneView.innerHTML = userData.phone ? userData.phone : "Não informado";
+

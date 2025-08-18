@@ -55,7 +55,7 @@ $this->layout("_theme", [
 
     <span id="nomeUsuario" style="margin-right: 10px;"></span>
 
-    <a href="/Dona-Angela-Store-/" class="logout-link" id="btnLogout">sair</a>
+    <a class="logout-link" id="btnLogout">sair</a>
 
     <a href="/Dona-Angela-Store-/app/perfil" class="perfil-link" id="btnPerfil" > 
       <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="Perfil do Usuário" class="perfil-icon">

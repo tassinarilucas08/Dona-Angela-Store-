@@ -28,8 +28,8 @@ loginForm.addEventListener("submit", async (e) => {
     }
 
     // Salva o token e os dados do usuário no localStorage
-    localStorage.setItem("userToken", data.token);
-    localStorage.setItem("userData", JSON.stringify(data.user));
+    localStorage.setItem("userToken", data.data.token);
+    localStorage.setItem("userData", JSON.stringify(data.data.user));
 
     alert("Login realizado com sucesso!");
     window.location.href = "/Dona-Angela-Store-/app"; // ou página principal

@@ -1,7 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM carregado");
-});
-
 console.log("JS CARREGOU");
 const usuario = JSON.parse(localStorage.getItem("usuario"));
 console.log(usuario.data.user.name);
@@ -50,4 +46,15 @@ function handleClick(button, category) {
   button.classList.add('clicked');
   setTimeout(() => button.classList.remove('clicked'), 100);
   filterProducts(category);
+}
+
+let btnLogout = document.querySelector("#btnLogout");
+
+if (!btnLogout) {
+  console.error("Botão de logout não encontrado!");
+} else {
+  btnLogout.addEventListener("click", () => {
+    localStorage.clear();
+    window.location.href = "/Dona-Angela-Store-/";
+  });
 }
