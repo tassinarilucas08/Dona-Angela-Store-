@@ -243,6 +243,7 @@ public function createUser(): void
                     "id" => $user->getId(),
                     "name" => $user->getName(),
                     "email" => $user->getEmail(),
+                    "phone" => $user->getPhone()
                 ]
             ]);
 }

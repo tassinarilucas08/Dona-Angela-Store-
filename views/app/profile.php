@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="<?= url("/assets/app/css/profile.css") ?>">
-  <script src="<?= url("/assets/app/js/profile.js") ?>" async></script>
+  <script src="<?= url("/assets/app/js/profile.js") ?>" defer></script>
 </head>
 <body>
   <div class="perfil-wrapper">
