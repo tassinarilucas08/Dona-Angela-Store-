@@ -1,3 +1,0 @@
-[17-Aug-2025 20:35:46 UTC] Teste de erro personalizado!
-[17-Aug-2025 20:35:48 UTC] Teste de erro personalizado!
-[17-Aug-2025 20:35:48 UTC] Teste de erro personalizado!
