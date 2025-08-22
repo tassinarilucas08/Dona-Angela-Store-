@@ -23,6 +23,8 @@ $route->get("/perfil","Site:profile");
 $route->get("/redefinir-senha","Site:reset_password");
 $route->get("/redefinir-senha-telefone","Site:reset_password_phone");
 $route->get("/produto","Site:product");
+$route->get("/cadastro-vendedor","Site:seller_register");
+
 
 // Rotas amigáveis da área restrita
 $route->group("/app");
