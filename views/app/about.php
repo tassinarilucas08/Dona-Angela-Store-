@@ -41,6 +41,42 @@
         <img src="<?= url('/images/layout/note_tela.png') ?>" alt="Tela principal do catálogo" />
       </div>
     </section>
+
+
+    <section class="devs-section">
+      <h2 class="devs-title">Quem desenvolveu este catálogo</h2>
+
+      <div class="devs-grid">
+        <div class="dev-card">
+          <div class="dev-photo">
+            <img src="<?= url('/images/devs/tassinari.jpg') ?>" alt="Foto do desenvolvedor Lucas Tassinari" loading="lazy">
+          </div>
+          <div class="dev-info">
+            <h3>Lucas Tassinari</h3>
+            <p class="dev-role">Backend & Integrações</p>
+            <p class="dev-bio">
+              Focado em regras de negócio, API e segurança. Trabalhou nas
+              rotas, persistência de dados e integração com o front.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="dev-card">
+          <div class="dev-photo">
+            <img src="<?= url('/images/devs/matheus.jpg') ?>" alt="Foto do desenvolvedor Matheus Espíndola" loading="lazy">
+          </div>
+          <div class="dev-info">
+            <h3>Matheus Espíndola</h3>
+            <p class="dev-role">Frontend & UI</p>
+            <p class="dev-bio">
+              Responsável pelo visual, componentes e experiência do usuário.
+              Criou páginas, estilos e interações do catálogo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </body>
 </html>

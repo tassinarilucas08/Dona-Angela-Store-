@@ -13,11 +13,14 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     phone VARCHAR (255),
+    photo VARCHAR(512) NULL,
     FOREIGN KEY (idUserCategory)
         REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
 alter table users
 drop COLUMN token;
+
+ALTER TABLE users ADD COLUMN photo VARCHAR(512) NULL AFTER phone;
 
 CREATE TABLE IF NOT EXISTS address (
     id INT AUTO_INCREMENT PRIMARY KEY,

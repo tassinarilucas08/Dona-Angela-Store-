@@ -79,4 +79,9 @@ class Site extends Controller
     {
         echo $this->view->render("product");
     }
+
+    public function seller_register (array $data): void
+    {
+        echo $this->view->render("seller_register");
+    }
 }
