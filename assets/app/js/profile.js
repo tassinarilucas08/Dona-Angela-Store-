@@ -57,3 +57,49 @@ nomeView.innerHTML = userData.name;
 emailView.innerHTML = userData.email;
 phoneView.innerHTML = userData.phone ? userData.phone : "Não informado";
 
+let newName = document.querySelector("#novo-nome");
+let newPhone = document.querySelector("#novo-telefone");
+let newEmail = document.querySelector("#novo-email");
+
+newName.value = userData.name;
+newEmail.value = userData.email;
+newPhone.value = userData.phone;
+
+// login.js
+const formEdit = document.querySelector("formEdit");
+
+formEdit.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  if (!newName.value || !newPhone.value || newEmail.value) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  try {
+    console.log(newEmail, newPhone, newName);
+    const response = await fetch("http://localhost/Dona-Angela-Store-/api/Users/updateUser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ newEmail, newPhone, newName }), // enviar senha em texto
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data.message || "Erro ao fazer login");
+      return;
+    }
+
+    // Salva o token e os dados do usuário no localStorage
+    localStorage.setItem("userToken", data.data.token);
+    localStorage.setItem("userData", JSON.stringify(data.data.user));
+
+    alert("Login realizado com sucesso!");
+    window.location.href = "/Dona-Angela-Store-/app"; // ou página principal
+
+  } catch (error) {
+    console.error("Erro ao conectar à API:", error);
+    alert("Erro de conexão");
+  }
+});

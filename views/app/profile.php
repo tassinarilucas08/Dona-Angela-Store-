@@ -52,6 +52,7 @@
   <div class="modal" id="modal-edicao">
     <div class="modal-content">
       <h3>Alterar Dados</h3>
+      <form id="formEdit">
       <label for="nova-imagem" class="photo">Foto de perfil:</label>
       <div class="file-upload">
         <label for="upload" class="upload-label">📁 Escolher Arquivo</label>
@@ -59,15 +60,16 @@
         <span id="file-name">Nenhum arquivo selecionado</span>
       </div>
       <label for="novo-nome">Nome:</label>
-      <input type="text" id="novo-nome" value="Joana Silva">
+      <input type="text" id="novo-nome" value="">
       <label for="novo-email">E-mail:</label>
-      <input type="email" id="novo-email" value="joana@email.com">
+      <input type="email" id="novo-email" value="">
       <label for="novo-email">Telefone:</label>
-      <input type="email" id="novo-telefone" value="51 94567-6312">
+      <input type="email" id="novo-telefone" value="">
       <div class="modal-buttons">
         <button onclick="fecharModalEdicao()">Cancelar</button>
-        <button class="salvar">Salvar</button>
-      </div>
+        <button class="salvar" id = "buttonSave">Salvar</button>
+        </div>
+      </form>
     </div>
   </div>
 
