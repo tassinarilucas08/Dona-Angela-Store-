@@ -75,6 +75,11 @@ class Site extends Controller
         echo $this->view->render("reset_password_phone");
     }
 
+    public function new_password (array $data): void
+    {
+        echo $this->view->render("new_password");
+    }
+
     public function product (array $data): void
     {
         echo $this->view->render("product");
