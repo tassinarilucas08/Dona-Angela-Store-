@@ -118,84 +118,82 @@ public function createUser(): void
         $this->call(200, "success", "Encontrado com sucesso", "success")->back($response);
     }
 
-    public function updateUser(array $data): void
+public function updateUser(): void
 {
     // Verifica autenticação via token
     $this->auth();
-       
-    // Verifica se há pelo menos um campo para atualizar
-    if (empty($data)) {
+
+    // Pega os dados enviados pelo fetch
+    $input = json_decode(file_get_contents("php://input"), true);
+
+    if (empty($input)) {
         $this->call(400, "bad_request", "Nenhum dado enviado para atualização", "error")->back();
         return;
     }    
+
     $user = new User();
 
-        // Busca o usuário atual pelo ID do token JWT
-
+    // Busca o usuário atual pelo ID do token JWT
     if (!$user->findById($this->userAuth->id)) {
         $this->call(404, "not_found", "Usuário não encontrado", "error")->back();
         return;
     }
-    
+
+    // Permissão: só o próprio usuário ou admin (idUserCategory === 3)
     if ($user->getId() !== $this->userAuth->id && $this->userAuth->idUserCategory !== 3) {
-        $this->call(403, "forbidden", "Você não tem permissão para atualizar este endereço", "error")->back();
+        $this->call(403, "forbidden", "Você não tem permissão para atualizar este usuário", "error")->back();
         return;
     }
 
-    // Verifica e aplica os campos recebidos
-    if (isset($data["name"])) {
-        if (empty($data["name"])) {
+    // Atualiza campos se enviados
+    if (isset($input["name"])) {
+        if (empty($input["name"])) {
             $this->call(400, "bad_request", "O nome não pode ser vazio", "error")->back();
             return;
         }
-        $user->setName($data["name"]);
+        $user->setName($input["name"]);
     }
 
-    if (isset($data["email"])) {
-        if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL)) {
+    if (isset($input["email"])) {
+        if (!filter_var($input["email"], FILTER_VALIDATE_EMAIL)) {
             $this->call(400, "bad_request", "Formato de e-mail inválido", "error")->back();
             return;
         }
-        // Verifica se o novo email já está sendo usado por outro usuário
+
         $userCheck = new User();
-        if ($userCheck->findByEmail($data["email"])) {
-        $this->call(409, "conflict", "E-mail já cadastrado", "error")->back();
-        return;
+        if ($userCheck->findByEmail($input["email"]) && $userCheck->getId() !== $user->getId()) {
+            $this->call(409, "conflict", "E-mail já cadastrado", "error")->back();
+            return;
         }
-        $user->setEmail($data["email"]);
+
+        $user->setEmail($input["email"]);
     }
 
-    if (isset($data["phone"])) {
-    if (empty($data["phone"])) {
-        $this->call(400, "bad_request", "O telefone não pode ser vazio", "error")->back();
-        return;
+    if (isset($input["phone"])) {
+        if (empty($input["phone"])) {
+            $this->call(400, "bad_request", "O telefone não pode ser vazio", "error")->back();
+            return;
+        }
+
+        $userCheck = new User();
+        if ($userCheck->findByPhone($input["phone"]) && $userCheck->getId() !== $user->getId()) {
+            $this->call(409, "conflict", "Telefone já cadastrado", "error")->back();
+            return;
+        }
+
+        $user->setPhone($input["phone"]);
     }
 
-    $userCheck = new User();
-    if ($userCheck->findByPhone($data["phone"])) {
-        $this->call(409, "conflict", "Telefone já cadastrado", "error")->back();
-        return;
-    }
+    // ID do usuário vindo do token
+    $user->setId($this->userAuth->id);
 
-    $user->setPhone($data["phone"]);
-}
-
-    if (isset($data["password"])) {
-    if (strlen($data["password"]) < 6) {
-        $this->call(400, "bad_request", "A senha deve ter pelo menos 6 caracteres", "error")->back();
-        return;
-    }
-    $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
-    $user->setPassword($hashedPassword);
-}
-
-    // Tenta atualizar usando o método inteligente
+    // Tenta atualizar no banco
     if (!$user->updateById()) {
         $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao atualizar usuário", "error")->back();
         return;
     }
 
-    // Sucesso!
+    // Atualiza o retorno para o JS e localStorage
     $this->call(200, "success", "Usuário atualizado com sucesso", "success")->back([
         "id" => $user->getId(),
         "name" => $user->getName(),
@@ -203,6 +201,90 @@ public function createUser(): void
         "phone" => $user->getPhone()
     ]);
 }
+
+public function sendResetPasswordEmail(): void
+{
+    $input = json_decode(file_get_contents("php://input"), true);
+
+    if (empty($input["email"])) {
+        $this->call(400, "bad_request", "Email não fornecido", "error")->back();
+        return;
+    }
+
+    $email = $input["email"];
+    $user = new User();
+
+    if (!$user->findByEmail($email)) {
+        $this->call(404, "not_found", "Usuário não encontrado", "error")->back();
+        return;
+    }
+
+    // Gera um token temporário (pode ser JWT ou UUID)
+    $jwt = new JWTToken();
+    $token = $jwt->encode(["id" => $user->getId()], 3600); // expira em 1 hora
+
+    // Monta o link de reset
+    $resetLink = "http://seusite.com/reset-password?token=" . $token;
+
+    // Envia o email
+    $subject = "Redefinição de senha";
+    $message = "Olá, clique no link abaixo para redefinir sua senha:\n\n$resetLink\n\nEste link expira em 1 hora.";
+    $headers = "From: no-reply@seusite.com\r\n";
+
+    if (!mail($email, $subject, $message, $headers)) {
+        $this->call(500, "internal_server_error", "Erro ao enviar email", "error")->back();
+        return;
+    }
+
+    $this->call(200, "success", "Email de redefinição enviado com sucesso", "success")->back();
+}
+
+
+    public function updatePassword(): void
+ {
+    // Pega os dados enviados pelo fetch
+    $input = json_decode(file_get_contents("php://input"), true);
+
+    if (empty($input) || !isset($input["token"]) || !isset($input["password"])) {
+        $this->call(400, "bad_request", "Token ou senha não fornecidos", "error")->back();
+        return;
+    }
+
+    $token = $input["token"];
+    $newPassword = $input["password"];
+
+    // Validação da senha
+    if (strlen($newPassword) < 6) {
+        $this->call(400, "bad_request", "A senha deve ter pelo menos 6 caracteres", "error")->back();
+        return;
+    }
+
+    // Decodifica e valida o token temporário (JWT ou UUID armazenado no banco)
+    $jwt = new JWTToken();
+    $decoded = $jwt->decode($token);
+
+    if (!$decoded) {
+        $this->call(401, "unauthorized", "Token inválido ou expirado", "error")->back();
+        return;
+    }
+
+    $user = new User();
+    if (!$user->findById($decoded->data->id)) {
+        $this->call(404, "not_found", "Usuário não encontrado", "error")->back();
+        return;
+    }
+
+    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+    $user->setPassword($hashedPassword);
+
+    if (!$user->updateById()) {
+        $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao atualizar senha", "error")->back();
+        return;
+    }
+
+    $this->call(200, "success", "Senha atualizada com sucesso", "success")->back();
+}
+
 
     public function login(array $data): void
     {

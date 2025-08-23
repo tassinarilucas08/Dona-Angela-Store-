@@ -64,10 +64,12 @@
       <label for="novo-email">E-mail:</label>
       <input type="email" id="novo-email" value="">
       <label for="novo-email">Telefone:</label>
-      <input type="email" id="novo-telefone" value="">
+      <input type="phone" id="novo-telefone" value="">
       <div class="modal-buttons">
-        <button onclick="fecharModalEdicao()">Cancelar</button>
-        <button class="salvar" id = "buttonSave">Salvar</button>
+        <div class="modal-buttons">
+      <button type="button" onclick="fecharModalEdicao()">Cancelar</button>
+      <button type="submit" class="salvar" id="buttonSave">Salvar</button>
+      </div>
         </div>
       </form>
     </div>

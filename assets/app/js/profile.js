@@ -36,7 +36,7 @@ function abrirModalEdicao() {
   }
 
   // profile.js
-const userData = JSON.parse(localStorage.getItem("userData"));
+let userData = JSON.parse(localStorage.getItem("userData"));
 const userToken = localStorage.getItem("userToken");
 
 if (!userData || !userToken) {
@@ -44,59 +44,56 @@ if (!userData || !userToken) {
   window.location.href = "/Dona-Angela-Store-/login";
 }
 
-// Agora você pode usar userData e userToken em qualquer função JS
-// exemplo:
+function atualizaDados(){
+  let name = document.querySelector("#novo-nome").value = userData.name;
+  let email = document.querySelector("#novo-email").value = userData.email;
+  let phone = document.querySelector("#novo-telefone").value = userData.phone;
+  
+  document.querySelector("#nomeView").innerHTML = userData.name;
+  document.querySelector("#emailView").innerHTML = userData.email;
+  document.querySelector("#phoneView").innerHTML = userData.phone ? userData.phone : "Não informado";
+}
 console.log("Usuário logado:", userData);
 console.log("Token JWT:", userToken);
 
-let nomeView = document.querySelector("#nomeView");
-let emailView = document.querySelector("#emailView");
-let phoneView = document.querySelector("#phoneView");
+atualizaDados();
 
-nomeView.innerHTML = userData.name;
-emailView.innerHTML = userData.email;
-phoneView.innerHTML = userData.phone ? userData.phone : "Não informado";
-
-let newName = document.querySelector("#novo-nome");
-let newPhone = document.querySelector("#novo-telefone");
-let newEmail = document.querySelector("#novo-email");
-
-newName.value = userData.name;
-newEmail.value = userData.email;
-newPhone.value = userData.phone;
-
-// login.js
-const formEdit = document.querySelector("formEdit");
+const formEdit = document.querySelector("#formEdit");
 
 formEdit.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  if (!newName.value || !newPhone.value || newEmail.value) {
+  const name = document.querySelector("#novo-nome").value;
+  const email = document.querySelector("#novo-email").value;
+  const phone = document.querySelector("#novo-telefone").value;
+
+  if (!name || !email || !phone) {
     alert("Preencha todos os campos!");
     return;
-  }
+  } 
 
   try {
-    console.log(newEmail, newPhone, newName);
-    const response = await fetch("http://localhost/Dona-Angela-Store-/api/Users/updateUser", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ newEmail, newPhone, newName }), // enviar senha em texto
+    const response = await fetch("http://localhost/Dona-Angela-Store-/api/Users/update", {
+      method: "PUT",
+      headers: { 
+        "Content-Type": "application/json",
+        "token": userToken
+      },
+      body: JSON.stringify({ name, email, phone }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      alert(data.message || "Erro ao fazer login");
+      alert(data.message || "Erro ao atualizar usuário");
       return;
     }
 
-    // Salva o token e os dados do usuário no localStorage
-    localStorage.setItem("userToken", data.data.token);
-    localStorage.setItem("userData", JSON.stringify(data.data.user));
+    localStorage.setItem("userData", JSON.stringify(data.data));
+    userData = data.data;
+    atualizaDados();
 
-    alert("Login realizado com sucesso!");
-    window.location.href = "/Dona-Angela-Store-/app"; // ou página principal
+    alert("Dados atualizados com sucesso!");
 
   } catch (error) {
     console.error("Erro ao conectar à API:", error);

@@ -2,10 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM carregado");
 });
 
-console.log("JS CARREGOU");
-const usuario = JSON.parse(localStorage.getItem("usuario"));
-console.log(usuario.data.user.name);
-
 function scrollToProdutos() {
   const produtosSection = document.querySelector('#products');
   produtosSection.scrollIntoView({ behavior: 'smooth' });

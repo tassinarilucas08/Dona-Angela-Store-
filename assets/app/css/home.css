@@ -75,6 +75,7 @@
     color: #f60606;
     text-decoration: none;
     font-size: 14px;
+    cursor: pointer;
   }
   
   .logout-link:hover {
