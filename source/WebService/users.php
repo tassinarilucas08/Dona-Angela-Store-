@@ -219,49 +219,58 @@ public function sendResetPasswordEmail(): void
         return;
     }
 
-    // Gera um token temporário (pode ser JWT ou UUID)
-    $jwt = new JWTToken();
-    $token = $jwt->encode(["id" => $user->getId()], 3600); // expira em 1 hora
+    // Gera um token temporário (JWT)
+    $jwt = new \Source\Core\JWTToken();
+    $token = $jwt->create(["id" => $user->getId()]); // você pode ajustar a validade no JWTToken
 
     // Monta o link de reset
-    $resetLink = "http://seusite.com/reset-password?token=" . $token;
+    $resetLink = "http://localhost/Dona-Angela-Store-/nova-senha?token=" . $token;
 
-    // Envia o email
-    $subject = "Redefinição de senha";
-    $message = "Olá, clique no link abaixo para redefinir sua senha:\n\n$resetLink\n\nEste link expira em 1 hora.";
-    $headers = "From: no-reply@seusite.com\r\n";
+    // Configura o PHPMailer
+    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 
-    if (!mail($email, $subject, $message, $headers)) {
-        $this->call(500, "internal_server_error", "Erro ao enviar email", "error")->back();
-        return;
+    try {
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'angelastore008@gmail.com';
+        $mail->Password   = 'mxspnqynugkuyjsg';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port       = 587;
+
+        $mail->setFrom('angelastore008@gmail.com', 'Dona Angela Store');
+        $mail->addAddress($email, $user->getName());
+
+        $mail->isHTML(true);
+        $mail->Subject = 'Redefinição de senha';
+        $mail->Body    = "Olá {$user->getName()},<br><br>
+                          Clique no link abaixo para redefinir sua senha:<br>
+                          <a href='{$resetLink}'>{$resetLink}</a><br><br>
+                          Este link expira em 1 hora.";
+        $mail->AltBody = "Olá {$user->getName()},\n\n
+                          Clique no link abaixo para redefinir sua senha:\n
+                          {$resetLink}\n\n
+                          Este link expira em 1 hora.";
+
+        $mail->send();
+        $this->call(200, "success", "Email de redefinição enviado com sucesso", "success")->back();
+
+    } catch (\PHPMailer\PHPMailer\Exception $e) {
+        $this->call(500, "internal_server_error", "Erro ao enviar email: {$mail->ErrorInfo}", "error")->back();
     }
-
-    $this->call(200, "success", "Email de redefinição enviado com sucesso", "success")->back();
 }
 
-
-    public function updatePassword(): void
- {
-    // Pega os dados enviados pelo fetch
+   public function updatePassword(): void
+{
     $input = json_decode(file_get_contents("php://input"), true);
 
-    if (empty($input) || !isset($input["token"]) || !isset($input["password"])) {
+    if (empty($input['token']) || empty($input['password'])) {
         $this->call(400, "bad_request", "Token ou senha não fornecidos", "error")->back();
         return;
     }
 
-    $token = $input["token"];
-    $newPassword = $input["password"];
-
-    // Validação da senha
-    if (strlen($newPassword) < 6) {
-        $this->call(400, "bad_request", "A senha deve ter pelo menos 6 caracteres", "error")->back();
-        return;
-    }
-
-    // Decodifica e valida o token temporário (JWT ou UUID armazenado no banco)
-    $jwt = new JWTToken();
-    $decoded = $jwt->decode($token);
+    $jwt = new \Source\Core\JWTToken();
+    $decoded = $jwt->decode($input['token']);
 
     if (!$decoded) {
         $this->call(401, "unauthorized", "Token inválido ou expirado", "error")->back();
@@ -274,17 +283,20 @@ public function sendResetPasswordEmail(): void
         return;
     }
 
-    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-    $user->setPassword($hashedPassword);
+    if (strlen($input['password']) < 6) {
+        $this->call(400, "bad_request", "A senha deve ter pelo menos 6 caracteres", "error")->back();
+        return;
+    }
+
+    $user->setPassword(password_hash($input['password'], PASSWORD_DEFAULT));
 
     if (!$user->updateById()) {
-        $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao atualizar senha", "error")->back();
+        $this->call(500, "internal_server_error", "Erro ao atualizar senha", "error")->back();
         return;
     }
 
     $this->call(200, "success", "Senha atualizada com sucesso", "success")->back();
 }
-
 
     public function login(array $data): void
     {

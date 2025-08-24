@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="<?= url("/assets/web/css/reset_password.css") ?>">
-    <script src="<?= url("/assets/web/js/reset_password.js") ?>" defer></script>
+    <script src="<?= url("/assets/web/js/reset_password.js") ?>" async></script>
 </head>
 <body>
     <div class="container">
@@ -27,7 +27,6 @@
                 <label for="email">E-mail cadastrado</label>
                 <input type="email" id="email" placeholder="exemplo@email.com" required>
                 </div>
-
                 <button id="enviar-link" type="submit">Enviar Link</button>
             </form>
 

@@ -27,6 +27,7 @@
     "coffeecode/router" : "2.0.2",
     "firebase/php-jwt": "v6.11.1",
     "league/plates": "3.6.0",
-    "sorfabiosantos/uploader": "^1.0"
+    "sorfabiosantos/uploader": "^1.0",
+    "phpmailer/phpmailer": "^6.10"
   }
 }

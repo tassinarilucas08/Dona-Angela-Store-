@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nova Senha</title>
   <link rel="stylesheet" href="<?= url("/assets/web/css/new_password.css") ?>">
-  <script src="<?= url("/assets/web/js/new_password.js") ?>" defer></script>
+  <script src="<?= url("/assets/web/js/new_password.js") ?>" async></script>
 </head>
 <body>
   <div class="container">

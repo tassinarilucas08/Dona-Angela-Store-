@@ -29,6 +29,7 @@ $route->get("/id/{id}", "Users:listUserById");
 $route->post("/add", "Users:createUser");
 $route->put("/update", "Users:updateUser");
 $route->put("/updatePass", "Users:updatePassword");
+$route->post("/sendEmail", "Users:sendResetPasswordEmail");
 $route->delete("/delete/id/{id}", "Users:deleteUser");
 $route->post("/photo", "Users:updatePhoto");
 $route->post("/file", "Users:updateFile");

@@ -17,6 +17,10 @@ class ComposerStaticInit407f5200d01eac44508186c93e79db18
             'Source\\' => 7,
             'SorFabioSantos\\Uploader\\' => 24,
         ),
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'L' => 
         array (
             'League\\Plates\\' => 14,
@@ -39,6 +43,10 @@ class ComposerStaticInit407f5200d01eac44508186c93e79db18
         'SorFabioSantos\\Uploader\\' => 
         array (
             0 => __DIR__ . '/..' . '/sorfabiosantos/uploader/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'League\\Plates\\' => 
         array (
