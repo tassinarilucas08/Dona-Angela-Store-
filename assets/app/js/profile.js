@@ -30,11 +30,6 @@ function abrirModalEdicao() {
     document.querySelector("#modal-excluir-conta").style.display = "none";
   }
 
-  function confirmarExclusao() {
-    fecharModalExcluirConta();
-    window.location.href = '/Dona-Angela-Store-/';
-  }
-
   // profile.js
 let userData = JSON.parse(localStorage.getItem("userData"));
 const userToken = localStorage.getItem("userToken");
@@ -100,3 +95,33 @@ formEdit.addEventListener("submit", async (e) => {
     alert("Erro de conexão");
   }
 });
+
+async function confirmarExclusao() {
+  try {
+    const url = `http://localhost/Dona-Angela-Store-/api/Users/delete/id/${userData.id}`;
+
+    const resp = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "token": userToken
+      }
+    });
+
+    const json = await resp.json();
+
+    if (!resp.ok) {
+      alert(json.message || "Não foi possível excluir a conta.");
+      return;
+    }
+
+    // Sucesso: limpar sessão e redirecionar
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userData");
+    alert("Conta excluída com sucesso.");
+    window.location.href = "/Dona-Angela-Store-/";
+  } catch (e) {
+    console.error(e);
+    alert("Erro ao excluir conta. Tente novamente em instantes.");
+  }
+}
