@@ -342,7 +342,9 @@ public function sendResetPasswordEmail(): void
             ]);
 }
     function deleteUser(array $data)
-  {
+  { 
+    $input = json_decode(file_get_contents("php://input"), true);
+
     $this->auth(); // autentica e define $this->userAuth
 
     // Verifica se o ID foi enviado e é válido
