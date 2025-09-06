@@ -115,7 +115,6 @@ async function confirmarExclusao() {
       return;
     }
 
-    // Sucesso: limpar sessão e redirecionar
     localStorage.removeItem("userToken");
     localStorage.removeItem("userData");
     alert("Conta excluída com sucesso.");
@@ -124,4 +123,93 @@ async function confirmarExclusao() {
     console.error(e);
     alert("Erro ao excluir conta. Tente novamente em instantes.");
   }
+}
+
+function cardEndereco({ street, number, complement, neighborhood, city, state }) {
+  const card = document.createElement("div");
+  card.className = "card endereco";
+  card.innerHTML = `
+    <p><strong>${street}, ${number}</strong></p>
+    <p>${neighborhood}${complement ? " - " + complement : ""}</p>
+    <p>${city} | ${state}</p>
+    <button class="editar" onclick="abrirModalEditarEndereco()">✎</button>
+  `;
+  return card;
+}
+
+async function salvarEndereco() {
+  const zipCode = document.querySelector("#zipCode").value;
+  const street = document.querySelector("#street").value;
+  const number = document.querySelector("#number").value;
+  const complement = document.querySelector("#complement").value;
+  const neighborhood = document.querySelector("#neighborhood").value;
+  const city = document.querySelector("#city").value;
+  const state = document.querySelector("#state").value;
+
+  if (!zipCode || !street || !number || !neighborhood || !city || !state) {
+    alert("Preencha todos os campos.");
+    return;
+  }
+
+  const address = {
+    idUser: userData.id,
+    zipCode,
+    street,
+    number,
+    complement: complement || null,
+    neighborhood,
+    state,
+    city
+  };
+
+  try {
+    const resp = await fetch("http://localhost/Dona-Angela-Store-/api/Addresses/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "token": userToken
+      },
+      body: JSON.stringify(address)
+    });
+
+    const json = await resp.json();
+
+    if (!resp.ok) {
+      alert(json.message || "Não foi possível criar o endereço.");
+      return;
+    }
+
+    const list = document.querySelector(".enderecos");
+    const newCard = cardEndereco({ street, number, complement, neighborhood, city, state });
+    const addBlock = document.querySelector(".card.novo-endereco");
+    if (addBlock) {
+      list.insertBefore(newCard, addBlock);
+    } else {
+      list.appendChild(newCard);
+    }
+
+    document.querySelector("#zipCode").value = "";
+    document.querySelector("#street").value = "";
+    document.querySelector("#number").value = "";
+    document.querySelector("#complement").value = "";
+    document.querySelector("#neighborhood").value = "";
+    document.querySelector("#city").value = "";
+    document.querySelector("#state").value = "";
+
+    fecharModalEndereco();
+    alert("Endereço criado com sucesso.");
+  } catch (e) {
+    console.error(e);
+    alert("Erro ao criar endereço. Tente novamente.");
+  }
+}
+
+function editarEndereco() {
+  const zipCode = document.querySelector("#zipCode").value;
+  const street = document.querySelector("#street").value;
+  const number = document.querySelector("#number").value;
+  const complement = document.querySelector("#complement").value;
+  const neighborhood = document.querySelector("#neighborhood").value;
+  const city = document.querySelector("#city").value;
+  const state = document.querySelector("#state").value;
 }

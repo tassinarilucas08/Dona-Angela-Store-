@@ -55,24 +55,7 @@
         <option value="">Selecione...</option>
         <option value="casa">Rua das Flores, 123 - Centro</option>
         <option value="trabalho">Av. Brasil, 456 - Comercial</option>
-        <option value="outro">Outro Endereço...</option>
       </select>
-
-      <button id="btnEndereco">Novo Endereço</button>
-
-      <!-- Modal de Endereço -->
-      <div id="modalEndereco" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <input type="text" placeholder="Rua">
-          <input type="text" placeholder="Número">
-          <input type="text" placeholder="Complemento">
-          <input type="text" placeholder="Cidade">
-          <input type="text" placeholder="Estado">
-          <input type="text" placeholder="CEP">
-          <button>Confirmar Endereço</button>
-        </div>
-      </div>
 
       <h3>Formas de Pagamento</h3>
       <ul>
