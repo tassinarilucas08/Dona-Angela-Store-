@@ -32,10 +32,6 @@ CREATE TABLE IF NOT EXISTS address (
         REFERENCES users(id)
 ) ENGINE=InnoDB;
 
-ALTER TABLE address MODIFY COLUMN number VARCHAR(255) NOT NULL;
-
-ALTER TABLE address ADD COLUMN neighborhood VARCHAR(255) NOT NULL AFTER complement;
-
 CREATE TABLE IF NOT EXISTS genders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     description VARCHAR(255) NOT NULL
@@ -107,6 +103,3 @@ CREATE TABLE IF NOT EXISTS purchasesProducts (
     FOREIGN KEY (idProduct)
         REFERENCES products(id)
 ) ENGINE=InnoDB;
-
-INSERT INTO users_categories (id, description)
-VALUES (1, 'Cliente'), (2, 'Administrador'), (3, 'Vendedor');
