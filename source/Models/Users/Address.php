@@ -11,6 +11,7 @@ Class Address extends Model{
     protected $street;
     protected $number;
     protected $complement;
+    protected $neighborhood;
     protected $state;
     protected $city;
 
@@ -21,8 +22,9 @@ Class Address extends Model{
     String $street = null, 
     String $number = null, 
     String $complement = null,
+    String $neighborhood = null,
     String $state = null,
-    String $city = null,
+    String $city = null
     ){
         $this->id = $id;
         $this->idUser = $idUser;
@@ -30,6 +32,7 @@ Class Address extends Model{
         $this->street = $street;
         $this->number = $number;
         $this->complement = $complement;
+        $this->neighborhood = $neighborhood;
         $this->state = $state;
         $this->city = $city;
         $this -> table = "address";
@@ -93,6 +96,16 @@ Class Address extends Model{
     {
         $this->complement = $complement;
     }
+
+    public function getNeighborhood(): ?String
+    {
+        return $this->neighborhood;
+    }
+
+    public function setNeighborhood(?String $neighborhood): void
+    {
+        $this->neighborhood = $neighborhood;
+    }
      
     public function getState(): ?String
     {
@@ -101,7 +114,7 @@ Class Address extends Model{
 
     public function setState(?String $state): void
     {
-        $this->State = $state;
+        $this->state = $state;
     } 
     
     public function getCity(): ?String

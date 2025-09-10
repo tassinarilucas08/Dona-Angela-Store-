@@ -36,12 +36,6 @@
 
     <h2 class="subtitulo">ENDEREÇOS</h2>
     <div class="enderecos">
-      <div class="card endereco">
-        <p><strong>Rua das Flores, 123</strong></p>
-        <p>Centro - Casa</p>
-        <p>Montoral | Porto Alegre - RS</p>
-        <button class="editar" onclick="abrirModalEditarEndereco()">✎</button>
-      </div>
       <div class="card novo-endereco">
         <button class="adicionar" onclick="abrirModalEndereco()">＋ Adicionar novo endereço</button>
       </div>
@@ -79,16 +73,16 @@
   <div class="modal" id="modal-endereco">
     <div class="modal-content">
       <h3>Novo Endereço</h3>
-      <input type="text" placeholder="Rua">
-      <input type="text" placeholder="Número">
-      <input type="text" placeholder="Complemento">
-      <input type="text" placeholder="Bairro">
-      <input type="text" placeholder="Cidade">
-      <input type="text" placeholder="Estado">
-      <input type="text" placeholder="CEP">
+      <input type="text" placeholder="Rua" id="street">
+      <input type="text" placeholder="Número" id="number">
+      <input type="text" placeholder="Complemento" id="complement">
+      <input type="text" placeholder="Bairro" id="neighborhood">
+      <input type="text" placeholder="Cidade" id="city">
+      <input type="text" placeholder="Estado (sigla)" id="state">
+      <input type="text" placeholder="CEP" id="zipCode">
       <div class="modal-buttons">
         <button onclick="fecharModalEndereco()">Cancelar</button>
-        <button class="salvar">Adicionar</button>
+        <button class="salvar" onclick="salvarEndereco()">Adicionar</button>
       </div>
     </div>
   </div>
@@ -97,16 +91,24 @@
   <div class="modal" id="modal-editar-endereco">
     <div class="modal-content">
       <h3>Editar Endereço</h3>
-      <input type="text" placeholder="Rua" value="Rua das Flores">
-      <input type="text" placeholder="Número" value="123">
-      <input type="text" placeholder="Complemento" value="Casa">
-      <input type="text" placeholder="Bairro" value="Centro">
-      <input type="text" placeholder="Cidade" value="Montoral">
-      <input type="text" placeholder="Estado" value="RS">
-      <input type="text" placeholder="CEP" value="99999-000">
+      <form id="formEditEndereco"></form>
+      <label for="nova-rua">Nome:</label>
+      <input type="text" placeholder="Rua" id="newStreet">
+      <label for="novo-numero">Nome:</label>
+      <input type="text" placeholder="Número" id="newNumber">
+      <label for="novo-complemento">Nome:</label>
+      <input type="text" placeholder="Complemento" id="newComplement">
+      <label for="novo-bairro">Nome:</label>
+      <input type="text" placeholder="Bairro" id="newNeighborhood">
+      <label for="nova-cidade">Nome:</label>
+      <input type="text" placeholder="Cidade" id="newCity">
+      <label for="novo-estado">Nome:</label>
+      <input type="text" placeholder="Estado" id="newState">
+      <label for="novo-cep">Nome:</label>
+      <input type="text" placeholder="CEP" id="newZipCode">
       <div class="modal-buttons">
         <button onclick="fecharModalEditarEndereco()">Cancelar</button>
-        <button class="salvar">Salvar Alterações</button>
+        <button class="salvar" onclick="EditarEndereco()">Salvar Alterações</button>
       </div>
     </div>
   </div>

@@ -23,13 +23,18 @@ CREATE TABLE IF NOT EXISTS address (
     idUser INT NOT NULL,
     zipCode VARCHAR(255) NOT NULL,
     street VARCHAR(255) NOT NULL,
-    number INT NOT NULL,
+    number VARCHAR(255) NOT NULL,
     complement VARCHAR(255),
+    neighborhood VARCHAR(255) NOT NULL,
     state VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
     FOREIGN KEY (idUser)
         REFERENCES users(id)
 ) ENGINE=InnoDB;
+
+ALTER TABLE address MODIFY COLUMN number VARCHAR(255) NOT NULL;
+
+ALTER TABLE address ADD COLUMN neighborhood VARCHAR(255) NOT NULL AFTER complement;
 
 CREATE TABLE IF NOT EXISTS genders (
     id INT AUTO_INCREMENT PRIMARY KEY,
