@@ -341,6 +341,60 @@ public function sendResetPasswordEmail(): void
                 ]
             ]);
 }
+    public function updateFile():void
+    {
+        $this->auth();
+
+        $file = (!empty($_FILES["file"]["name"]) ? $_FILES["file"] : null);
+
+        $upload = new Uploader();
+        $path = $upload->File($file);
+        if(!$path) {
+            $this->call(400, "bad_request", $upload->getMessage(), "error")->back();
+            return;
+        }
+
+        $user = new User();
+        $user->findByEmail($this->userAuth->email);
+        $user->setPhoto($path);
+        if(!$user->updateById()){
+            $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
+            return;
+        }
+
+        $this->call(200, "success", "Arquivo atualizada com sucesso", "success")->back();
+    }
+
+    public function updatePhoto (): void
+    {
+        $this->auth();
+
+        $photo = (!empty($_FILES["photo"]["name"]) ? $_FILES["photo"] : null);
+
+        $upload = new Uploader();
+        // /storage/images/091da97a9aec86fe9905ecf532508cd4.png
+        $path = $upload->Image($photo);
+        if(!$path) {
+            $this->call(400, "bad_request", $upload->getMessage(), "error")->back();
+            return;
+        }
+
+        $user = new User();
+        $user->findByEmail($this->userAuth->email);
+        if(file_exists(__DIR__ . "/../../storage/images/" . "{$user->getPhoto()}")){
+            unlink(__DIR__ . "/../../storage/images/" . "{$user->getPhoto()}");
+        }
+
+        $user->setPhoto($path);
+        if(!$user->updateById()){
+            $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
+            return;
+        }
+
+        $this->call(200, "success", "Foto atualizada com sucesso", "success")->back();
+
+    }
+    
     function deleteUser(array $data)
   { 
     $input = json_decode(file_get_contents("php://input"), true);

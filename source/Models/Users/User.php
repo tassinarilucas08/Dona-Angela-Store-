@@ -14,6 +14,7 @@ class User extends Model
     protected $email;
     protected $password;
     protected $phone;
+    protected $photo;
 
     public function __construct(
         int $id = null,
@@ -21,7 +22,7 @@ class User extends Model
         String $name = null,
         String $email = null,
         String $password = null,
-        String $phone = null
+        String $phone = null,
     )
     {
         $this->id = $id;
@@ -91,6 +92,16 @@ class User extends Model
     public function setPhone(?String $phone): void
     {
         $this->phone = $phone;
+        
+    }
+        public function getPhoto(): ?String
+    {
+        return $this->photo ? "/storage/images/{$this->photo}" : "/images/layout/user.png";
+    }
+
+    public function setPhoto(?String $photo): void
+    {
+        $this->photo = $photo;
 
     }
 
@@ -172,5 +183,6 @@ class User extends Model
         return false;
     }
 }
+
 
 }

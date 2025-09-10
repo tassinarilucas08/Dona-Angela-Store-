@@ -20,7 +20,7 @@
     <div class="card perfil-info">
       <div class="perfil-container">
         <div class="perfil-imagem">
-          <img src="<?= url("/images/layout/user.png") ?>" alt="Foto do usuário">
+          <img src=<?= $user->getPhoto(); ?> alt="Foto de perfil" width="150">
         </div>
         <div class="dados">
           <h2 id = "nomeView"></h2>
