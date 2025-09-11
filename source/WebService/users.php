@@ -326,7 +326,7 @@ public function sendResetPasswordEmail(): void
         $token = $jwt->create([
             "id" => $user->getId(),
             "email" => $user->getEmail(),
-            "idUserCategory" => $user->getIdUserCategory()
+            "idUserCategory" => $user->getIdUserCategory(),
         ]);
 
         // Retornar o token JWT na resposta
@@ -337,7 +337,8 @@ public function sendResetPasswordEmail(): void
                     "id" => $user->getId(),
                     "name" => $user->getName(),
                     "email" => $user->getEmail(),
-                    "phone" => $user->getPhone()
+                    "phone" => $user->getPhone(),
+                    "photo" => $user->getPhoto()
                 ]
             ]);
 }

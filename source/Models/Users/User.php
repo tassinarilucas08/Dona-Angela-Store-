@@ -92,11 +92,11 @@ class User extends Model
     public function setPhone(?String $phone): void
     {
         $this->phone = $phone;
-        
+
     }
         public function getPhoto(): ?String
     {
-        return $this->photo ? "/storage/images/{$this->photo}" : "/images/layout/user.png";
+        return $this->photo ? "../../images/{$this->photo}" : "../../images/layout/user.png";
     }
 
     public function setPhoto(?String $photo): void

@@ -46,7 +46,8 @@ function atualizaDados(){
   
   document.querySelector("#nomeView").innerHTML = userData.name;
   document.querySelector("#emailView").innerHTML = userData.email;
-  document.querySelector("#phoneView").innerHTML = userData.phone ? userData.phone : "Não informado";
+  document.querySelector("#phoneView").innerHTML = userData.phone ? userData.phone : "Não informado";  
+  document.querySelector("#photoView").innerHTML = userData.photo ? userData.phone : "../../images/layout/user.png"
 }
 console.log("Usuário logado:", userData);
 console.log("Token JWT:", userToken);
