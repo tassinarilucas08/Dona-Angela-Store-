@@ -96,7 +96,7 @@ class User extends Model
     }
         public function getPhoto(): ?String
     {
-        return $this->photo ? "../../images/{$this->photo}" : "../../images/layout/user.png";
+        return $this->photo ? "..{$this->photo}" : "../storage/images/user.png";
     }
 
     public function setPhoto(?String $photo): void
@@ -150,6 +150,7 @@ class User extends Model
             $this->email = $result->email;
             $this->password = $result->password;
             $this->phone = $result->phone;
+            $this->photo = $result->photo;
 
             return true;
         } catch (PDOException $e) {

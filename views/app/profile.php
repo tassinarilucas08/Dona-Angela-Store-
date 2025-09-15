@@ -50,7 +50,7 @@
       <label for="nova-imagem" class="photo">Foto de perfil:</label>
       <div class="file-upload">
         <label for="upload" class="upload-label">📁 Escolher Arquivo</label>
-        <input type="file" id="upload" class="input-file" name="imagem">
+        <input type="file" id="upload" class="input-file" name="photo">
         <span id="file-name">Nenhum arquivo selecionado</span>
       </div>
       <label for="novo-nome">Nome:</label>
@@ -61,8 +61,10 @@
       <input type="phone" id="novo-telefone" value="">
       <div class="modal-buttons">
         <div class="modal-buttons">
-      <button type="button" onclick="fecharModalEdicao()">Cancelar</button>
-      <button type="submit" class="salvar" id="buttonSave">Salvar</button>
+      <div class="modal-buttons">
+    <button type="button" onclick="cancelarEdicao()">Cancelar</button>
+    <button type="submit" class="salvar" id="buttonSave" onclick="salvarEdicao(event)">Salvar</button>
+    </div>
       </div>
         </div>
       </form>

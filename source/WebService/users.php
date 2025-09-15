@@ -4,6 +4,7 @@ namespace Source\WebService;
 
 use Source\Models\Users\User;
 use Source\Core\JWTToken;
+use SorFabioSantos\Uploader\Uploader;
 
 class Users extends Api
 {
@@ -363,11 +364,12 @@ public function sendResetPasswordEmail(): void
             return;
         }
 
-        $this->call(200, "success", "Arquivo atualizada com sucesso", "success")->back();
+        $this->call(200, "success", "Arquivo atualizado com sucesso", "success")->back();
     }
 
     public function updatePhoto (): void
     {
+
         $this->auth();
 
         $photo = (!empty($_FILES["photo"]["name"]) ? $_FILES["photo"] : null);
@@ -382,8 +384,8 @@ public function sendResetPasswordEmail(): void
 
         $user = new User();
         $user->findByEmail($this->userAuth->email);
-        if(file_exists(__DIR__ . "/../../storage/images/" . "{$user->getPhoto()}")){
-            unlink(__DIR__ . "/../../storage/images/" . "{$user->getPhoto()}");
+        if(file_exists(__DIR__ . "{$user->getPhoto()}")){
+            unlink(__DIR__ . "{$user->getPhoto()}");
         }
 
         $user->setPhoto($path);
