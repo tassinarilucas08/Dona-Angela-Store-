@@ -39,13 +39,9 @@
 
       <form method="POST" id="vendorRegisterForm" novalidate>
         <div class="grid">
-          <div class="field">
-            <label for="storeName">Nome da Loja</label>
-            <input type="text" id="storeName" name="storeName" placeholder="Ex.: Beleza & Perfumes" required>
-          </div>
 
           <div class="field">
-            <label for="ownerName">Seu Nome</label>
+            <label for="ownerName">Nome</label>
             <input type="text" id="ownerName" name="ownerName" placeholder="Ex.: Angela Santos" required>
           </div>
 
@@ -57,26 +53,6 @@
           <div class="field">
             <label for="phone">Telefone / WhatsApp</label>
             <input type="tel" id="phone" name="phone" placeholder="(00) 90000-0000" required>
-          </div>
-
-          <div class="field">
-            <label for="doc">CPF / CNPJ <span class="muted">(opcional)</span></label>
-            <input type="text" id="doc" name="doc" placeholder="Somente números">
-          </div>
-
-          <div class="field">
-            <label for="instagram">Instagram <span class="muted">(opcional)</span></label>
-            <input type="text" id="instagram" name="instagram" placeholder="@sualoja">
-          </div>
-
-          <div class="field">
-            <label for="logo">Logo da Loja <span class="muted">(opcional)</span></label>
-            <input type="file" id="logo" name="logo" accept="image/*">
-          </div>
-
-          <div class="field">
-            <label for="site">Site / Link <span class="muted">(opcional)</span></label>
-            <input type="url" id="site" name="site" placeholder="https://">
           </div>
 
           <div class="field">
@@ -96,7 +72,7 @@
         </div>
 
         <div class="actions">
-          <button type="submit" class="btn-register">Criar minha loja</button>
+          <button type="submit" class="btn-register">Começar a vender</button>
         </div>
       </form>
     </section>
