@@ -291,3 +291,9 @@ h1 {
     min-width: 120px;
     margin-bottom: 8px;
   }
+#photoView {
+    width: 150px;       /* ou o tamanho que você já usa */
+    height: 150px;      /* deixar quadrado para o border-radius funcionar */
+    border-radius: 50%; /* isso deixa redonda */
+    object-fit: cover;  /* mantém a proporção, cortando o excesso */
+}

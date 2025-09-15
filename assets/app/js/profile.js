@@ -39,14 +39,69 @@ if (!userData || !userToken) {
   window.location.href = "/Dona-Angela-Store-/login";
 }
 
+const fileInput = document.querySelector("#upload");
+const fileNameSpan = document.querySelector("#file-name");
+const preview = document.querySelector("#photoView");
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  if (file) {
+    fileNameSpan.textContent = `Arquivo selecionado: ${file.name}`;
+    preview.src = URL.createObjectURL(file);
+  } else {
+    fileNameSpan.textContent = "Nenhum arquivo selecionado";
+    preview.src = "/Dona-Angela-Store-/images/layout/user.png";
+  }
+});
+
+async function atualizaFoto() {
+
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Selecione uma foto primeiro!");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("photo", file);
+
+  try {
+    const resp = await fetch("http://localhost/Dona-Angela-Store-/api/Users/photo", {
+      method: "POST",
+      headers: { "token": userToken }, // seu token JWT 
+      body: formData
+    });
+
+    const data = await resp.json();
+
+    if (!resp.ok) {
+    alert(data.message || "Erro ao atualizar foto");
+      return;
+    }
+
+    // Atualiza preview e localStorage apenas com a foto final
+    preview.src = data.data.photo;       // caminho final retornado pelo backend
+    userData.photo = data.data.photo;
+    localStorage.setItem("userData", JSON.stringify(userData));
+
+    alert("Foto atualizada com sucesso!");
+
+  } catch (e) {
+    console.error(e);
+    alert("Erro ao enviar a foto. Tente novamente.");
+  }
+}
+
 function atualizaDados(){
-  let name = document.querySelector("#novo-nome").value = userData.name;
-  let email = document.querySelector("#novo-email").value = userData.email;
-  let phone = document.querySelector("#novo-telefone").value = userData.phone;
+  document.querySelector("#novo-nome").value = userData.name;
+  document.querySelector("#novo-email").value = userData.email;
+  document.querySelector("#novo-telefone").value = userData.phone;
   
-  document.querySelector("#nomeView").innerHTML = userData.name;
-  document.querySelector("#emailView").innerHTML = userData.email;
-  document.querySelector("#phoneView").innerHTML = userData.phone ? userData.phone : "Não informado";
+  document.querySelector("#nomeView").textContent = userData.name;
+  document.querySelector("#emailView").textContent = userData.email;
+  document.querySelector("#phoneView").textContent = userData.phone ? userData.phone : "Não informado";  
+  document.querySelector("#photoView").src = userData.photo;
 }
 console.log("Usuário logado:", userData);
 console.log("Token JWT:", userToken);
@@ -212,4 +267,17 @@ function editarEndereco() {
   const neighborhood = document.querySelector("#neighborhood").value;
   const city = document.querySelector("#city").value;
   const state = document.querySelector("#state").value;
+}
+
+function cancelarEdicao() {
+  fileInput.value = "";
+  fileNameSpan.textContent = "Nenhum arquivo selecionado";
+  preview.src = userData.photo || "/Dona-Angela-Store-/images/layout/user.png";
+  fecharModalEdicao();
+}
+
+async function salvarEdicao(e) {
+  e.preventDefault();
+  await atualizaFoto();
+  fecharModalEdicao();
 }

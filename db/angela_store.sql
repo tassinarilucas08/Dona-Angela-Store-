@@ -28,10 +28,6 @@ CREATE TABLE IF NOT EXISTS users (
     FOREIGN KEY (idStore)
         REFERENCES store(id)
 ) ENGINE=InnoDB;
-alter table users
-drop COLUMN token;
-
-ALTER TABLE users ADD COLUMN photo VARCHAR(512) NULL AFTER phone;
 
 CREATE TABLE IF NOT EXISTS address (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -46,10 +42,6 @@ CREATE TABLE IF NOT EXISTS address (
     FOREIGN KEY (idUser)
         REFERENCES users(id)
 ) ENGINE=InnoDB;
-
-ALTER TABLE address MODIFY COLUMN number VARCHAR(255) NOT NULL;
-
-ALTER TABLE address ADD COLUMN neighborhood VARCHAR(255) NOT NULL AFTER complement;
 
 CREATE TABLE IF NOT EXISTS genders (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -122,6 +114,3 @@ CREATE TABLE IF NOT EXISTS purchasesProducts (
     FOREIGN KEY (idProduct)
         REFERENCES products(id)
 ) ENGINE=InnoDB;
-
-INSERT INTO users_categories (id, description)
-VALUES (1, 'Cliente'), (2, 'Administrador'), (3, 'Vendedor');

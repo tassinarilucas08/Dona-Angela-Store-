@@ -4,6 +4,7 @@ namespace Source\WebService;
 
 use Source\Models\Users\User;
 use Source\Core\JWTToken;
+use SorFabioSantos\Uploader\Uploader;
 
 class Users extends Api
 {
@@ -326,7 +327,7 @@ public function sendResetPasswordEmail(): void
         $token = $jwt->create([
             "id" => $user->getId(),
             "email" => $user->getEmail(),
-            "idUserCategory" => $user->getIdUserCategory()
+            "idUserCategory" => $user->getIdUserCategory(),
         ]);
 
         // Retornar o token JWT na resposta
@@ -337,10 +338,66 @@ public function sendResetPasswordEmail(): void
                     "id" => $user->getId(),
                     "name" => $user->getName(),
                     "email" => $user->getEmail(),
-                    "phone" => $user->getPhone()
+                    "phone" => $user->getPhone(),
+                    "photo" => $user->getPhoto()
                 ]
             ]);
 }
+    public function updateFile():void
+    {
+        $this->auth();
+
+        $file = (!empty($_FILES["file"]["name"]) ? $_FILES["file"] : null);
+
+        $upload = new Uploader();
+        $path = $upload->File($file);
+        if(!$path) {
+            $this->call(400, "bad_request", $upload->getMessage(), "error")->back();
+            return;
+        }
+
+        $user = new User();
+        $user->findByEmail($this->userAuth->email);
+        $user->setPhoto($path);
+        if(!$user->updateById()){
+            $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
+            return;
+        }
+
+        $this->call(200, "success", "Arquivo atualizado com sucesso", "success")->back();
+    }
+
+    public function updatePhoto (): void
+    {
+
+        $this->auth();
+
+        $photo = (!empty($_FILES["photo"]["name"]) ? $_FILES["photo"] : null);
+
+        $upload = new Uploader();
+        // /storage/images/091da97a9aec86fe9905ecf532508cd4.png
+        $path = $upload->Image($photo);
+        if(!$path) {
+            $this->call(400, "bad_request", $upload->getMessage(), "error")->back();
+            return;
+        }
+
+        $user = new User();
+        $user->findByEmail($this->userAuth->email);
+        if(file_exists(__DIR__ . "{$user->getPhoto()}")){
+            unlink(__DIR__ . "{$user->getPhoto()}");
+        }
+
+        $user->setPhoto($path);
+        if(!$user->updateById()){
+            $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
+            return;
+        }
+
+        $this->call(200, "success", "Foto atualizada com sucesso", "success")->back();
+
+    }
+    
     function deleteUser(array $data)
   { 
     $input = json_decode(file_get_contents("php://input"), true);

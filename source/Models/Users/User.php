@@ -14,6 +14,7 @@ class User extends Model
     protected $email;
     protected $password;
     protected $phone;
+    protected $photo;
 
     public function __construct(
         int $id = null,
@@ -21,7 +22,7 @@ class User extends Model
         String $name = null,
         String $email = null,
         String $password = null,
-        String $phone = null
+        String $phone = null,
     )
     {
         $this->id = $id;
@@ -93,6 +94,16 @@ class User extends Model
         $this->phone = $phone;
 
     }
+        public function getPhoto(): ?String
+    {
+        return $this->photo ? "..{$this->photo}" : "../storage/images/user.png";
+    }
+
+    public function setPhoto(?String $photo): void
+    {
+        $this->photo = $photo;
+
+    }
 
     public function insert (): bool
     {
@@ -139,6 +150,7 @@ class User extends Model
             $this->email = $result->email;
             $this->password = $result->password;
             $this->phone = $result->phone;
+            $this->photo = $result->photo;
 
             return true;
         } catch (PDOException $e) {
@@ -172,5 +184,6 @@ class User extends Model
         return false;
     }
 }
+
 
 }
