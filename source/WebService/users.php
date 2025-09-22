@@ -369,7 +369,6 @@ public function sendResetPasswordEmail(): void
 
     public function updatePhoto (): void
     {
-
         $this->auth();
 
         $photo = (!empty($_FILES["photo"]["name"]) ? $_FILES["photo"] : null);
@@ -393,9 +392,7 @@ public function sendResetPasswordEmail(): void
             $this->call(500, "internal_server_error", $user->getErrorMessage(), "error")->back();
             return;
         }
-
-        $this->call(200, "success", "Foto atualizada com sucesso", "success")->back();
-
+        $this->call(200, "success", "Foto atualizada com sucesso", "success")->back(["photo" => $user->getPhoto()]);
     }
     
     function deleteUser(array $data)

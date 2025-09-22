@@ -58,30 +58,25 @@ async function atualizaFoto() {
 
   const file = fileInput.files[0];
 
-  if (!file) {
-    alert("Selecione uma foto primeiro!");
-    return;
-  }
-
   const formData = new FormData();
   formData.append("photo", file);
 
   try {
-    const resp = await fetch("http://localhost/Dona-Angela-Store-/api/Users/photo", {
+    const response = await fetch("http://localhost/Dona-Angela-Store-/api/Users/photo", {
       method: "POST",
       headers: { "token": userToken }, // seu token JWT 
       body: formData
     });
 
-    const data = await resp.json();
+    const data = await response.json();
 
-    if (!resp.ok) {
+    if (!response.ok) {
     alert(data.message || "Erro ao atualizar foto");
       return;
     }
 
     // Atualiza preview e localStorage apenas com a foto final
-    preview.src = data.data.photo;       // caminho final retornado pelo backend
+    preview.src = data.data.photo;       // igual ao login
     userData.photo = data.data.photo;
     localStorage.setItem("userData", JSON.stringify(userData));
 
