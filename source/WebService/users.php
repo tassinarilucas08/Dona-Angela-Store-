@@ -383,8 +383,22 @@ public function sendResetPasswordEmail(): void
 
         $user = new User();
         $user->findByEmail($this->userAuth->email);
-        if(file_exists(__DIR__ . "{$user->getPhoto()}")){
-            unlink(__DIR__ . "{$user->getPhoto()}");
+
+        // foto antiga
+        $oldPhoto = $user->getPhoto();
+
+        // nome do arquivo antigo (tira ../ etc)
+        $oldFilename = $oldPhoto ? basename($oldPhoto) : null;
+
+        // caminho absoluto da pasta de imagens
+        $storageDir = dirname(__DIR__, 2) . "/storage/images/";
+
+        // se existe uma foto antiga, não é a padrão e não é igual à nova, exclui
+        if (!empty($oldFilename) && $oldFilename !== "user.png" && $oldFilename !== basename($path)) {
+            $oldPath = $storageDir . $oldFilename;
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
         }
 
         $user->setPhoto($path);
