@@ -153,6 +153,23 @@ class Addresses extends Api
         ]);
     }
 
+public function listAddresses(): void
+{
+    $this->auth();
+
+    $address = new Address();
+    $all = $address->findAll();
+
+    $mine = array_values(array_filter($all, function ($a) {
+        $idUser = is_array($a) ? ($a['idUser'] ?? null) : ($a->idUser ?? null);
+        return (int)$idUser === (int)$this->userAuth->id;
+    }));
+
+    $this->call(200, "success", "Endereços do usuário", "success")->back([
+        "addresses" => $mine
+    ]);
+}
+
  public function deleteAddress(array $data): void
 {
     // Autentica o usuário

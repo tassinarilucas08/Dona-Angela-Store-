@@ -19,9 +19,7 @@
     <h1>Sua conta</h1>
     <div class="card perfil-info">
       <div class="dados">
-        <h2>EU VO MATAR O MATHEUS</h2>
-        <p>e-mail: joana@email.com</p>
-        <p>telefone: 51 94567-6312</p>
+
       </div>
       <div class="botoes-conta">
         <button class="btn-alterar" onclick="abrirModalEdicao()">ALTERAR DADOS ✎</button>
@@ -31,15 +29,11 @@
 
     <h2 class="subtitulo">ENDEREÇOS</h2>
     <div class="enderecos">
-      <div class="card endereco">
-        <p><strong>Rua das Flores, 123</strong></p>
-        <p>Centro - Casa</p>
-        <p>Montoral | Porto Alegre - RS</p>
-        <button class="editar" onclick="abrirModalEditarEndereco()">✎</button>
-      </div>
-      <div class="card novo-endereco">
+    
+      <div class="card endereco add">
         <button class="adicionar" onclick="abrirModalEndereco()">＋ Adicionar novo endereço</button>
       </div>
+
     </div>
   </div>
 
@@ -48,11 +42,11 @@
     <div class="modal-content">
       <h3>Alterar Dados</h3>
       <label for="novo-nome">Nome:</label>
-      <input type="text" id="novo-nome" value="Joana Silva">
+      <input type="text" id="novo-nome">
       <label for="novo-email">E-mail:</label>
-      <input type="email" id="novo-email" value="joana@email.com">
+      <input type="email" id="novo-email">
       <label for="novo-email">Telefone:</label>
-      <input type="email" id="novo-telefone" value="51 94567-6312">
+      <input type="email" id="novo-telefone">
       <div class="modal-buttons">
         <button onclick="fecharModalEdicao()">Cancelar</button>
         <button class="salvar">Salvar</button>
@@ -60,10 +54,29 @@
     </div>
   </div>
 
-  <!-- MODAL NOVO ENDEREÇO -->
-  <div class="modal" id="modal-endereco">
+ <!-- MODAL NOVO ENDEREÇO -->
+<div class="modal" id="modal-endereco">
+  <div class="modal-content">
+    <h3>Novo Endereço</h3>
+    <input type="text" id="street" placeholder="Rua">
+    <input type="text" id="number" placeholder="Número">
+    <input type="text" id="complement" placeholder="Complemento">
+    <input type="text" id="neighborhood" placeholder="Bairro">
+    <input type="text" id="city" placeholder="Cidade">
+    <input type="text" id="state" placeholder="Estado">
+    <input type="text" id="zipCode" placeholder="CEP (XXXXX-XXX)">
+    <div class="modal-buttons">
+      <button onclick="fecharModalEndereco()">Cancelar</button>
+      <button class="salvar" onclick="salvarEndereco()">Adicionar</button>
+    </div>
+  </div>
+</div>
+
+  <!-- MODAL EDITAR ENDEREÇO EXISTENTE -->
+  <div class="modal" id="modal-editar-endereco">
     <div class="modal-content">
-      <h3>Novo Endereço</h3>
+      <h3>Editar Endereço</h3>
+      <label for="nova-rua">Rua:</label>
       <input type="text" placeholder="Rua">
       <input type="text" placeholder="Número">
       <input type="text" placeholder="Complemento">
@@ -71,24 +84,6 @@
       <input type="text" placeholder="Cidade">
       <input type="text" placeholder="Estado">
       <input type="text" placeholder="CEP">
-      <div class="modal-buttons">
-        <button onclick="fecharModalEndereco()">Cancelar</button>
-        <button class="salvar">Adicionar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL EDITAR ENDEREÇO EXISTENTE -->
-  <div class="modal" id="modal-editar-endereco">
-    <div class="modal-content">
-      <h3>Editar Endereço</h3>
-      <input type="text" placeholder="Rua" value="Rua das Flores">
-      <input type="text" placeholder="Número" value="123">
-      <input type="text" placeholder="Complemento" value="Casa">
-      <input type="text" placeholder="Bairro" value="Centro">
-      <input type="text" placeholder="Cidade" value="Montoral">
-      <input type="text" placeholder="Estado" value="RS">
-      <input type="text" placeholder="CEP" value="99999-000">
       <div class="modal-buttons">
         <button onclick="fecharModalEditarEndereco()">Cancelar</button>
         <button class="salvar">Salvar Alterações</button>

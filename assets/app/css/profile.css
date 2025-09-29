@@ -114,27 +114,45 @@ h1 {
 }
 
 .enderecos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-}
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+  }
+  
+.enderecos.one .card.endereco.add {
+    grid-column: 2;
+  }
 
-.endereco {
-    flex: 1;
-    min-width: 280px;
+  /* .enderecos.hide-add .card.endereco.add {
+    display: none !important;
+  } */
+
+
+ /* Botão desativado quando atingir o limite */
+.card.endereco.add .adicionar[disabled]{
+    background-color: #f5f5f5;
+    border: 2px dashed #ccc;
+    color: #999;
+    cursor: not-allowed;
+    pointer-events: none;           /* impede clique do mouse */
+    user-select: none;              /* opcional */
+  }
+  
+  /* Não muda no hover quando desabilitado */
+.card.endereco.add .adicionar[disabled]:hover{
+    background-color: #f5f5f5;
+  }
+  
+  
+  /* .card.endereco {
     position: relative;
-}
+    min-height: 110px;
+  }
 
-.endereco .editar {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    color: #333;
-    cursor: pointer;
-}
+.card.endereco.add .adicionar { 
+    width:100%; 
+} */
 
 .principal {
     color: #a62c7b;
