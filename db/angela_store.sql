@@ -48,11 +48,6 @@ CREATE TABLE IF NOT EXISTS genders (
     description VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS photos (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-    photo VARCHAR(512) NOT NULL
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS products_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idGender INT,
@@ -72,6 +67,14 @@ CREATE TABLE IF NOT EXISTS products (
     status VARCHAR(255),
     FOREIGN KEY (idCategory)
 		REFERENCES products_categories(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS photos_products (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    idProduct INT NOT NULL,
+    photo VARCHAR(512) NOT NULL,
+    FOREIGN KEY (idProduct)
+        REFERENCES products(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS avaliacoes (
