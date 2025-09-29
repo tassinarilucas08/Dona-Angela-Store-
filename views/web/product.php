@@ -17,9 +17,16 @@
     <div class="produto-container">
         <button type="submit" class="btn-voltar" onclick="window.history.back()">← Voltar</button>
         <div class="produto-info">
-            <div class="imagem-produto">
-                <img src="/Dona-Angela-Store-/images/perfums/lily.jpg" alt="Lily">
+           <div class="imagem-produto">
+          <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+
+          <img id="product-image" src="/Dona-Angela-Store-/images/perfums/lily.jpg" alt="Lily">
+
+          <button class="next" onclick="changeImage(1)">&#10095;</button>
+
+          <div class="indicators" id="indicators"></div>
             </div>
+
             <div class="texto-produto">
                 <h1 class="nome-produto">Lily</h1>
                 <p class="preco-produto">R$ 89,90</p>

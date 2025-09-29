@@ -325,3 +325,73 @@ body {
     color: #777;
     font-style: italic;
   }
+
+  /* ===== Carrossel Produto ===== */
+.imagem-produto {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagem-produto img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  object-fit: cover;
+}
+
+/* Botões de navegação */
+.imagem-produto button.prev,
+.imagem-produto button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(166,44,123,0.8); /* cor puxada do tema */
+  border: none;
+  color: white;
+  font-size: 20px;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.imagem-produto button.prev:hover,
+.imagem-produto button.next:hover {
+  background: rgba(134,34,97,0.9);
+}
+
+.imagem-produto button.prev {
+  left: -20px;
+}
+
+.imagem-produto button.next {
+  right: -20px;
+}
+
+/* Bolinhas (indicators) */
+.indicators {
+  position: absolute;
+  bottom: -15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.indicators span {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.indicators span.active {
+  background: #a62c7b; /* cor do tema */
+}
