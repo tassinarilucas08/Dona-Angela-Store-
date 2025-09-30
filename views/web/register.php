@@ -12,6 +12,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="<?= url("/assets/web/css/register.css") ?>">
   <script src="<?= url("/assets/web/js/register.js") ?>" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -27,19 +28,25 @@
             <h2>Cadastre-se</h2>
             <form method="POST" id = "registerForm">
                 <label for="nome">Nome Completo</label>
-                <input type="text" id="name" name="nome" required>
+                <input type="text" id="name" name="nome" required placeholder="Fulano da Silva">
 
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required placeholder="fulano@gmail.com">
 
-                <label for="telefone">Telefone - XX XXXXX-XXXX</label>
-                <input type="tel" id="phone" name="telefone" required>
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="phone" name="telefone" required placeholder = "XX XXXXX-XXXX">
 
                 <label for="senha">Senha</label>
-                <input type="password" id="password" name="senha" required>
+                <div class="password-wrapper">
+                <input type="password" id="password" name="senha" required placeholder="Mínimo 6 caracteres">
+                <i class="toggle-password fas fa-eye"></i>
+                </div>
 
                 <label for="senhaConfirmar">Confirmar Senha</label>
-                <input type="password" id="password_confirm" name="senhaConfirmar" required>
+                <div class="password-wrapper">
+                <input type="password" id="password_confirm" name="senhaConfirmar" required placeholder="Confirme a senha acima">
+                <i class="toggle-password-confirm fas fa-eye"></i>
+                </div>
 
                 <div class="terms">
                     <p>Leia nossos <a href="/Dona-Angela-Store-/pdfs/termos_e_condicoes.pdf" target="_blank">Termos e Condições</a></p>

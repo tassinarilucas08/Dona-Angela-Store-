@@ -336,6 +336,7 @@ public function sendResetPasswordEmail(): void
                 "token" => $token,
                 "user" => [
                     "id" => $user->getId(),
+                    "idUserCategory" => $user->getIdUserCategory(),
                     "name" => $user->getName(),
                     "email" => $user->getEmail(),
                     "phone" => $user->getPhone(),

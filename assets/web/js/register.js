@@ -34,3 +34,24 @@ if (registerForm) {
   }
  });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  // pega todos os botões de toggle
+  const toggles = document.querySelectorAll(".toggle-password, .toggle-password-confirm");
+
+  toggles.forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      // pega o input "irmão" do ícone
+      const input = toggle.previousElementSibling;
+
+      if (input.type === "password") {
+        input.type = "text";
+        toggle.classList.remove("fa-eye");
+        toggle.classList.add("fa-eye-slash");
+      } else {
+        input.type = "password";
+        toggle.classList.remove("fa-eye-slash");
+        toggle.classList.add("fa-eye");
+      }
+    });
+  });
+});

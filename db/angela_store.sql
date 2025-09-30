@@ -8,25 +8,25 @@ CREATE TABLE IF NOT EXISTS users_categories (
 
 CREATE TABLE store (
   id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idUser INT(11) NOT NULL,
   name VARCHAR(255) NOT NULL,
   cpf CHAR(14) NOT NULL,
   logo VARCHAR(512) NULL,
-  instagram VARCHAR(512) NULL
+  instagram VARCHAR(512) NULL,
+  FOREIGN KEY (idUser) 
+        REFERENCES users(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idUserCategory INT NOT NULL,
-    idStore INT NULL,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     phone VARCHAR (255),
     photo VARCHAR(512) NULL,
     FOREIGN KEY (idUserCategory)
-        REFERENCES users_categories(id),
-    FOREIGN KEY (idStore)
-        REFERENCES store(id)
+        REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS address (
@@ -48,6 +48,12 @@ CREATE TABLE IF NOT EXISTS genders (
     description VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS brands (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description TEXT NOT NULL
+) ENGINE=InnoDB;
+
+
 CREATE TABLE IF NOT EXISTS products_categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idGender INT,
@@ -59,6 +65,7 @@ CREATE TABLE IF NOT EXISTS products_categories (
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idCategory INT,
+    idBrand INT,
     name VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
     description TEXT NOT NULL,
@@ -66,7 +73,9 @@ CREATE TABLE IF NOT EXISTS products (
     quantity INT NOT NULL,
     status VARCHAR(255),
     FOREIGN KEY (idCategory)
-		REFERENCES products_categories(id)
+		REFERENCES products_categories(id),
+    FOREIGN KEY (idBrand)
+        REFERENCES brands(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS photos_products (

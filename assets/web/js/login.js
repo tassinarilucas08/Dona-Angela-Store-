@@ -32,10 +32,33 @@ loginForm.addEventListener("submit", async (e) => {
     localStorage.setItem("userData", JSON.stringify(data.data.user));
 
     alert("Login realizado com sucesso!");
-    window.location.href = "/Dona-Angela-Store-/app"; // ou página principal
+    if(data.data.user.idUserCategory == 1){
+    window.location.href = "/Dona-Angela-Store-/app";} // ou página principal
+    else if(data.data.user.idUserCategory == 3){
+      window.location.href = "/Dona-Angela-Store-/admin"; // ou página principal
+    }
+    else{
+      window.location.href = "/Dona-Angela-Store-/seller"; // ou página principal
+    }
 
   } catch (error) {
     console.error("Erro ao conectar à API:", error);
     alert("Erro de conexão");
   }
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const togglePassword = document.querySelector(".toggle-password");
+  const passwordInput = document.getElementById("password");
+
+  togglePassword.addEventListener("click", () => {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      togglePassword.classList.remove("fa-eye");
+      togglePassword.classList.add("fa-eye-slash");
+    } else {
+      passwordInput.type = "password";
+      togglePassword.classList.remove("fa-eye-slash");
+      togglePassword.classList.add("fa-eye");
+    }
+  });
 });

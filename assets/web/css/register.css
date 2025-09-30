@@ -154,3 +154,25 @@ input:focus {
         padding: 0;
     }
 }
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* espaço pro olho */
+}
+
+.password-wrapper i {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+}
+
+.password-wrapper i:hover {
+  color: #000;
+}

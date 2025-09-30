@@ -12,6 +12,7 @@ $this->layout("_theme", [
   <title>Document</title>
   <link rel="stylesheet" href="<?= url("/assets/web/css/login.css") ?>">
   <script src="<?= url("/assets/web/js/login.js") ?>" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div class="container">
@@ -23,12 +24,15 @@ $this->layout("_theme", [
       <form id="loginForm">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email" required placeholder="Digite seu email">
         </div>
         <div class="form-group">
-          <label for="senha">Senha</label>
-          <input type="password" id="password" name="password" required>
-        </div>
+  <label for="senha">Senha</label>
+  <div class="password-wrapper">
+    <input type="password" id="password" name="password" required placeholder="Digite sua senha">
+    <i class="toggle-password fas fa-eye"></i>
+  </div>
+</div>
         <button type="submit" id="login">Entrar</button>
         <div class="link-reset">
           <a href="/Dona-Angela-Store-/redefinir-senha">Esqueci minha senha</a>

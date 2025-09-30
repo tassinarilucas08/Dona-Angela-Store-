@@ -11,7 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="<?= url("/assets/admin/css/seller.css") ?>">
-</head>
+    <script src="<?= url("/assets/admin/js/seller.js") ?>" defer></script>
+  </head>
 <body>
 <div class="vendedor-wrapper">
     <div class="container">
@@ -31,17 +32,15 @@
           <textarea id="descricao" name="descricao"></textarea>
 
           <label for="preco">Preço:</label>
-          <input type="number" id="preco" name="preco" step="0.01">
+          <input type="number" id="preco" name="preco">
 
-          <label for="imagem">Imagem (em observação):</label>
-          <input type="number" id="imagem" name="imagem">
-
-          <label for="quantidade">Quantidade:</label>
-          <div class="quantidade-wrapper">
-            <input type="number" id="quantidade" name="quantidade" min="0" value="0">
-            <button type="button">-</button>
-            <button type="button">+</button>
-          </div>
+        <label for="imagens">Imagens do Produto: (Na ordem de visualização)</label>
+        <div class="file-upload">
+          <label for="imagens" class="upload-label">📁 Escolher Arquivos</label>
+          <input type="file" id="imagens" name="imagens[]" multiple>
+          <span id="file-name">Nenhum arquivo selecionado</span>
+        </div>
+        <div id="preview-imagens" class="preview-container"></div>
 
           <label for="status">Status:</label>
           <select id="status" name="status">
@@ -55,6 +54,13 @@
             <option value="">...</option>
             <option value="masculino">Masculino</option>
             <option value="feminino">Feminino</option>
+          </select>
+           
+          <label for="marca">Marca:</label>
+          <select id="marca" name="marca">
+            <option value="">...</option>
+            <option value="natura">Natura</option>
+            <option value="oboticario">Oboticário</option>
           </select>
 
           <button type="submit">Adicionar Produto</button>
