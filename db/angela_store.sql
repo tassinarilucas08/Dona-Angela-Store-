@@ -6,17 +6,6 @@ CREATE TABLE IF NOT EXISTS users_categories (
     description VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE store (
-  id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  idUser INT(11) NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  cpf CHAR(14) NOT NULL,
-  logo VARCHAR(512) NULL,
-  instagram VARCHAR(512) NULL,
-  FOREIGN KEY (idUser) 
-        REFERENCES users(id)
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idUserCategory INT NOT NULL,
@@ -27,6 +16,17 @@ CREATE TABLE IF NOT EXISTS users (
     photo VARCHAR(512) NULL,
     FOREIGN KEY (idUserCategory)
         REFERENCES users_categories(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE store (
+  id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  idUser INT(11) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  cpf CHAR(14) NOT NULL,
+  logo VARCHAR(512) NULL,
+  instagram VARCHAR(512) NULL,
+  FOREIGN KEY (idUser) 
+        REFERENCES users(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS address (
