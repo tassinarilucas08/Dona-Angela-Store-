@@ -42,7 +42,7 @@ class App extends Controller
 
     public function faqs(): void
     {
-        echo "Frequently Asked Questions";
+        echo $this->view->render("faqs");
     }
 
     public function error (array $data): void

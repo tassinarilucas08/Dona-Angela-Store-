@@ -72,7 +72,7 @@
         </li>
         <li>
           <p class="pergunta"></p>
-          <p class="resposta"><a href="/Dona-Angela-Store-/faqs" id="faq-link">👉 Tem uma dúvida? Mande aqui! 👈</a></p>
+          <p class="resposta"><a href="/Dona-Angela-Store-/login" id="faq-link">👉 Tem uma dúvida? Mande aqui! 👈</a></p>
         </li>
       </ul>
     </section>

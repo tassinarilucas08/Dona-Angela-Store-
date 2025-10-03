@@ -49,16 +49,8 @@
       <img src="/Dona-Angela-Store-/images/layout/lupa.png" alt="Buscar">
     </div>
 
-    <a href="/Dona-Angela-Store-/admin/login" class="login-link">Login</a>
+    <a class="logout-link" id="btnLogout">sair</a>
 
-    <a href="/Dona-Angela-Store-/admin/perfil" class="perfil-link">
-      <img src="https://img.icons8.com/ios-filled/50/000000/user-male-circle.png" alt="Perfil do Usuário" class="perfil-icon">
-    </a>
-
-    <div class="cart-icon">
-      <a href="/Dona-Angela-Store-/admin/carrinho"><img src="/Dona-Angela-Store-/images/layout/sacola.png" alt="Sacola de Compras"></a>
-      <span class="cart-badge">3</span>
-    </div>
   </header>
   
 <!-- Filtro por Categoria -->

@@ -42,7 +42,7 @@
 
           <div class="field">
             <label for="ownerName">Nome</label>
-            <input type="text" id="ownerName" name="ownerName" placeholder="Ex.: Angela Santos" required>
+            <input type="text" id="name" name="ownerName" placeholder="Ex.: Angela Santos" required>
           </div>
 
           <div class="field">
