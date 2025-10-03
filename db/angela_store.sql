@@ -62,20 +62,28 @@ CREATE TABLE IF NOT EXISTS products_categories (
         REFERENCES genders(id)
 ) ENGINE=InnoDB;
 
+CREATE TABLE IF NOT EXISTS products_status (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(255) NOT NULL
+) ENGINE=InnoDB;
+
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idCategory INT,
     idBrand INT,
+    idStatus INT,
     name VARCHAR(255) NOT NULL,
     price FLOAT NOT NULL,
+    salePrice FLOAT NOT NULL,
     description TEXT NOT NULL,
     photo INT,
     quantity INT NOT NULL,
-    status VARCHAR(255),
     FOREIGN KEY (idCategory)
 		REFERENCES products_categories(id),
     FOREIGN KEY (idBrand)
-        REFERENCES brands(id)
+        REFERENCES brands(id),
+    FOREIGN KEY (idStatus)
+        REFERENCES products_status(id),
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS photos_products (

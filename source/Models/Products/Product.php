@@ -2,33 +2,33 @@
 
 namespace Source\Models\Products;
 
-require  __DIR__ . "/../vendor/autoload.php";
-
 use Source\Core\Model;
 
 class Product extends Model
 {   
     private $id; 
     private $idCategory;
+    private $idBrand;
     private $name;
     private $price;
+    private $salePrice;
     private $description;
     private $photo;
     private $quantity;
-    private $status;
-    private $deletedAt;
+    private $idStatus;
 
-    public function __construct(int $id = null, int $idCategory = null, String $name = null, float $price = null, String $description, int $photo, int $quantity, String $status, String $deletedAt = null)
-{
+    public function __construct(int $id = null, int $idCategory = null, int $idBrand = null, String $name = null, float $price = null, float $salePrice = null, String $description = null, int $photo = null, int $quantity = null, int $idStatus = null)
+{    
     $this->id = $id;
     $this->idCategory = $idCategory;
+    $this->idBrand = $idBrand;
     $this->name = $name;
     $this->price = $price;
+    $this->salePrice = $salePrice;
     $this->description = $description;
     $this->photo = $photo;
     $this->quantity = $quantity;
-    $this->status = $status;
-    $this->deletedAt = $deletedAt;
+    $this->idStatus = $idStatus;
     $this->table = "products";
  }
 
@@ -50,6 +50,14 @@ class Product extends Model
     {
         $this->idCategory = $idCategory;
     }
+       public function getIdBrand(): ?int
+    {
+        return $this->idBrand;
+    }
+    public function setIdBrand(?int $idBrand): void
+    {
+        $this->idBrand = $idBrand;
+    }
 
     public function getName(): ?String
     {
@@ -69,6 +77,14 @@ class Product extends Model
     public function setPrice(?float $price): void
     {
         $this->price = $price;
+    }
+    public function getSalePrice(): ?float
+    {
+        return $this->salePrice;
+    }
+    public function setSalePrice(?float $salePrice): void
+    {
+        $this->salePrice = $salePrice;
     }
 
     public function getDescription(): ?String
@@ -101,23 +117,27 @@ class Product extends Model
         $this->quantity = $quantity;
     }
 
-    public function getStatus(): ?String
+    public function getIdStatus(): ?int
     {
-        return $this->status;
+        return $this->idStatus;
     }
 
-    public function setStatus(?String $status): void
+    public function setIdStatus(?int $idStatus): void
     {
-        $this->status = $status;
+        $this->idStatus = $idStatus;
     }
+    public function findByName(string $name): bool
+{
+    $sql = "SELECT id FROM products WHERE name = :name LIMIT 1";
+    $stmt = \Source\Core\Connect::getInstance()->prepare($sql);
+    $stmt->bindValue(":name", $name, \PDO::PARAM_STR);
+    $stmt->execute();
 
-     public function getDeletedAt(): ?String
-    {
-        return $this->deletedAt;
+    if ($stmt->rowCount()) {
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $this->id = $data["id"];
+        return true;
     }
-
-    public function setDeletedAt(?String $deletedAt): void
-    {
-        $this->deletedAt = $deletedAt;
-    }
+    return false;
+}
 }

@@ -58,6 +58,18 @@ $route->delete("/delete/id/{id}", "Addresses:deleteAddress");
 
 $route->group("null");
 
+//Products
+
+$route->group("/Products");
+$route->get("/", "Products:listProducts");
+$route->get("/id/{id}", "Products:listProductById");
+$route->post("/add", "Products:createProduct");
+$route->put("/update", "Products:updateProduct");
+$route->post("/photos", "Products:updatePhotos");
+$route->delete("/delete/id/{id}", "Products:deleteProduct");
+
+$route->group("null");
+
 //Questions
 
 // $route->group("/Questions");

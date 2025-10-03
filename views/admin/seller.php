@@ -32,9 +32,16 @@
           <textarea id="descricao" name="descricao"></textarea>
 
           <label for="preco">Preço:</label>
-          <input type="number" id="preco" name="preco">
+          <input type="number" id="preco" name="preco" step="0.01" min="0">
+            
+          <label for="quantidade-criar">Quantidade:</label>
+          <div class="quantidade-wrapper">
+            <input type="number" id="quantidade-criar" name="quantidade-criar" min="0" value="0">
+            <button type="button">-</button>
+            <button type="button">+</button>
+          </div>
 
-        <label for="imagens">Imagens do Produto: (Na ordem de visualização)</label>
+        <label for="imagens">Imagens do Produto (4 fotos e na ordem de visualização):</label>
         <div class="file-upload">
           <label for="imagens" class="upload-label">📁 Escolher Arquivos</label>
           <input type="file" id="imagens" name="imagens[]" multiple>
@@ -45,22 +52,22 @@
           <label for="status">Status:</label>
           <select id="status" name="status">
             <option value="">...</option>
-            <option value="ativo">Ativo</option>
-            <option value="inativo">Inativo</option>
+            <option value="1">Ativo</option>
+            <option value="2">Inativo</option>
           </select>
 
           <label for="categoria">Categoria:</label>
           <select id="categoria" name="categoria">
             <option value="">...</option>
-            <option value="masculino">Masculino</option>
-            <option value="feminino">Feminino</option>
+            <option value="1">Masculino</option>
+            <option value="2">Feminino</option>
           </select>
            
           <label for="marca">Marca:</label>
           <select id="marca" name="marca">
             <option value="">...</option>
-            <option value="natura">Natura</option>
-            <option value="oboticario">Oboticário</option>
+            <option value="1">Natura</option>
+            <option value="2">Oboticário</option>
           </select>
 
           <button type="submit">Adicionar Produto</button>
