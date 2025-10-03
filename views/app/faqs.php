@@ -10,8 +10,8 @@ $this->layout("_theme", [
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Angela Revendedora</title>
-  <link rel="stylesheet" href="<?= url("/assets/web/css/faqs.css") ?>" />
-  <script src="<?= url("/assets/web/js/faqs.js") ?>" defer></script>
+  <link rel="stylesheet" href="<?= url("/assets/app/css/faqs.css") ?>" />
+  <script src="<?= url("/assets/app/js/faqs.js") ?>" defer></script>
 </head>
 <body>
     <div id="cabecalho-faq">
