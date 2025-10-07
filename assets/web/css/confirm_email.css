@@ -1,0 +1,57 @@
+body {
+    margin-top: 40px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f2f2f2;
+  }
+  
+  .aguarde-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 900px;
+    height: 450px;
+    margin: auto;
+    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    position: relative;
+    text-align: center;
+  }
+  
+  .titulo {
+    color: #a62c7b;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .mensagem {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  /* animação dos três pontinhos */
+  .loader {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .dot {
+    width: 14px;
+    height: 14px;
+    background-color: #a62c7b;
+    border-radius: 50%;
+    opacity: 0.4;
+    transform: translateY(0);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .dot.active {
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+  

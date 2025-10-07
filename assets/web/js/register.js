@@ -24,7 +24,7 @@ if (registerForm) {
 
       if (res.ok) {
         alert("Cadastro realizado com sucesso!");
-        window.location.href = "/Dona-Angela-Store-/login";
+        window.location.href = "/Dona-Angela-Store-/confirm-email";
       } else {
         alert(result.message || "Erro ao cadastrar usuário.");
       }
