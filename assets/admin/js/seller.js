@@ -105,7 +105,7 @@ createProductForm.addEventListener("submit", async (e) => {
 
       formData.append("id", dataProduct.data.id); // id retornado pelo PHP
 
-      const resPhotos = await fetch("http://localhost/Dona-Angela-Store-/api/Products/updatePhotos", {
+      const resPhotos = await fetch("http://localhost/Dona-Angela-Store-/api/Products/photos", {
         method: "POST",
         headers: {
         token: userToken},
