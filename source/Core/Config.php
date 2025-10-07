@@ -24,7 +24,7 @@ const CONF_DB_PASS = ""; // Senha do banco de dados, geralmente vazia em ambient
  */
 
 const IMAGE_MAX_SIZE = 5 * 1024 * 1024; // 5MB
-const IMAGE_MIN_SIZE = 10 * 512; // 5KB
+const IMAGE_MIN_SIZE = 5 * 256; // 1.25KB
 
 //const IMAGE_DIR = __DIR__ . '/../../storage/images';
 const IMAGE_DIR = '/storage/images';
@@ -36,7 +36,7 @@ const ALLOWED_IMAGE_TYPES = [
 ];
 
 const FILE_MAX_SIZE = 5 * 1024 * 1024; // 5MB
-const FILE_MIN_SIZE = 10 * 512; // 5KB
+const FILE_MIN_SIZE = 5 * 256; // 1.25KB
 
 const FILE_DIR = '/storage/files';
 const ALLOWED_FILE_TYPES = [

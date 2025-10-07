@@ -3,6 +3,8 @@
 namespace Source\WebService;
 
 use Source\Models\Products\Product;
+use Source\Core\JWTToken;
+use SorFabioSantos\Uploader\Uploader;
 
 class Products extends Api
 {
@@ -129,22 +131,31 @@ public function updatePhotos(): void
     $upload = new Uploader();
     $photosSaved = [];
 
-    // iterar nos arquivos enviados (ex: photo0..photo3)
-    foreach ($_FILES as $file) {
-        if (!empty($file["name"]) && $file["error"] === UPLOAD_ERR_OK) {
-            $path = $upload->Image($file);
-            if (!$path) {
-                $this->call(400, "bad_request", $upload->getMessage(), "error")->back();
-                return;
-            }
+    if (isset($_FILES["photos"])) {
+        foreach ($_FILES["photos"]["name"] as $key => $name) {
+            if ($_FILES["photos"]["error"][$key] === UPLOAD_ERR_OK) {
+                $file = [
+                    "name" => $name,
+                    "type" => $_FILES["photos"]["type"][$key],
+                    "tmp_name" => $_FILES["photos"]["tmp_name"][$key],
+                    "error" => $_FILES["photos"]["error"][$key],
+                    "size" => $_FILES["photos"]["size"][$key],
+                ];
 
-            // salva no banco
-            $stmt = $this->db->prepare("INSERT INTO photos_products (idProduct, photo) VALUES (:idProduct, :photo)");
-            $stmt->bindValue(":idProduct", $productId, \PDO::PARAM_INT);
-            $stmt->bindValue(":photo", $path, \PDO::PARAM_STR);
+                $path = $upload->Image($file);
 
-            if ($stmt->execute()) {
-                $photosSaved[] = $path;
+                if (!$path) {
+                    $this->call(400, "bad_request", $upload->getMessage(), "error")->back();
+                    return;
+                }
+
+                $stmt = \Source\Core\Connect::getInstance()->prepare("INSERT INTO photos_products (idProduct, photo) VALUES (:idProduct, :photo)");
+                $stmt->bindValue(":idProduct", $productId, \PDO::PARAM_INT);
+                $stmt->bindValue(":photo", $path, \PDO::PARAM_STR);
+
+                if ($stmt->execute()) {
+                    $photosSaved[] = $path;
+                }
             }
         }
     }
