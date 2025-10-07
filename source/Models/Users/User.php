@@ -15,6 +15,9 @@ class User extends Model
     protected $password;
     protected $phone;
     protected $photo;
+    protected $confirmationToken;
+    protected $isConfirmed;
+
 
     public function __construct(
         int $id = null,
@@ -97,13 +100,34 @@ class User extends Model
         public function getPhoto(): ?String
     {
         return $this->photo ? "..{$this->photo}" : "../storage/images/user.png";
-    }
+    }   
 
     public function setPhoto(?String $photo): void
     {
         $this->photo = $photo;
 
     }
+    
+    public function setConfirmationToken(string $token): void
+    {
+        $this->confirmationToken = $token;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+        
+    public function setIsConfirmed(bool $confirmed): void
+    {
+        $this->isConfirmed = $confirmed;
+    }
+
+    public function getIsConfirmed(): bool
+    {
+        return $this->isConfirmed;
+    }
+
 
     public function insert (): bool
     {
