@@ -25,6 +25,7 @@ $route->get("/redefinir-senha-telefone","Site:reset_password_phone");
 $route->get("/produto","Site:product");
 $route->get("/cadastro-vendedor","Site:seller_register");
 $route->get("/nova-senha","Site:new_password");
+$route->get("/confirm-email","Site:confirm_email");
 
 
 // Rotas amigáveis da área restrita

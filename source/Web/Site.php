@@ -89,4 +89,9 @@ class Site extends Controller
     {
         echo $this->view->render("seller_register");
     }
+
+    public function confirm_email (array $data): void
+    {
+        echo $this->view->render("confirm_email");
+    }
 }
