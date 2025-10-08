@@ -108,7 +108,7 @@ class User extends Model
 
     }
     
-    public function setConfirmationToken(string $token): void
+    public function setConfirmationToken(?string $token): void
     {
         $this->confirmationToken = $token;
     }
@@ -125,7 +125,7 @@ class User extends Model
 
     public function getIsConfirmed(): bool
     {
-        return $this->isConfirmed;
+        return (bool) ($this->isConfirmed ?? false);
     }
 
 

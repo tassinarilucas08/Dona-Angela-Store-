@@ -8,10 +8,7 @@ use SorFabioSantos\Uploader\Uploader;
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-   
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
-$dotenv->load();
-    
+
 class Users extends Api
 {
 
@@ -89,21 +86,21 @@ public function createUser(): void
         $data["password"], // senha criptografada
         $data["phone"]
     );
+    
+    $user->setIsConfirmed(0);
 
     if (!$user->insert()) {
         $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao criar usuário", "error")->back();
         return;
     }
 
-    // Retorno personalizado
     $jwt = new JWTToken();
     $token = $jwt->create([
         "id" => $user->getId(),
         "email" => $user->getEmail(),
     ], "+10 minutes");
-
+    
     $user->setConfirmationToken($token);
-    $user->setIsConfirmed(0);
     $user->updateById();
     
     $mail = new PHPMailer(true);
@@ -115,11 +112,11 @@ public function createUser(): void
     $mail->Password   = $_ENV['MAIL_PASSWORD'];
     $mail->SMTPSecure = $_ENV['MAIL_ENCRYPTION'];
     $mail->Port       = $_ENV['MAIL_PORT'];
+    $mail->setFrom($_ENV['MAIL_USERNAME'], 'Dona-Angela-Store');
 
-    $mail->setFrom($_ENV['MAIL_USERNAME'], 'Dona Angela Store');
     $mail->addAddress($user->getEmail(), $user->getName());
 
-    $confirmationLink = "http://localhost/Dona-Angela-Store-/confirm-email?token={$token}";
+    $confirmationLink = "http://localhost/Dona-Angela-Store-/email-confirmation.php?token={$token}";
 
     $mail->isHTML(true);
     $mail->Subject = 'Confirme seu e-mail na Dona Angela Store';
@@ -362,17 +359,10 @@ public function sendResetPasswordEmail(): void
             $this->call(401, "unauthorized", "Senha inválida", "error")->back();
             return;
         }
-          if (!$user->getIsConfirmed()) {
-            $jwt = new JWTToken();
-            $decoded = $jwt->decode($user->getConfirmationToken());
-
-        if (!$decoded) {
-            // Token expirou, usuário não confirmou, apaga
-            $user->deleteById($user->getId());
-            $this->call(401, "unauthorized", "Usuário não confirmado e expirado. Por favor, registre-se novamente.", "error")->back();
+        if($user->getIsConfirmed() != 1){
+            $this->call(403, "forbidden", "E-mail não confirmado. Por favor, verifique seu e-mail.", "error")->back();
             return;
         }
-    }
 
         // Gerar o token JWT
         $jwt = new JWTToken();
@@ -525,8 +515,7 @@ public function sendResetPasswordEmail(): void
     $user->setConfirmationToken(null);
     $user->updateById();
 
-    // Redireciona para login (front-end decide)
-    header("Location: /login");
+    header("Location: http://localhost/Dona-Angela-Store-/login");
     exit;
     }
 }

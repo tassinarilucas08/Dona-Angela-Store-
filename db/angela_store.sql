@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS users_categories (
     phone VARCHAR (255),
     photo VARCHAR(512) NULL,
     isConfirmed TINYINT(1) DEFAULT 0,
-    confirmation_token VARCHAR(512) NULL,
+    confirmationToken VARCHAR(512) NULL,
     FOREIGN KEY (idUserCategory)
         REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
