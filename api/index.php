@@ -16,9 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 use Dotenv\Dotenv;
+use Source\Core\Connect;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../");
 $dotenv->load();
+
+Connect::init();
 
 use CoffeeCode\Router\Router;
 
