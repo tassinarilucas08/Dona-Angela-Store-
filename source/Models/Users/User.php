@@ -175,6 +175,8 @@ class User extends Model
             $this->password = $result->password;
             $this->phone = $result->phone;
             $this->photo = $result->photo;
+            $this->isConfirmed = $result->isConfirmed;
+            $this->confirmationToken = $result->confirmationToken;
 
             return true;
         } catch (PDOException $e) {

@@ -10,7 +10,7 @@ try {
     $pdo = Connect::getInstance();
 
     // Pega todos os usuários não confirmados
-    $stmt = $pdo->prepare("SELECT id, confirmation_token FROM users WHERE isConfirmed = 0");
+    $stmt = $pdo->prepare("SELECT id, confirmationToken FROM users WHERE isConfirmed = 0");
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -22,7 +22,7 @@ try {
             continue; // não achou, pula
         }
 
-        $token = $row['confirmation_token'] ?? null;
+        $token = $row['confirmationToken'] ?? null;
         if (!$token) {
             // sem token, deleta direto
             $user->deleteById($user->getId());
