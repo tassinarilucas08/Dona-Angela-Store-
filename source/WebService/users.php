@@ -260,7 +260,9 @@ public function sendResetPasswordEmail(): void
 
     // Gera um token temporário (JWT)
     $jwt = new \Source\Core\JWTToken();
-    $token = $jwt->create(["id" => $user->getId()]); // você pode ajustar a validade no JWTToken
+    $token = $jwt->create([
+        "id" => $user->getId()
+    ], "+1 hour"); // você pode ajustar a validade no JWTToken
 
     // Monta o link de reset
     $resetLink = "http://localhost/Dona-Angela-Store-/nova-senha?token=" . $token;

@@ -13,11 +13,11 @@ class JWTToken
     private $headerJWT = "HS512";
     private $url = "http://localhost:8080/inf-3am-2025";
 
-    public function create($payLoad): string
+    public function create($payLoad, string $expireTime = "+90 minutes"): string
     {
         $tokenId    = base64_encode(random_bytes(16));
         $issuedAt   = new DateTimeImmutable();
-        $expire     = $issuedAt->modify('+90 minutes')->getTimestamp(); // 60 minutos
+        $expire     = $issuedAt->modify($expireTime)->getTimestamp(); // 60 minutos
 
         // Create the token as an array
         $data = [

@@ -19,7 +19,7 @@
 
         <div class="mensagem">
             <p>Enviamos um e-mail de confirmação para o endereço cadastrado.<br>
-            Por favor, verifique sua caixa de entrada.</p>
+            Por favor, verifique sua caixa de entrada. Você tem 10 minutos para confirmar. Se passar esse tempo, registre-se novamente</p>
         </div>
 
         <div class="loader">
