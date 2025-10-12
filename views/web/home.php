@@ -84,42 +84,48 @@ $this->layout("_theme", [
     </section>
 
     <section class="products-container" id="products">
-      <!-- Produtos aqui -->
-      <div class="product-card todos masculino perfumes">
-        <span class="tag tag-natura">Natura</span>
-        <img src="/Dona-Angela-Store-/images/perfums/essencial.jpg" alt="Produto Natura Essencial">
-        <div class="product-info">
-          <h2>Essencial</h2>
-          <p>Perfume floral com toque cítrico</p>
-          <div class="price"><span class="normal">R$ 89,90</span></div>
-        </div>
-      </div>
+  <?php foreach($productsData as $product): ?>
+    <?php
+        // Dados básicos do produto
+        $id          = $product->id ?? 0;
+        $name        = $product->name ?? "Produto sem nome";
+        $description = $product->description ?? "Descrição não disponível";
+        $price       = isset($product->price) ? number_format($product->price, 2, ",", ".") : "0,00";
+        $salePrice   = isset($product->sale_price) ? number_format($product->sale_price, 2, ",", ".") : null;
 
-      <div class="product-card promocao todos feminino hidratantes">
-        <span class="tag tag-natura">Natura</span>
-        <img src="/Dona-Angela-Store-/images/perfums/ekos_hidra.jpg" alt="Produto Natura Ekos">
-        <div class="product-info">
-          <h2>Ekos</h2>
-          <p>Creme hidratante para o corpo</p>
-          <div class="price">
-            <span class="old">R$ 49,90</span>
-            <span class="new">R$ 39,90</span>
-          </div>
-        </div>
-      </div>
+        // Brand, categoria e gênero
+        $brand       = isset($product->brand) ? $product->brand : "Marca";
+        $category    = isset($product->category) ? strtolower($product->category) : "outros";
+        $gender      = isset($product->gender) ? strtolower($product->gender) : "unissex";
 
-      <a href="/Dona-Angela-Store-/produto">
-        <div class="product-card todos feminino perfumes">
-          <span class="tag tag-boticario">O Boticário</span>
-          <img src="/Dona-Angela-Store-/images/perfums/lily.jpg" alt="Produto O Boticário Lily">
-          <div class="product-info">
-            <h2>Lily</h2>
-            <p>Aroma floral sofisticado</p>
-            <div class="price"><span class="normal">R$ 119,90</span></div>
-          </div>
+        // Foto: pegar primeira se existir, senão fallback
+        if(isset($product->photos) && is_array($product->photos) && count($product->photos) > 0) {
+            $photo = $product->photos[0];
+        } else {
+            $photo = "/Dona-Angela-Store-/images/default.png";
+        }
+    ?>
+
+    <div class="product-card todos <?= $gender ?> <?= $category ?>">
+        <span class="tag tag-<?= strtolower($brand) ?>"><?= $brand ?></span>
+        <img src="<?= $photo ?>" alt="Produto <?= $name ?>">
+        <div class="product-info">
+            <h2><?= $name ?></h2>
+            <p><?= $description ?></p>
+            <div class="price">
+                <?php if($salePrice): ?>
+                    <span class="old">R$ <?= $price ?></span>
+                    <span class="new">R$ <?= $salePrice ?></span>
+                <?php else: ?>
+                    <span class="normal">R$ <?= $price ?></span>
+                <?php endif; ?>
+            </div>
+            <a href="/Dona-Angela-Store-/product/<?= $id ?>" class="btn-view">Ver Produto</a>
         </div>
-      </a>
-    </section>
+    </div>
+<?php endforeach; ?>
+</section>
+
   </main>
 </body>
 </html>
