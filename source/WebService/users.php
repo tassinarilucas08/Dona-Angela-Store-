@@ -98,7 +98,7 @@ public function createUser(): void
     $token = $jwt->create([
         "id" => $user->getId(),
         "email" => $user->getEmail(),
-    ], "+10 minutes");
+    ], "+1 hour");
     
     $user->setConfirmationToken($token);
     $user->updateById();
