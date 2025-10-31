@@ -3,6 +3,7 @@
 namespace Source\Models\Products;
 
 use Source\Core\Model;
+use Source\Core\Connect;
 
 class Product extends Model
 {   
@@ -139,5 +140,85 @@ class Product extends Model
         return true;
     }
     return false;
+    }
+
+    public function findAllWithDetails(): array
+{
+    $sql = "
+        SELECT 
+            p.id AS product_id,
+            p.name AS product_name,
+            p.price,
+            p.salePrice,
+            p.description AS product_description,
+            p.quantity,
+            p.photo AS product_photo,
+            b.id AS brand_id,
+            b.description AS brand_description,
+            c.id AS category_id,
+            c.description AS category_description,
+            g.id AS gender_id,
+            g.description AS gender_description
+        FROM products p
+        LEFT JOIN brands b ON p.idBrand = b.id
+        LEFT JOIN products_categories c ON p.idCategory = c.id
+        LEFT JOIN genders g ON c.idGender = g.id
+    ";
+
+    try {
+        $stmt = Connect::getInstance()->prepare($sql);
+        $stmt->execute();
+        $products = $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+        return $products ?: [];
+    } catch (\PDOException $e) {
+        $this->errorMessage = "Erro ao buscar produtos: {$e->getMessage()}";
+        return [];
+    }
 }
-}
+
+public function findByIdWithDetails(int $id): bool
+{
+    $sql = "
+        SELECT 
+            p.id,
+            p.name,
+            p.price,
+            p.salePrice,
+            p.description,
+            p.quantity,
+            b.description AS brand,
+            c.description AS category,
+            GROUP_CONCAT(pp.photo) AS photos
+        FROM products p
+        LEFT JOIN brands b ON p.idBrand = b.id
+        LEFT JOIN products_categories c ON p.idCategory = c.id
+        LEFT JOIN photos_products pp ON pp.idProduct = p.id
+        WHERE p.id = :id
+        GROUP BY p.id
+    ";
+
+    try {
+        $stmt = \Source\Core\Connect::getInstance()->prepare($sql);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            return false;
+        }
+
+        // converte fotos em array
+        $result['photos'] = $result['photos'] ? explode(",", $result['photos']) : [];
+
+        // popula as propriedades do objeto (opcional)
+        foreach ($result as $key => $value) {
+            $this->$key = $value;
+        }
+
+        return true;
+    } catch (\PDOException $e) {
+        $this->errorMessage = "Erro ao buscar produto: {$e->getMessage()}";
+        return false;
+    }
+}}  
