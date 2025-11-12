@@ -1,31 +1,32 @@
+// classes/HttpsUser/HttpProduct.js
 import HttpClientBase from "../HttpClientBase.js";
 
-export default class HttpProduct extends HttpClientBase {
-  constructor() {
-    super("http://localhost/Dona-Angela-Store-/api/Products");
-  }
+export class HttpProduct extends HttpClientBase {
+    constructor() {
+        super("http://localhost/Dona-Angela-Store-/api/Products");
+    }
 
-  getAll() {
-    return this.get("/");
-  }
+    async create(data) {
+        return this.post("/createProduct", data);
+    }
 
-  getById(id) {
-    return this.get(`/id/${id}`);
-  }
+    async update(data) {
+        return this.put("/update", data);
+    }
 
-  add(product) {
-    return this.post("/add", product);
-  }
+    async uploadPhotos(formData) {
+        return this.post("/updatePhotos", formData);
+    }
 
-  update(product) {
-    return this.put("/update", product);
-  }
+    async getAll() {
+        return this.get("/listProducts");
+    }
 
-  delete(id) {
-    return this.delete(`/delete/id/${id}`);
-  }
+    async getById(id) {
+        return this.get(`/listProductById/${id}`);
+    }
 
-  updatePhotos(data) {
-    return this.post("/photos", data);
-  }
+    async delete(id) {
+        return this.post("/deleteProduct", { id });
+    }
 }

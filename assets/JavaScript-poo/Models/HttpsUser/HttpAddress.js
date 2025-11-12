@@ -1,4 +1,4 @@
-import HttpClientBase from "../../HttpClientBase.js";
+import HttpClientBase from "../HttpClientBase.js";
 
 export class HttpAddress extends HttpClientBase {
     constructor() {
