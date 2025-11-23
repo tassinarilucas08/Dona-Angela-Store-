@@ -141,3 +141,14 @@ CREATE TABLE IF NOT EXISTS purchasesProducts (
     FOREIGN KEY (idProduct)
         REFERENCES products(id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idUser INT,
+    idProduct INT,
+    quantity INT NOT NULL,
+    FOREIGN KEY (idUser)
+        REFERENCES users(id),
+    FOREIGN KEY (idProduct)
+        REFERENCES products(id)
+) ENGINE=InnoDB;
