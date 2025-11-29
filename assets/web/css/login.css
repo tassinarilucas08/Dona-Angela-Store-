@@ -176,3 +176,26 @@ body {
 .toggle-password:hover {
   color: #000;
 }
+
+/* Centraliza os toasts na parte inferior da tela */
+#toast-container {
+    top: auto !important;
+    bottom: 30px !important; /* distância do rodapé */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+  }
+
+  #toast-container .toast {
+    min-width: 300px;
+    text-align: center;
+    font-weight: 500;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .toast-custom {
+    background-color: #d04c92 !important; /* substitui pela cor exata do teu layout */
+    color: #fff !important;
+  }
+  

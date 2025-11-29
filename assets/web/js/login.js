@@ -8,7 +8,8 @@ loginForm.addEventListener("submit", async (e) => {
   const password = document.getElementById("password").value.trim();
 
   if (!email || !password) {
-    alert("Preencha todos os campos!");
+    M.Toast.dismissAll();
+    M.toast({html: 'Preencha todos os campos!', classes: 'red rounded'});
     return;
   }
 
@@ -23,7 +24,8 @@ loginForm.addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (!response.ok) {
-      alert(data.message || "Erro ao fazer login");
+      M.Toast.dismissAll();
+      M.toast({html: data.message || 'Erro ao fazer login', classes: 'red rounded'});
       return;
     }
 
@@ -31,7 +33,9 @@ loginForm.addEventListener("submit", async (e) => {
     localStorage.setItem("userToken", data.data.token);
     localStorage.setItem("userData", JSON.stringify(data.data.user));
 
-    alert("Login realizado com sucesso!");
+    M.Toast.dismissAll();
+    M.toast({html: 'Login realizado com sucesso!', classes: 'green rounded'});
+    
     if(data.data.user.idUserCategory == 1){
     window.location.href = "/Dona-Angela-Store-/app";} // ou página principal
     else if(data.data.user.idUserCategory == 3){
@@ -43,7 +47,8 @@ loginForm.addEventListener("submit", async (e) => {
 
   } catch (error) {
     console.error("Erro ao conectar à API:", error);
-    alert("Erro de conexão");
+    M.Toast.dismissAll();
+    M.toast({html: 'Erro de conexão com o servidor', classes: 'toast-custom rounded'});
   }
 });
 document.addEventListener("DOMContentLoaded", () => {
