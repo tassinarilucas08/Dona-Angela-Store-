@@ -15,6 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
+use Dotenv\Dotenv;
+use Source\Core\Connect;
+
+$dotenv = Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
+
+Connect::init();
+
 use CoffeeCode\Router\Router;
 
 $route = new Router("http://localhost/Dona-Angela-Store-/api",":");
@@ -27,6 +35,9 @@ $route->post("/login", "Users:login");
 $route->get("/", "Users:listUsers");
 $route->get("/id/{id}", "Users:listUserById");
 $route->post("/add", "Users:createUser");
+$route->post("/registerPending", "Users:registerPending");  
+$route->get("/confirm/{token}", "Users:confirmEmail");
+$route->delete("/clearPendings", "Users:clearExpiredPendings");
 $route->put("/update", "Users:updateUser");
 $route->put("/updatePass", "Users:updatePassword");
 $route->post("/sendEmail", "Users:sendResetPasswordEmail");

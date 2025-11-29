@@ -3,8 +3,16 @@
 namespace Source\WebService;
 
 use Source\Models\Products\Product;
+use Source\Models\Products\Brand;
+use Source\Models\Products\ProductCategory;
+use Source\Models\Products\Gender;
+use Source\Models\Products\PhotoProduct;
 use Source\Core\JWTToken;
 use SorFabioSantos\Uploader\Uploader;
+
+use Source\Core\Connect;
+use PDO;
+use PDOException;
 
 class Products extends Api
 {
@@ -173,15 +181,27 @@ public function updatePhotos(): void
 
     public function listProducts(): void
     {
-        $this->auth();
-
         $product = new Product();
-        $all = $product->findAll();
+        $all = $product->findAllWithDetails(); // usa a versão detalhada
 
         $this->call(200, "success", "Lista de produtos", "success")->back([
-            "products" => $all
-        ]);
+        "products" => $all
+    ]);
+}
+    
+    public function listProductById(int $id): void
+{
+
+    $product = new Product();
+    if (!$product->findByIdWithDetails($id)) { // função que retorna o produto com brand, category e photos
+        $this->call(404, "not_found", "Produto não encontrado", "error")->back();
+        return;
     }
+
+    $this->call(200, "success", "Produto encontrado", "success")->back([
+        "product" => $product->toArray() // ou manualmente monta o array com os campos desejados
+    ]);
+}
 
     public function deleteProduct(array $data): void
     {

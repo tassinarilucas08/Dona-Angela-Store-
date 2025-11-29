@@ -37,18 +37,18 @@ abstract class Model
 
         try {
             $stmt = Connect::getInstance()->prepare($sql);
-            foreach ($values as $column => $value) {
+           foreach ($values as $column => $value) {
                 if(is_null($value)){
-                    $stmt->bindValue($column, 'NULL', PDO::PARAM_NULL);
-                    continue;
+                    $stmt->bindValue($column, null, PDO::PARAM_NULL);
+                } elseif(is_bool($value)) {
+                    $stmt->bindValue($column, $value ? 1 : 0, PDO::PARAM_INT);
+                } elseif(is_numeric($value) && $value == (int)$value) {
+                    $stmt->bindValue($column, (int)$value, PDO::PARAM_INT);
+                } else {
+                    $stmt->bindValue($column, $value, PDO::PARAM_STR);
                 }
-                if(is_int($value)) {
-                    $stmt->bindValue($column, $value, PDO::PARAM_INT);
-                    continue;
-                }
-                $stmt->bindValue($column, $value);
-
             }
+
             if(!$stmt->execute()){
                 return false;
             }
@@ -86,13 +86,16 @@ abstract class Model
             $stmt = Connect::getInstance()->prepare($sql);
             foreach ($values as $column => $value) {
                 if(is_null($value)){
-                    $stmt->bindValue($column, 'NULL', PDO::PARAM_NULL);
-                } else if(is_int($value)) {
-                    $stmt->bindValue($column, $value, PDO::PARAM_INT);
+                    $stmt->bindValue($column, null, PDO::PARAM_NULL);
+                } elseif(is_bool($value)) {
+                    $stmt->bindValue($column, $value ? 1 : 0, PDO::PARAM_INT);
+                } elseif(is_numeric($value) && $value == (int)$value) {
+                    $stmt->bindValue($column, (int)$value, PDO::PARAM_INT);
                 } else {
                     $stmt->bindValue($column, $value, PDO::PARAM_STR);
                 }
             }
+
             return $stmt->execute();
         } catch (PDOException $e) {
             $this->errorMessage = "Erro ao inserir o registro: {$e->getMessage()}";

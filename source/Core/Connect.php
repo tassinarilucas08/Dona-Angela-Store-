@@ -1,17 +1,33 @@
 <?php
     namespace Source\Core;
+    require __DIR__ . '/../../vendor/autoload.php';
+    use Dotenv\Dotenv;
+
+    // Caminho para a pasta onde está o .env
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+    $dotenv->load();
 
     use PDO;
     use PDOException;
 
-    const CONF_DB_HOST = "MySQL"; // ou o host do seu container Docker
-    const CONF_DB_NAME = "angela_store";
-    const CONF_DB_USER = "root";
-    const CONF_DB_PASS = "asdf1234";
-
-
     abstract class Connect
+    { 
+    
+    private static $instance;
+
+    private static $dbHost;
+    private static $dbName;
+    private static $dbUser;
+    private static $dbPass;
+
+    public static function init(): void
     {
+        self::$dbHost = $_ENV['DB_HOST'];
+        self::$dbName = $_ENV['DB_NAME'];
+        self::$dbUser = $_ENV['DB_USER'];
+        self::$dbPass = $_ENV['DB_PASS'];
+    }
+
         private const OPTIONS = [
             PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -19,22 +35,27 @@
             PDO::ATTR_CASE => PDO::CASE_NATURAL
         ];
 
-        private static $instance;
-
         public static function getInstance(): ?PDO
-        {
-            if (empty(self::$instance)) {
-                try {
-                    self::$instance = new PDO(
-                        "mysql:host=" . CONF_DB_HOST . ";dbname=" . CONF_DB_NAME,
-                        CONF_DB_USER,
-                        CONF_DB_PASS,
-                        self::OPTIONS
-                    );
-                } catch (PDOException $exception) {
-                    //redirect("/ops/problemas");
-                    echo "Problemas ao Conectar! ";
-                    echo $exception->getMessage();
+{
+    if (empty(self::$instance)) {
+
+        // Garante que as variáveis do .env estejam carregadas
+        if (empty(self::$dbHost)) {
+            self::init();
+        }
+
+        try {
+            self::$instance = new PDO(
+                "mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName,
+                self::$dbUser,
+                self::$dbPass,
+                self::OPTIONS
+            );
+
+        } catch (PDOException $exception) {
+            //redirect("/ops/problemas");
+            echo "Problemas ao Conectar! ";
+            echo $exception->getMessage();
                 }
             }
 

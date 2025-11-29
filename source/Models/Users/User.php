@@ -15,6 +15,9 @@ class User extends Model
     protected $password;
     protected $phone;
     protected $photo;
+    protected $confirmationToken;
+    protected $isConfirmed;
+
 
     public function __construct(
         int $id = null,
@@ -97,13 +100,34 @@ class User extends Model
         public function getPhoto(): ?String
     {
         return $this->photo ? "..{$this->photo}" : "../storage/images/user.png";
-    }
+    }   
 
     public function setPhoto(?String $photo): void
     {
         $this->photo = $photo;
 
     }
+    
+    public function setConfirmationToken(?string $token): void
+    {
+        $this->confirmationToken = $token;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+        
+    public function setIsConfirmed(bool $confirmed): void
+    {
+        $this->isConfirmed = $confirmed;
+    }
+
+    public function getIsConfirmed(): bool
+    {
+        return (bool) ($this->isConfirmed ?? false);
+    }
+
 
     public function insert (): bool
     {
@@ -151,6 +175,8 @@ class User extends Model
             $this->password = $result->password;
             $this->phone = $result->phone;
             $this->photo = $result->photo;
+            $this->isConfirmed = $result->isConfirmed;
+            $this->confirmationToken = $result->confirmationToken;
 
             return true;
         } catch (PDOException $e) {

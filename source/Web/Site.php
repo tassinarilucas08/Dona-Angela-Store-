@@ -10,10 +10,14 @@ class Site extends Controller
     }
 
     public function home(): void
-    {
-        //echo "Home Page...";
-        echo $this->view->render("home",[]);
-    }
+{
+    $productModel = new \Source\Models\Products\Product();
+    $products = $productModel->findAll(); // Puxa todos os produtos
+
+    echo $this->view->render("home", [
+        "productsData" => $products // Passa pra view
+    ]);
+}
 
     public function about(): void
     {

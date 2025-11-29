@@ -2,6 +2,14 @@
 
 require __DIR__ . "/vendor/autoload.php";
 
+use Source\Core\Connect;
+use Dotenv\Dotenv;
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+Connect::init();
+
 use CoffeeCode\Router\Router;
 
 ob_start();

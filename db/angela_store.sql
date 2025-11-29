@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users_categories (
     description VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idUserCategory INT NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     phone VARCHAR (255),
     photo VARCHAR(512) NULL,
+    isConfirmed TINYINT(1) DEFAULT 0,
+    confirmationToken VARCHAR(512) NULL,
     FOREIGN KEY (idUserCategory)
         REFERENCES users_categories(id)
 ) ENGINE=InnoDB;
@@ -76,14 +78,14 @@ CREATE TABLE IF NOT EXISTS products (
     price FLOAT NOT NULL,
     salePrice FLOAT NOT NULL,
     description TEXT NOT NULL,
-    photo INT,
+    photo VARCHAR(512) NULL,
     quantity INT NOT NULL,
     FOREIGN KEY (idCategory)
 		REFERENCES products_categories(id),
     FOREIGN KEY (idBrand)
         REFERENCES brands(id),
     FOREIGN KEY (idStatus)
-        REFERENCES products_status(id),
+        REFERENCES products_status(id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS photos_products (

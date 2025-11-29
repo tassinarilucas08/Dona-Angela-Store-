@@ -5,6 +5,9 @@ namespace Source\WebService;
 use Source\Models\Users\User;
 use Source\Core\JWTToken;
 use SorFabioSantos\Uploader\Uploader;
+use Dotenv\Dotenv;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class Users extends Api
 {
@@ -83,23 +86,58 @@ public function createUser(): void
         $data["password"], // senha criptografada
         $data["phone"]
     );
+    
+    $user->setIsConfirmed(0);
 
     if (!$user->insert()) {
         $this->call(500, "internal_server_error", $user->getErrorMessage() ?? "Erro ao criar usuário", "error")->back();
         return;
     }
 
-    // Retorno personalizado
+    $jwt = new JWTToken();
+    $token = $jwt->create([
+        "id" => $user->getId(),
+        "email" => $user->getEmail(),
+    ], "+1 hour");
+    
+    $user->setConfirmationToken($token);
+    $user->updateById();
+    
+    $mail = new PHPMailer(true);
+    try {
+    $mail->isSMTP();
+    $mail->Host       = $_ENV['MAIL_HOST'];
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $_ENV['MAIL_USERNAME'];
+    $mail->Password   = $_ENV['MAIL_PASSWORD'];
+    $mail->SMTPSecure = $_ENV['MAIL_ENCRYPTION'];
+    $mail->Port       = $_ENV['MAIL_PORT'];
+    $mail->setFrom($_ENV['MAIL_USERNAME'], 'Dona-Angela-Store');
+
+    $mail->addAddress($user->getEmail(), $user->getName());
+
+    $confirmationLink = "http://localhost/Dona-Angela-Store-/email-confirmation.php?token={$token}";
+
+    $mail->isHTML(true);
+    $mail->Subject = 'Confirme seu e-mail na Dona Angela Store';
+    $mail->Body    = "Olá {$user->getName()},<br><br>
+                      Clique no link abaixo para confirmar seu e-mail:<br>
+                      <a href='{$confirmationLink}'>{$confirmationLink}</a>";
+    $mail->send();    
+    
     $response = [
         "id" => $user->getId(),
         "name" => $user->getName(),
         "email" => $user->getEmail(),
         "phone" => $user->getPhone()
-    ];
-
+    ];    
     $this->call(201, "created", "Usuário criado com sucesso", "success")->back($response);
 }
-
+    catch (Exception $e) {
+        $user->deleteById($user->getId());
+        $this->call(500, "internal_server_error", "Erro ao enviar e-mail de confirmação: {$mail->ErrorInfo}", "error")->back();
+    }
+}
     public function listUserById (array $data): void
     {
         if(!filter_var($data["id"], FILTER_VALIDATE_INT)) {
@@ -222,7 +260,9 @@ public function sendResetPasswordEmail(): void
 
     // Gera um token temporário (JWT)
     $jwt = new \Source\Core\JWTToken();
-    $token = $jwt->create(["id" => $user->getId()]); // você pode ajustar a validade no JWTToken
+    $token = $jwt->create([
+        "id" => $user->getId()
+    ], "+1 hour"); // você pode ajustar a validade no JWTToken
 
     // Monta o link de reset
     $resetLink = "http://localhost/Dona-Angela-Store-/nova-senha?token=" . $token;
@@ -232,14 +272,14 @@ public function sendResetPasswordEmail(): void
 
     try {
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       = $_ENV['MAIL_HOST'];
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'angelastore008@gmail.com';
-        $mail->Password   = 'mxspnqynugkuyjsg';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
+        $mail->Username   = $_ENV['MAIL_USERNAME'];
+        $mail->Password   = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = $_ENV['MAIL_ENCRYPTION'];
+        $mail->Port       = $_ENV['MAIL_PORT'];
 
-        $mail->setFrom('angelastore008@gmail.com', 'Dona Angela Store');
+        $mail->setFrom($_ENV['MAIL_USERNAME'], 'Dona Angela Store');
         $mail->addAddress($email, $user->getName());
 
         $mail->isHTML(true);
@@ -319,6 +359,10 @@ public function sendResetPasswordEmail(): void
         
         if(!password_verify($data["password"], $user->getPassword())){
             $this->call(401, "unauthorized", "Senha inválida", "error")->back();
+            return;
+        }
+        if($user->getIsConfirmed() != 1){
+            $this->call(403, "forbidden", "E-mail não confirmado. Por favor, verifique seu e-mail.", "error")->back();
             return;
         }
 
@@ -445,4 +489,35 @@ public function sendResetPasswordEmail(): void
         return;
     }
 
-    $this->call(200, "success", "Usuário deletado com sucesso", "success")->back();}}
+    $this->call(200, "success", "Usuário deletado com sucesso", "success")->back();
+}
+
+    public function confirmEmail(): void {
+    $input = $_GET['token'] ?? null;
+    if (!$input) {
+        $this->call(400, "bad_request", "Token não fornecido", "error")->back();
+        return;
+    }
+
+    $jwt = new JWTToken();
+    $decoded = $jwt->decode($input);
+
+    if (!$decoded) {
+        $this->call(401, "unauthorized", "Token inválido ou expirado", "error")->back();
+        return;
+    }
+
+    $user = new User();
+    if (!$user->findById($decoded->data->id)) {
+        $this->call(404, "not_found", "Usuário não encontrado", "error")->back();
+        return;
+    }
+
+    $user->setIsConfirmed(1);
+    $user->setConfirmationToken(null);
+    $user->updateById();
+
+    header("Location: http://localhost/Dona-Angela-Store-/login");
+    exit;
+    }
+}
