@@ -75,15 +75,18 @@
       </section>
 
       <!-- Gerenciar Produto -->
-      <section class="gerenciar-produtos">
+            <!-- Gerenciar Produto -->
+        <section class="gerenciar-produtos">
         <h2>Gerenciar Produtos</h2>
         <form>
           <label for="selecionar-produto">Selecionar Produto:</label>
           <select id="selecionar-produto" name="selecionar-produto">
             <option value="">...</option>
-            <option value="lily">Lily</option>
-            <option value="biografia">Biografia</option>
+            <!-- opções serão preenchidas via JS usando listProducts -->
           </select>
+
+          <!-- ID oculto para update/delete -->
+          <input type="hidden" id="produto-id-atualizar" name="produto-id-atualizar">
 
           <label for="nome-atualizar">Nome:</label>
           <input type="text" id="nome-atualizar" name="nome-atualizar">
@@ -92,10 +95,10 @@
           <textarea id="descricao-atualizar" name="descricao-atualizar"></textarea>
 
           <label for="preco-atualizar">Preço:</label>
-          <input type="number" id="preco-atualizar" name="preco-atualizar" step="0.01">
+          <input type="number" id="preco-atualizar" name="preco-atualizar" step="0.01" min="0">
 
           <label for="imagem-atualizar">Imagem (em observação):</label>
-          <input type="number" id="imagem-atualizar" name="imagem-atualizar">
+          <input type="text" id="imagem-atualizar" name="imagem-atualizar" readonly>
 
           <label for="quantidade-atualizar">Quantidade:</label>
           <div class="quantidade-wrapper">
@@ -107,20 +110,27 @@
           <label for="status-atualizar">Status:</label>
           <select id="status-atualizar" name="status-atualizar">
             <option value="">...</option>
-            <option value="ativo">Ativo</option>
-            <option value="inativo">Inativo</option>
+            <option value="1">Ativo</option>
+            <option value="2">Inativo</option>
           </select>
 
           <label for="categoria-atualizar">Categoria:</label>
           <select id="categoria-atualizar" name="categoria-atualizar">
             <option value="">...</option>
-            <option value="masculino">Masculino</option>
-            <option value="feminino">Feminino</option>
+            <option value="1">Masculino</option>
+            <option value="2">Feminino</option>
+          </select>
+
+          <label for="marca-atualizar">Marca:</label>
+          <select id="marca-atualizar" name="marca-atualizar">
+            <option value="">...</option>
+            <option value="1">Natura</option>
+            <option value="2">Oboticário</option>
           </select>
 
           <div class="botoes-gerenciar">
-            <button type="submit">Atualizar Produto</button>
-            <button type="submit">Excluir Produto</button>
+            <button type="submit" id="btn-atualizar-produto">Atualizar Produto</button>
+            <button type="submit" id="btn-excluir-produto">Excluir Produto</button>
           </div>
         </form>
       </section>

@@ -44,7 +44,7 @@ $this->layout("_theme", [
     </div>
 
     <div class="search-box">
-      <input type="text" placeholder="Pesquisar produtos...">
+      <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
       <img src="/Dona-Angela-Store-/images/layout/lupa.png" alt="Buscar">
     </div>
 
@@ -72,10 +72,10 @@ $this->layout("_theme", [
   <!-- Filtros -->
   <section class="product-categories">
     <div class="category-buttons">
-      <button class="movButton" onclick="handleClick(this, 'todos')" style="background-color: gainsboro;"><b>Todos</b></button>
-      <button class="movButton" onclick="handleClick(this, 'masculino')" style="background-color: lightblue;"><b>Masculino</b></button>
-      <button class="movButton" onclick="handleClick(this, 'feminino')" style="background-color: lightpink;"><b>Feminino</b></button>
-      <button class="movButton" onclick="handleClick(this, 'infantil')" style="background-color: lightgreen;"><b>Infantil</b></button>
+      <button class="movButton" id="all" onclick="handleClick(this, 'todos')""><b>Todos</b></button>
+      <button class="movButton"id="male" onclick="handleClick(this, 'masculino')"><b>Masculino</b></button>
+      <button class="movButton" id="female" onclick="handleClick(this, 'feminino')"><b>Feminino</b></button>
+      <button class="movButton" id="infant" onclick="handleClick(this, 'infantil')"><b>Infantil</b></button>
     </div>
   </section>
 
@@ -90,41 +90,7 @@ $this->layout("_theme", [
     </section>
 
     <section class="products-container" id="products">
-      <!-- Produtos aqui -->
-      <div class="product-card todos masculino perfumes">
-        <span class="tag tag-natura">Natura</span>
-        <img src="/Dona-Angela-Store-/images/perfums/essencial.jpg" alt="Produto Natura Essencial">
-        <div class="product-info">
-          <h2>Essencial</h2>
-          <p>Perfume floral com toque cítrico</p>
-          <div class="price"><span class="normal">R$ 89,90</span></div>
-        </div>
-      </div>
 
-      <div class="product-card promocao todos feminino hidratantes">
-        <span class="tag tag-natura">Natura</span>
-        <img src="/Dona-Angela-Store-/images/perfums/ekos_hidra.jpg" alt="Produto Natura Ekos">
-        <div class="product-info">
-          <h2>Ekos</h2>
-          <p>Creme hidratante para o corpo</p>
-          <div class="price">
-            <span class="old">R$ 49,90</span>
-            <span class="new">R$ 39,90</span>
-          </div>
-        </div>
-      </div>
-
-      <a href="/Dona-Angela-Store-/app/produto">
-        <div class="product-card todos feminino perfumes">
-          <span class="tag tag-boticario">O Boticário</span>
-          <img src="/Dona-Angela-Store-/images/perfums/lily.jpg" alt="Produto O Boticário Lily">
-          <div class="product-info">
-            <h2>Lily</h2>
-            <p>Aroma floral sofisticado</p>
-            <div class="price"><span class="normal">R$ 119,90</span></div>
-          </div>
-        </div>
-      </a>
     </section>
   </main>
 </body>

@@ -239,3 +239,93 @@ body {
     cursor: pointer;
     color: #d04c92;
   }
+
+  /* Card do item do carrinho */
+.cart-items .item {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  margin-bottom: 16px;
+}
+
+/* Imagem do produto */
+.cart-items .item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Info do produto */
+.cart-items .item .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart-items .item .price {
+  font-weight: 600;
+  color: #e27396; /* puxa pro rosinha da tua paleta */
+}
+
+/* Botão X (remover) */
+.btn-remove {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 26px;     /* antes era 20px */
+  line-height: 1;
+  cursor: pointer;
+  color: #e27396;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.btn-remove:hover {
+  color: #c0392b;
+  transform: scale(1.1);
+}
+
+
+/* Controles de quantidade */
+.quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.btn-qty {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid #e9aebd;
+  background-color: #ffe6ee;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.btn-qty:hover {
+  background-color: #f9c0d4;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.btn-qty:active {
+  transform: scale(0.95);
+}
+
+.quantity-controls .qty {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+}

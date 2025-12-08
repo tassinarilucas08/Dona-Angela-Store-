@@ -10,30 +10,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= url("/assets/app/css/product.css") ?>">
-    <script src="<?= url("/assets/app/js/product.js") ?>" async></script>
+    <link rel="stylesheet" href="<?= url("/assets/web/css/product.css") ?>">
+    <script src="<?= url("/assets/web/js/product.js") ?>" defer></script>
 </head>
 <body>
-    <div class="produto-container">
-        <button type="submit" class="btn-voltar" onclick="window.history.back()">← Voltar</button>
+<div class="produto-container">
+        <button type="button" class="btn-voltar" onclick="window.history.back()">← Voltar</button>
+
         <div class="produto-info">
             <div class="imagem-produto">
-                <img src="/Dona-Angela-Store-/images/perfums/lily.jpg" alt="Lily">
+                <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+
+                <img id="product-image" src="" alt="Produto">
+
+                <button class="next" onclick="changeImage(1)">&#10095;</button>
+
+                <div class="indicators" id="indicators"></div>
             </div>
+
             <div class="texto-produto">
-                <h1 class="nome-produto">Lily</h1>
-                <p class="preco-produto">R$ 89,90</p>
-                <p class="descricao-produto">
-                    O Lily Eau de Parfum une a clássica técnica do enfleurage à sofisticação da alta perfumaria. Um floral sofisticado com personalidade marcante e envolvente.
-                </p>
-                <button class="btn-adicionar">Adicionar ao Carrinho</button>
+                <h1 class="nome-produto" id="product-name"></h1>
+                <p class="preco-produto" id="product-price"></p>
+                <p class="descricao-produto" id="product-description"></p>
+                <button class="btn-adicionar" type="button"onclick="handleAddToCart()">Adicionar ao Carrinho</button>
+
             </div>
         </div>
 
         <h1><b>Produtos Relacionados</b></h1>
-        <!-- Produtos relacionados -->
         <section class="products-related" id="related">
-            <!-- Produto Natura - Biografia -->
             <div class="product-card">
                 <span class="tag tag-natura">Natura</span>
                 <img src="/Dona-Angela-Store-/images/perfums/biografia.jpg" alt="Produto Natura Biografia">

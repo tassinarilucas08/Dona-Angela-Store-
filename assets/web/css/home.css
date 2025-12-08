@@ -473,12 +473,23 @@
     margin-left: 8px;
     margin-left: 0px;
   }
+
+  .movButton#all{
+    background-color: gainsboro;
+  }
+
   .movButton#male{
   background-color: lightblue;
   }
+
   .movButton#female{
   background-color: lightpink;
   }
+
+  .movButton#infant{
+    background-color: lightgreen;
+  }
+
   .movButton {
     transition: transform 0.1s ease;
     cursor: pointer;
@@ -502,4 +513,33 @@
 }
 .btn-view:hover {
   background-color: #9B2471;
+}
+
+.tag {
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  color: #fff;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.tag.boticario {
+  background-color: #a62c7b;
+}
+
+.tag.natura {
+  background-color: #359830;
+}
+
+.tag.default-brand {
+  background-color: #444;
+}
+
+.card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* quantidade de linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

@@ -57,6 +57,13 @@ class App extends Controller
 
     public function product (array $data): void
     {
-        echo $this->view->render("product");
+        $id = filter_var($data["id"] ?? null, FILTER_VALIDATE_INT);
+
+        if (!$id) {
+            redirect("/ops/404");
+            return;
+        }
+
+        echo $this->view->render("product", ["productId" => $id]);
     }
 }

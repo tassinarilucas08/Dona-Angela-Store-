@@ -73,11 +73,13 @@ $route->group("null");
 
 $route->group("/Products");
 $route->get("/", "Products:listProducts");
+$route->get("/list", "Products:listProducts");
 $route->get("/id/{id}", "Products:listProductById");
+$route->get("/name/{name}", "Products:getProductByName");
 $route->post("/add", "Products:createProduct");
-$route->put("/update", "Products:updateProduct");
+$route->post("/update", "Products:updateProduct");
 $route->post("/photos", "Products:updatePhotos");
-$route->delete("/delete/id/{id}", "Products:deleteProduct");
+$route->post("/delete/id/{id}", "Products:deleteProduct");
 
 $route->group("null");
 

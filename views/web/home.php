@@ -49,10 +49,10 @@ $this->layout("_theme", [
   <!-- Filtros -->
   <section class="product-categories">
     <div class="category-buttons">
-      <button class="movButton" onclick="handleClick(this, 'todos')"><b>Todos</b></button>
-      <button class="movButton" onclick="handleClick(this, 'masculino')"><b>Masculino</b></button>
-      <button class="movButton" onclick="handleClick(this, 'feminino')"><b>Feminino</b></button>
-      <button class="movButton" onclick="handleClick(this, 'infantil')"><b>Infantil</b></button>
+      <button class="movButton" id="all" onclick="handleClick(this, 'todos')"><b>Todos</b></button>
+      <button class="movButton" id="male" onclick="handleClick(this, 'masculino')"><b>Masculino</b></button>
+      <button class="movButton" id="female" onclick="handleClick(this, 'feminino')"><b>Feminino</b></button>
+      <button class="movButton" id="infant" onclick="handleClick(this, 'infantil')"><b>Infantil</b></button>
     </div>
   </section>
 

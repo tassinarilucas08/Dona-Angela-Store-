@@ -18,7 +18,7 @@ class Product extends Model
     private $quantity;
     private $idStatus;
 
-    public function __construct(int $id = null, int $idCategory = null, int $idBrand = null, String $name = null, float $price = null, float $salePrice = null, String $description = null, int $photo = null, int $quantity = null, int $idStatus = null)
+    public function __construct(int $id = null, int $idCategory = null, int $idBrand = null, String $name = null, float $price = null, float $salePrice = null, String $description = null, String $photo = null, int $quantity = null, int $idStatus = null)
 {    
     $this->id = $id;
     $this->idCategory = $idCategory;
@@ -98,12 +98,12 @@ class Product extends Model
         $this->description = $description;
     }
 
-    public function getPhoto(): ?int
+    public function getPhoto(): ?String
     {
         return $this->photo;
     }
 
-    public function setPhoto(?int $photo): void
+    public function setPhoto(?String $photo): void
     {
         $this->photo = $photo;
     }
@@ -129,18 +129,106 @@ class Product extends Model
     }
     public function findByName(string $name): bool
 {
-    $sql = "SELECT id FROM products WHERE name = :name LIMIT 1";
+    $sql = "SELECT * FROM products WHERE name = :name LIMIT 1";
     $stmt = \Source\Core\Connect::getInstance()->prepare($sql);
     $stmt->bindValue(":name", $name, \PDO::PARAM_STR);
     $stmt->execute();
 
     if ($stmt->rowCount()) {
         $data = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $this->id = $data["id"];
+
+        $this->id          = (int)$data["id"];
+        $this->idCategory  = (int)$data["idCategory"];
+        $this->idBrand     = (int)$data["idBrand"];
+        $this->name        = $data["name"];
+        $this->price       = isset($data["price"]) ? (float)$data["price"] : null;
+        $this->salePrice   = isset($data["salePrice"]) ? (float)$data["salePrice"] : null;
+        $this->description = $data["description"];
+        $this->photo       = $data["photo"];
+        $this->quantity    = isset($data["quantity"]) ? (int)$data["quantity"] : null;
+        $this->idStatus    = isset($data["idStatus"]) ? (int)$data["idStatus"] : null;
+
         return true;
     }
     return false;
+}
+
+public function findById(int $id): bool
+{
+    $sql = "SELECT * FROM products WHERE id = :id LIMIT 1";
+    $stmt = \Source\Core\Connect::getInstance()->prepare($sql);
+    $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+    $stmt->execute();
+
+    if ($stmt->rowCount()) {
+        $data = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        $this->id          = (int)$data["id"];
+        $this->idCategory  = (int)$data["idCategory"];
+        $this->idBrand     = (int)$data["idBrand"];
+        $this->name        = $data["name"];
+        $this->price       = isset($data["price"]) ? (float)$data["price"] : null;
+        $this->salePrice   = isset($data["salePrice"]) ? (float)$data["salePrice"] : null;
+        $this->description = $data["description"];
+        $this->photo       = $data["photo"];
+        $this->quantity    = isset($data["quantity"]) ? (int)$data["quantity"] : null;
+        $this->idStatus    = isset($data["idStatus"]) ? (int)$data["idStatus"] : null;
+
+        return true;
     }
+    return false;
+}
+
+public function update(): bool
+{
+    $sql = "
+        UPDATE products SET
+            idCategory  = :idCategory,
+            idBrand     = :idBrand,
+            name        = :name,
+            price       = :price,
+            salePrice   = :salePrice,
+            description = :description,
+            photo       = :photo,
+            quantity    = :quantity,
+            idStatus    = :idStatus
+        WHERE id = :id
+    ";
+
+    try {
+        $stmt = \Source\Core\Connect::getInstance()->prepare($sql);
+
+        $stmt->bindValue(":id",         $this->id, \PDO::PARAM_INT);
+        $stmt->bindValue(":idCategory", $this->idCategory, \PDO::PARAM_INT);
+        $stmt->bindValue(":idBrand",    $this->idBrand, \PDO::PARAM_INT);
+        $stmt->bindValue(":name",       $this->name, \PDO::PARAM_STR);
+        $stmt->bindValue(":price",      $this->price);
+        $stmt->bindValue(":salePrice",  $this->salePrice);
+        $stmt->bindValue(":description",$this->description, \PDO::PARAM_STR);
+        $stmt->bindValue(":photo",      $this->photo);
+        $stmt->bindValue(":quantity",   $this->quantity, \PDO::PARAM_INT);
+        $stmt->bindValue(":idStatus",   $this->idStatus, \PDO::PARAM_INT);
+
+        return $stmt->execute();
+    } catch (\PDOException $e) {
+        $this->errorMessage = "Erro ao atualizar produto: {$e->getMessage()}";
+        return false;
+    }
+}
+
+public function deleteById(int $id): bool
+{
+    $sql = "DELETE FROM products WHERE id = :id";
+    try {
+        $stmt = \Source\Core\Connect::getInstance()->prepare($sql);
+        $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+        return $stmt->execute();
+    } catch (\PDOException $e) {
+        $this->errorMessage = "Erro ao deletar produto: {$e->getMessage()}";
+        return false;
+    }
+}
+
 
     public function findAllWithDetails(): array
 {
@@ -177,7 +265,7 @@ class Product extends Model
     }
 }
 
-public function findByIdWithDetails(int $id): bool
+public function findByIdWithDetails(int $id): ?array
 {
     $sql = "
         SELECT 
@@ -187,6 +275,7 @@ public function findByIdWithDetails(int $id): bool
             p.salePrice,
             p.description,
             p.quantity,
+            p.photo AS product_photo,
             b.description AS brand,
             c.description AS category,
             GROUP_CONCAT(pp.photo) AS photos
@@ -205,20 +294,18 @@ public function findByIdWithDetails(int $id): bool
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
 
         if (!$result) {
-            return false;
+            return null;
         }
 
         // converte fotos em array
-        $result['photos'] = $result['photos'] ? explode(",", $result['photos']) : [];
+        $result["photos"] = $result["photos"]
+            ? explode(",", $result["photos"])
+            : [];
 
-        // popula as propriedades do objeto (opcional)
-        foreach ($result as $key => $value) {
-            $this->$key = $value;
-        }
-
-        return true;
+        return $result;
     } catch (\PDOException $e) {
         $this->errorMessage = "Erro ao buscar produto: {$e->getMessage()}";
-        return false;
+        return null;
     }
-}}  
+}
+}

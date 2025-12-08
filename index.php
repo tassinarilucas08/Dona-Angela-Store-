@@ -30,7 +30,7 @@ $route->get("/cadastro","Site:register");
 $route->get("/perfil","Site:profile");
 $route->get("/redefinir-senha","Site:reset_password");
 $route->get("/redefinir-senha-telefone","Site:reset_password_phone");
-$route->get("/produto","Site:product");
+$route->get("/produto/{id}","Site:product");
 $route->get("/cadastro-vendedor","Site:seller_register");
 $route->get("/nova-senha","Site:new_password");
 $route->get("/confirm-email","Site:confirm_email");
@@ -46,7 +46,7 @@ $route->get("/carrinho","App:cart");
 $route->get("/servicos","App:services");
 $route->get("/faqs","App:faqs");
 $route->get("/perfil","App:profile");
-$route->get("/produto","App:product");
+$route->get("/produto/{id}","App:product");
 
 // Rotas amigáveis do vendedor
 $route->group("/seller");

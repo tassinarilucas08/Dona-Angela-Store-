@@ -81,7 +81,7 @@ public function createProduct(): void
         return;
     }
 
-    $name = mb_strtolower(trim($data["name"]));
+    $name = mb_convert_case(trim($data["name"]), MB_CASE_TITLE, "UTF-8");
 
     $productCheck = new Product();
     if ($productCheck->findByName($name)) {
@@ -128,7 +128,7 @@ public function updatePhotos(): void
         return;
     }
 
-    $productId = $_POST["id"];
+    $productId = (int)$_POST["id"];
 
     $product = new Product();
     if (!$product->findById($productId)) {
@@ -138,6 +138,7 @@ public function updatePhotos(): void
 
     $upload = new Uploader();
     $photosSaved = [];
+    $coverSet = false; 
 
     if (isset($_FILES["photos"])) {
         foreach ($_FILES["photos"]["name"] as $key => $name) {
@@ -157,12 +158,29 @@ public function updatePhotos(): void
                     return;
                 }
 
-                $stmt = \Source\Core\Connect::getInstance()->prepare("INSERT INTO photos_products (idProduct, photo) VALUES (:idProduct, :photo)");
+                // salva na photos_products
+                $stmt = Connect::getInstance()->prepare("
+                    INSERT INTO photos_products (idProduct, photo) 
+                    VALUES (:idProduct, :photo)
+                ");
                 $stmt->bindValue(":idProduct", $productId, \PDO::PARAM_INT);
                 $stmt->bindValue(":photo", $path, \PDO::PARAM_STR);
 
                 if ($stmt->execute()) {
                     $photosSaved[] = $path;
+
+                    // 👇 primeira foto vira capa na tabela products
+                    if (!$coverSet) {
+                        $coverSet = true;
+                        $stmtCover = Connect::getInstance()->prepare("
+                            UPDATE products 
+                            SET photo = :photo 
+                            WHERE id = :id
+                        ");
+                        $stmtCover->bindValue(":photo", $path, \PDO::PARAM_STR);
+                        $stmtCover->bindValue(":id", $productId, \PDO::PARAM_INT);
+                        $stmtCover->execute();
+                    }
                 }
             }
         }
@@ -179,6 +197,7 @@ public function updatePhotos(): void
     ]);
 }
 
+
     public function listProducts(): void
     {
         $product = new Product();
@@ -189,19 +208,173 @@ public function updatePhotos(): void
     ]);
 }
     
-    public function listProductById(int $id): void
+public function listProductById(array $data): void
 {
+    // valida ID vindo da rota /Products/id/{id}
+    if (empty($data["id"]) || !filter_var($data["id"], FILTER_VALIDATE_INT)) {
+        $this->call(400, "bad_request", "ID inválido", "error")->back();
+        return;
+    }
 
-    $product = new Product();
-    if (!$product->findByIdWithDetails($id)) { // função que retorna o produto com brand, category e photos
+    $id = (int)$data["id"];
+
+    $productModel = new Product();
+    $product = $productModel->findByIdWithDetails($id);
+
+    if (!$product) {
         $this->call(404, "not_found", "Produto não encontrado", "error")->back();
         return;
     }
 
     $this->call(200, "success", "Produto encontrado", "success")->back([
-        "product" => $product->toArray() // ou manualmente monta o array com os campos desejados
+        "product" => $product
     ]);
 }
+
+public function getProductByName(array $data): void
+{
+    $this->auth();
+
+    if (empty($data["name"])) {
+        $this->call(400, "bad_request", "Nome não informado", "error")->back();
+        return;
+    }
+
+    // nome vem urlencoded
+    $name = urldecode($data["name"]);
+    $name = mb_convert_case(trim($data["name"]), MB_CASE_TITLE, "UTF-8");
+
+    $product = new Product();
+    if (!$product->findByName($name)) {
+        $this->call(404, "not_found", "Produto não encontrado", "error")->back();
+        return;
+    }
+
+    $this->call(200, "success", "Produto encontrado", "success")->back([
+        "product" => [
+            "id"          => $product->getId(),
+            "idCategory"  => $product->getIdCategory(),
+            "idBrand"     => $product->getIdBrand(),
+            "name"        => $product->getName(),
+            "description" => $product->getDescription(),
+            "price"       => $product->getPrice(),
+            "salePrice"   => $product->getSalePrice(),
+            "photo"       => $product->getPhoto(),
+            "quantity"    => $product->getQuantity(),
+            "idStatus"    => $product->getIdStatus()
+        ]
+    ]);
+}
+
+
+public function updateProduct(): void
+{
+    $this->auth();
+
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!is_array($data)) {
+        $this->call(400, "bad_request", "JSON inválido", "error")->back();
+        return;
+    }
+
+    if (empty($data["id"]) || !filter_var($data["id"], FILTER_VALIDATE_INT)) {
+        $this->call(400, "bad_request", "ID inválido", "error")->back();
+        return;
+    }
+
+    $required = ["idCategory", "idBrand", "name", "description", "price", "quantity", "idStatus"];
+    foreach ($required as $field) {
+        if (!isset($data[$field]) || $data[$field] === "") {
+            $this->call(400, "bad_request", "O campo '$field' é obrigatório", "error")->back();
+            return;
+        }
+    }
+
+    $id = (int)$data["id"];
+
+    // normaliza preço
+    $price = str_replace(',', '.', $data["price"]);
+    if (!is_numeric($price) || $price < 0) {
+        $this->call(400, "bad_request", "Preço inválido", "error")->back();
+        return;
+    }
+    $price = (float)$price;
+
+    if (!filter_var($data["idCategory"], FILTER_VALIDATE_INT)) {
+        $this->call(400, "bad_request", "ID de categoria inválido", "error")->back();
+        return;
+    }
+
+    if (!filter_var($data["idBrand"], FILTER_VALIDATE_INT)) {
+        $this->call(400, "bad_request", "ID de marca inválido", "error")->back();
+        return;
+    }
+
+    if (!filter_var($data["idStatus"], FILTER_VALIDATE_INT)) {
+        $this->call(400, "bad_request", "ID de status inválido", "error")->back();
+        return;
+    }
+
+    if (!filter_var($data["quantity"], FILTER_VALIDATE_INT) || $data["quantity"] < 0) {
+        $this->call(400, "bad_request", "Quantidade inválida", "error")->back();
+        return;
+    }
+
+    $name = mb_convert_case(trim($data["name"]), MB_CASE_TITLE, "UTF-8");
+
+    if (strlen($name) < 3 || strlen($name) > 255) {
+        $this->call(400, "bad_request", "Nome do produto deve ter entre 3 e 255 caracteres", "error")->back();
+        return;
+    }
+
+    if (strlen($data["description"]) < 20) {
+        $this->call(400, "bad_request", "Descrição do produto deve ter no mínimo 20 caracteres", "error")->back();
+        return;
+    }
+
+    // garante que não exista outro produto com o mesmo nome
+    $check = new Product();
+    if ($check->findByName($name) && $check->getId() !== $id) {
+        $this->call(400, "bad_request", "Já existe outro produto com este nome", "error")->back();
+        return;
+    }
+
+    // carrega o produto atual
+    $product = new Product();
+    if (!$product->findById($id)) {
+        $this->call(404, "not_found", "Produto não encontrado", "error")->back();
+        return;
+    }
+
+    // atualiza os campos
+    $product->setIdCategory((int)$data["idCategory"]);
+    $product->setIdBrand((int)$data["idBrand"]);
+    $product->setName($name);
+    $product->setPrice($price);
+    $product->setSalePrice(isset($data["salePrice"]) ? (float)$data["salePrice"] : null);
+    $product->setDescription($data["description"]);
+    // photo aqui deixei como está (só observação)
+    $product->setQuantity((int)$data["quantity"]);
+    $product->setIdStatus((int)$data["idStatus"]);
+
+    if (!$product->update()) {
+        $this->call(500, "internal_server_error", $product->getErrorMessage() ?? "Erro ao atualizar produto", "error")->back();
+        return;
+    }
+
+    $this->call(200, "success", "Produto atualizado com sucesso", "success")->back([
+        "id"          => $product->getId(),
+        "name"        => $product->getName(),
+        "description" => $product->getDescription(),
+        "idCategory"  => $product->getIdCategory(),
+        "idBrand"     => $product->getIdBrand(),
+        "price"       => $product->getPrice(),
+        "quantity"    => $product->getQuantity(),
+        "idStatus"    => $product->getIdStatus()
+    ]);
+}
+
+
 
     public function deleteProduct(array $data): void
     {
